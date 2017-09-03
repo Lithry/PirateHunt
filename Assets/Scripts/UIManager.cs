@@ -13,11 +13,14 @@ public class UIManager : MonoBehaviour {
 	public Sprite questSelectedButton;
 	private List<Quest> questList = new List<Quest>();
 	private int questSelectedId;
+	public GameObject cityUI;
+	public GameObject combatUI;
 	
 	void Start () {
 		instance = this;
 		questPanel.SetActive(false);
 		questAceptButton.SetActive(false);
+		combatUI.SetActive(false);
 		questSelectedId = 0;
 	}
 
@@ -76,6 +79,7 @@ public class UIManager : MonoBehaviour {
 			}
 		}
 		QuestPanelClose();
+		StartCoroutine(ChangeInstance());
 	}
 
 	public Sprite QuestNormalButton(){
@@ -85,6 +89,16 @@ public class UIManager : MonoBehaviour {
 	public Sprite QuestSelectedButton(){
 		return questSelectedButton;
 	}
+
+	IEnumerator ChangeInstance()
+    {
+        float fadeTime = FadeTransition.instance.BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+        cityUI.SetActive(false);
+		combatUI.SetActive(true);
+		FadeTransition.instance.BeginFade(-1);
+		
+    }
 
 	// ================================================================================
 }

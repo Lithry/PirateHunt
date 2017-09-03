@@ -46,7 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\FadeTransition.cs" />
+     <Compile Include="Assets\Scripts\Quest.cs" />
+     <Compile Include="Assets\Scripts\QuestAndRewards.cs" />
+     <Compile Include="Assets\Scripts\QuestManager.cs" />
      <Compile Include="Assets\Scripts\Quit.cs" />
+     <Compile Include="Assets\Scripts\Resources.cs" />
+     <Compile Include="Assets\Scripts\UIManager.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>D:/C++/Trabajos/PirateHunt/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
