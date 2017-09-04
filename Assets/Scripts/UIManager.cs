@@ -15,11 +15,17 @@ public class UIManager : MonoBehaviour {
 	private int questSelectedId;
 	public GameObject cityUI;
 	public GameObject combatUI;
+	public Text combatLog;
+	public Text questRewardText;
+	public GameObject combatOptionPanel;
+	public GameObject completedQuestPanel;
 	
 	void Start () {
 		instance = this;
 		questPanel.SetActive(false);
 		questAceptButton.SetActive(false);
+		completedQuestPanel.SetActive(false);
+		combatOptionPanel.SetActive(false);
 		combatUI.SetActive(false);
 		questSelectedId = 0;
 	}
@@ -76,10 +82,11 @@ public class UIManager : MonoBehaviour {
 		foreach (Quest que in questList){
 			if (questSelectedId == que.GetId()){
 				QuestAndRewards.instance.SetQuest(questSelectedId);
+				QuestAndRewards.instance.RestartValues();
 			}
 		}
 		QuestPanelClose();
-		StartCoroutine(ChangeInstance());
+		StartCoroutine(ChangeInstanceToCombat());
 	}
 
 	public Sprite QuestNormalButton(){
@@ -90,15 +97,69 @@ public class UIManager : MonoBehaviour {
 		return questSelectedButton;
 	}
 
-	IEnumerator ChangeInstance()
+	IEnumerator ChangeInstanceToCombat()
     {
         float fadeTime = FadeTransition.instance.BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         cityUI.SetActive(false);
 		combatUI.SetActive(true);
+		combatOptionPanel.SetActive(true);
 		FadeTransition.instance.BeginFade(-1);
+
+		combatLog.text = "Has encontrado " + QuestAndRewards.instance.GetQuestData().numEnemis.ToString() + " barcos piratas\nQue haras:";
 		
     }
 
-	// ================================================================================
+	// =================================================================================
+	// COMBAT OPTIONS ==================================================================
+
+	public void Catch(){
+		QuestAndRewards.instance.AddCatch(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.QuestCompleted();
+		combatOptionPanel.SetActive(false);
+		
+		questRewardText.text = "Has Recibido:\nHonor: " + QuestAndRewards.instance.GetCatch() * 2 + 
+		" | Miedo: " +  QuestAndRewards.instance.GetKills() * 2 + " | Pereza: " + QuestAndRewards.instance.GetAway() * 2 + 
+		"\nOro: " + ((QuestAndRewards.instance.GetCatch() + (int)(QuestAndRewards.instance.GetKills() / 2)) * 5).ToString();
+
+		completedQuestPanel.SetActive(true);
+	}
+
+	public void Kill(){
+		QuestAndRewards.instance.AddKilled(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.QuestCompleted();
+		combatOptionPanel.SetActive(false);
+		
+		questRewardText.text = "Has Recibido:\nHonor: " + QuestAndRewards.instance.GetCatch() * 2 + 
+		" | Miedo: " +  QuestAndRewards.instance.GetKills() * 2 + " | Pereza: " + QuestAndRewards.instance.GetAway() * 2 + 
+		"\nOro: " + ((QuestAndRewards.instance.GetCatch() + (int)(QuestAndRewards.instance.GetKills() / 2)) * 5).ToString();
+		
+		completedQuestPanel.SetActive(true);
+	}
+
+	public void Idle(){
+		QuestAndRewards.instance.AddAway(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.QuestCompleted();
+		combatOptionPanel.SetActive(false);
+		
+		questRewardText.text = "Has Recibido:\nHonor: " + QuestAndRewards.instance.GetCatch() * 2 + 
+		" | Miedo: " +  QuestAndRewards.instance.GetKills() * 2 + " | Pereza: " + QuestAndRewards.instance.GetAway() * 2 + 
+		"\nOro: " + ((QuestAndRewards.instance.GetCatch() + (int)(QuestAndRewards.instance.GetKills() / 2)) * 5).ToString();
+		
+		completedQuestPanel.SetActive(true);
+	}
+
+	public void ReturnToCity(){
+		StartCoroutine(ChangeInstanceToCity());
+	}
+
+	IEnumerator ChangeInstanceToCity()
+    {
+        float fadeTime = FadeTransition.instance.BeginFade(1);
+        yield return new WaitForSeconds(fadeTime);
+		completedQuestPanel.SetActive(false);
+		combatUI.SetActive(false);
+        cityUI.SetActive(true);
+		FadeTransition.instance.BeginFade(-1);		
+    }
 }

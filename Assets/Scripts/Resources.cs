@@ -12,37 +12,41 @@ public class Resources : MonoBehaviour {
 
     void Start () {
 		instance = this;
+        honor = 0;
+        fear = 0;
+        idle = 0;
+        gold = 0;
 	}
 	
 	public int GetHonor() {
         return honor;
     }
 
-    public void SetHonor(int value) {
-        honor = value;
+    public void AddHonor(int value) {
+        honor += value;
     }
 
 	public int GetFear() {
         return fear;
     }
 
-    public void SetFear(int value) {
-        fear = value;
+    public void AddFear(int value) {
+        fear += value;
     }
 
 	public int GetIdle() {
         return idle;
     }
 
-    public void SetIdle(int value) {
-        idle = value;
+    public void AddIdle(int value) {
+        idle += value;
     }
 
 	public int GetGold() {
         return gold;
     }
 
-    public void SetGold(int value) {
-        gold = value;
+    public void AddGold(int value) {
+        gold += value;
     }
 }
