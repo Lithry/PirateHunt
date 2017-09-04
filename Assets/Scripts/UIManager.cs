@@ -46,10 +46,9 @@ public class UIManager : MonoBehaviour {
 			for (int i = 0; i < q.Count; i++){
 				GameObject nQuest = Instantiate(questPrefab);
 				nQuest.transform.SetParent(questContainer.transform);
-
+				nQuest.transform.localPosition = new Vector3(0, -(100 * i), 0);
 				RectTransform trans = nQuest.GetComponent<RectTransform>();
-				trans.transform.position = new Vector3(563.2f, -(100 * i) + 600, 0f);
-
+				trans.sizeDelta = new Vector2(0, 95);
 				Quest que = nQuest.GetComponent<Quest>();
 				que.SetTexts(q[i].id, q[i].dificult, q[i].numEnemis);
 
