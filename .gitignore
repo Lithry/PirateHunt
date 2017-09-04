@@ -5,3 +5,5 @@
 /Build
 /obj
 /PirateHunt.csproj
+/Assembly-CSharp.csproj
+/*.sln
