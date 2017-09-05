@@ -21,10 +21,18 @@ public class QuestManager : MonoBehaviour {
     void Awake () {
 		instance = this;
 		
-		QuestData q = new QuestData(1, 1,1);
+		QuestData q = new QuestData(1, 1, 1);
 		quests.Add(q);
-		QuestData q2 = new QuestData(2, 2,2);
+		QuestData q2 = new QuestData(2, 2, 2);
 		quests.Add(q2);
+		QuestData q3 = new QuestData(3, 3, 3);
+		quests.Add(q3);
+		QuestData q4 = new QuestData(4, 4, 4);
+		quests.Add(q4);
+		QuestData q5 = new QuestData(5, 5, 5);
+		quests.Add(q5);
+		QuestData q6 = new QuestData(6, 6, 6);
+		quests.Add(q6);
 	}
 
 	public List<QuestData> GetQuests() {

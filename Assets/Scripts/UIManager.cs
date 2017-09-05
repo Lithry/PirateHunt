@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour {
 			questPanel.SetActive(true);
 			List<QuestManager.QuestData> q;
 			q = QuestManager.instance.GetQuests();
+			questContainer.transform.localPosition = new Vector3(0, 0, 0);		
 			for (int i = 0; i < q.Count; i++){
 				GameObject nQuest = Instantiate(questPrefab);
 				nQuest.transform.SetParent(questContainer.transform);
@@ -54,6 +55,8 @@ public class UIManager : MonoBehaviour {
 
 				questList.Add(que);
 			}
+			RectTransform queContainer = questContainer.GetComponent<RectTransform>();
+			queContainer.sizeDelta = new Vector2(0, 100 * questList.Count);
 		}
 	}
 
