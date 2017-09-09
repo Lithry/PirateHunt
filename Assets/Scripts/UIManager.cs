@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 	static public UIManager instance;
-	public GameObject questPrefab;
 	public GameObject questPanel;
+	public GameObject questPrefab;
 	public GameObject questContainer;
 	private List<Quest> questList = new List<Quest>();
-	private int questSelectedId;
+	public GameObject tavernPanel;
+	public GameObject sailorPrefab;
+	public GameObject sailorContainer;
+	private List<SailorUI> sailorsOnUI = new List<SailorUI>();
 	public GameObject cityUI;
 	public GameObject combatUI;
 	public Text combatLog;
@@ -20,10 +23,10 @@ public class UIManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 		questPanel.SetActive(false);
+		tavernPanel.SetActive(false);
 		completedQuestPanel.SetActive(false);
 		combatOptionPanel.SetActive(false);
 		combatUI.SetActive(false);
-		questSelectedId = 0;
 	}
 
 	void Update () {
@@ -36,7 +39,7 @@ public class UIManager : MonoBehaviour {
 
 	public void QuestPanelOpen(){
 		if (!questPanel.active){
-			questPanel.SetActive(true);
+			TavernPanelClose();
 			List<QuestManager.QuestData> q;
 			q = QuestManager.instance.GetQuests();
 			questContainer.transform.localPosition = new Vector3(0, 0, 0);		
@@ -53,6 +56,7 @@ public class UIManager : MonoBehaviour {
 			}
 			RectTransform queContainer = questContainer.GetComponent<RectTransform>();
 			queContainer.sizeDelta = new Vector2(0, 100 * questList.Count);
+			questPanel.SetActive(true);
 		}
 	}
 
@@ -73,6 +77,58 @@ public class UIManager : MonoBehaviour {
 		}
 		QuestPanelClose();
 		StartCoroutine(ChangeInstanceToCombat());
+	}
+
+	public void TavernPanelOpen(){
+		if (!tavernPanel.active){
+			QuestPanelClose();
+			List<Sailor> sailors = AvalivleSailors.instance.GetAvalivleSailors();
+			for(int i = 0; i < sailors.Count; i++){
+				GameObject nSailor = Instantiate(sailorPrefab);
+				nSailor.transform.SetParent(sailorContainer.transform);
+				nSailor.transform.localPosition = new Vector3(0, -(100 * i), 0);
+				
+				RectTransform trans = nSailor.GetComponent<RectTransform>();
+				trans.sizeDelta = new Vector2(0, 95);
+				
+				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
+				sailorUI.SetId(sailors[i].GetId());
+				sailorUI.SetCost(sailors[i].GetHonorRequired(), sailors[i].GetFearRequired(), sailors[i].GetIdleRequired(), sailors[i].GetGoldRequired());
+				sailorUI.CheckIfCanHire();
+
+				sailorsOnUI.Add(sailorUI);
+			}
+			RectTransform saContainer = sailorContainer.GetComponent<RectTransform>();
+			saContainer.sizeDelta = new Vector2(0, 100 * sailors.Count);
+			tavernPanel.SetActive(true);
+		}
+	}
+
+	public void TavernPanelClose(){
+		foreach(SailorUI sailor in sailorsOnUI){
+			sailor.Destroy();
+		}
+		sailorsOnUI.Clear();
+		tavernPanel.SetActive(false);
+	}
+
+	public void HireSailor(int id){
+		foreach (SailorUI sailor in sailorsOnUI){
+			if (id == sailor.GetId()){
+				AvalivleSailors.instance.HireSailor(id);
+				sailorsOnUI.Remove(sailor);
+				sailor.Destroy();
+				RearrangeSailorsOnUI();
+				break;
+			}
+		}
+		
+	}
+
+	private void RearrangeSailorsOnUI(){
+		for (int i = 0; i < sailorsOnUI.Count; i++){
+			sailorsOnUI[i].gameObject.transform.localPosition = new Vector3(0, -(100 * i), 0);
+		}
 	}
 
 	IEnumerator ChangeInstanceToCombat()

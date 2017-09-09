@@ -58,9 +58,9 @@ public class QuestAndRewards : MonoBehaviour {
 	}
 
 	public void QuestCompleted(){
-		Resources.instance.AddHonor(catchs * 2);
-		Resources.instance.AddFear(kills * 2);
-		Resources.instance.AddIdle(misses * 2);
-		Resources.instance.AddGold((catchs + (int)(kills / 2)) * 5);
+		ResourcesManager.instance.AddHonor(catchs * 2);
+		ResourcesManager.instance.AddFear(kills * 2);
+		ResourcesManager.instance.AddIdle(misses * 2);
+		ResourcesManager.instance.AddGold((catchs + (int)(kills / 2)) * 5);
 	}
 }

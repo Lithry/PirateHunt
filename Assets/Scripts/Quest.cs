@@ -11,7 +11,7 @@ public class Quest : MonoBehaviour {
 
 
 	void Awake () {
-		button = gameObject.GetComponentInChildren<Button>();
+		button = GetComponentInChildren<Button>();
         button.onClick.AddListener(delegate() { UIManager.instance.AceptQuest(id); });
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();

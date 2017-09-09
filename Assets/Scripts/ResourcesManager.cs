@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resources : MonoBehaviour {
-	static public Resources instance;
+public class ResourcesManager : MonoBehaviour {
+	static public ResourcesManager instance;
 	private int honor;
 	private int fear;
 	private int idle;
@@ -17,7 +17,7 @@ public class Resources : MonoBehaviour {
         idle = 0;
         gold = 0;
 	}
-	
+
 	public int GetHonor() {
         return honor;
     }
