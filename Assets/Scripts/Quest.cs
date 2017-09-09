@@ -7,16 +7,12 @@ public class Quest : MonoBehaviour {
 	private Text dificulttDisplay;
 	private Text enemyCountDisplay;
 	private Button button;
-	private Sprite normal;
-	private Sprite selected;
 	private int id;
 
 
 	void Awake () {
-		button = gameObject.GetComponent<Button>();
-        button.onClick.AddListener(delegate() { UIManager.instance.QuestSelected(id); });
-		normal = UIManager.instance.QuestNormalButton();
-		selected = UIManager.instance.QuestSelectedButton();
+		button = gameObject.GetComponentInChildren<Button>();
+        button.onClick.AddListener(delegate() { UIManager.instance.AceptQuest(id); });
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();
 
@@ -38,13 +34,6 @@ public class Quest : MonoBehaviour {
 
 	public int GetId(){
 		return id;
-	}
-	public void ChangeImageNormal(){
-		button.image.sprite = normal;
-	}
-
-	public void ChangeImageSelected(){
-		button.image.sprite = selected;
 	}
 
 	public void Destroy(){

@@ -7,10 +7,7 @@ public class UIManager : MonoBehaviour {
 	static public UIManager instance;
 	public GameObject questPrefab;
 	public GameObject questPanel;
-	public GameObject questAceptButton;
 	public GameObject questContainer;
-	public Sprite questNormalButton;
-	public Sprite questSelectedButton;
 	private List<Quest> questList = new List<Quest>();
 	private int questSelectedId;
 	public GameObject cityUI;
@@ -23,7 +20,6 @@ public class UIManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 		questPanel.SetActive(false);
-		questAceptButton.SetActive(false);
 		completedQuestPanel.SetActive(false);
 		combatOptionPanel.SetActive(false);
 		combatUI.SetActive(false);
@@ -65,38 +61,18 @@ public class UIManager : MonoBehaviour {
 			que.Destroy();
 		}
 		questList.Clear();
-		questAceptButton.SetActive(false);
 		questPanel.SetActive(false);
 	}
 
-	public void QuestSelected(int id){
-		questSelectedId = id;
+	public void AceptQuest(int id){
 		foreach (Quest que in questList){
-			if (questSelectedId == que.GetId())
-				que.ChangeImageSelected();
-			else
-				que.ChangeImageNormal();
-		}
-		questAceptButton.SetActive(true);
-	}
-
-	public void AceptQuest(){
-		foreach (Quest que in questList){
-			if (questSelectedId == que.GetId()){
-				QuestAndRewards.instance.SetQuest(questSelectedId);
+			if (id == que.GetId()){
+				QuestAndRewards.instance.SetQuest(id);
 				QuestAndRewards.instance.RestartValues();
 			}
 		}
 		QuestPanelClose();
 		StartCoroutine(ChangeInstanceToCombat());
-	}
-
-	public Sprite QuestNormalButton(){
-		return questNormalButton;
-	}
-
-	public Sprite QuestSelectedButton(){
-		return questSelectedButton;
 	}
 
 	IEnumerator ChangeInstanceToCombat()
