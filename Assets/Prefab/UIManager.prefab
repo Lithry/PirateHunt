@@ -60,6 +60,8 @@ MonoBehaviour:
     type: 2}
   sailorContainer: {fileID: 0}
   portPanel: {fileID: 0}
+  sailorActiveContainer: {fileID: 0}
+  sailorReservContainer: {fileID: 0}
   cityUI: {fileID: 0}
   combatUI: {fileID: 0}
   combatLog: {fileID: 0}

@@ -49,4 +49,8 @@ public class ResourcesManager : MonoBehaviour {
     public void AddGold(int value) {
         gold += value;
     }
+
+    public void ReduceGold(int value){
+        gold -= value;
+    }
 }

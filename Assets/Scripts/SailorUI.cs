@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class SailorUI : MonoBehaviour {
 	private Text description;
 	private Text cost;
-	private Button hireButton;
+	private Button button;
+	private Text buttonText;
 	private int id;
 
 	private int honorCost;
@@ -15,8 +16,8 @@ public class SailorUI : MonoBehaviour {
 	private int goldCost;
 
 	void Awake () {
-		hireButton = GetComponentInChildren<Button>();
-		hireButton.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
+		button = GetComponentInChildren<Button>();
+		buttonText = button.GetComponentInChildren<Text>();
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();
 
@@ -30,6 +31,18 @@ public class SailorUI : MonoBehaviour {
 		}
 	}
 	
+	public void SetButtonToHire(){
+		button.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
+		buttonText.text = "Contratar";
+		CheckIfCanHire();
+	}
+
+	public void SetButtonToAdministrate(){
+		button.onClick.AddListener(delegate() { UIManager.instance.MoveSailorInCrew(id); });
+		buttonText.text = "Mover";
+		button.interactable = true;
+	}
+
 	public void SetId(int id){
 		this.id = id;
 	}
@@ -51,11 +64,15 @@ public class SailorUI : MonoBehaviour {
 		cost.text = "Honor: " + honorCost.ToString() + " | Miedo: " + fearCost.ToString() + " | Pereza: " + idleCost.ToString() + "\nOro: " + goldCost.ToString();
 	}
 
+	public void SetCostNull(){
+		cost.text = "";
+	}
+
 	public void CheckIfCanHire(){
 		if ((honorCost > ResourcesManager.instance.GetHonor()) || (fearCost > ResourcesManager.instance.GetFear()) || (idleCost > ResourcesManager.instance.GetIdle()) || (goldCost > ResourcesManager.instance.GetGold()))
-			hireButton.interactable = false;
+			button.interactable = false;
 		else
-			hireButton.interactable = true;
+			button.interactable = true;
 	}
 
 	public void Destroy(){

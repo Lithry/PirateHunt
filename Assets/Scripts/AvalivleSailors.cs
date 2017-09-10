@@ -22,25 +22,29 @@ public class AvalivleSailors : MonoBehaviour {
 		set2.SetRequirements(0, 1, 0, 10);
 		avalivle.Add(set2);
 		
-		/*Sailor c = new Sailor();
-		c.SetId(3);
-		c.SetRequirements(0, 0, 1, 10);
-		avalivle.Add(c);
+		GameObject c = new GameObject();
+		Sailor set3 = c.AddComponent<Sailor>();
+		set3.SetId(3);
+		set3.SetRequirements(0, 0, 1, 10);
+		avalivle.Add(set3);
+		
+		GameObject d = new GameObject();
+		Sailor set4 = d.AddComponent<Sailor>();
+		set4.SetId(4);
+		set4.SetRequirements(0, 1, 1, 50);
+		avalivle.Add(set4);
 
-		Sailor a2 = new Sailor();
-		a2.SetId(4);
-		a2.SetRequirements(10, 0, 0, 100);
-		avalivle.Add(a2);
+		GameObject e = new GameObject();
+		Sailor set5 = e.AddComponent<Sailor>();
+		set5.SetId(5);
+		set5.SetRequirements(1, 2, 0, 60);
+		avalivle.Add(set5);
 		
-		Sailor b2 = new Sailor();
-		b2.SetId(5);
-		b2.SetRequirements(0, 10, 0, 100);
-		avalivle.Add(b2);
-		
-		Sailor c2 = new Sailor();
-		c2.SetId(6);
-		c2.SetRequirements(0, 0, 10, 100);
-		avalivle.Add(c2);*/
+		GameObject f = new GameObject();
+		Sailor set6 = f.AddComponent<Sailor>();
+		set6.SetId(6);
+		set6.SetRequirements(3, 1, 0, 100);
+		avalivle.Add(set6);
 	}
 
 	public List<Sailor> GetAvalivleSailors(){
@@ -51,6 +55,7 @@ public class AvalivleSailors : MonoBehaviour {
 		for(int i = 0; i < avalivle.Count; i++){
 			if (id == avalivle[i].GetId()){
 				CrewManager.instance.AddSailorToCrew(avalivle[i]);
+				ResourcesManager.instance.ReduceGold(avalivle[i].GetGoldRequired());
 				avalivle.Remove(avalivle[i]);
 			}
 		}
