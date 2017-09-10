@@ -59,6 +59,7 @@ MonoBehaviour:
   sailorPrefab: {fileID: 1802906638160690, guid: 8d57e2ce141fb8d4aa9efa112692974b,
     type: 2}
   sailorContainer: {fileID: 0}
+  portPanel: {fileID: 0}
   cityUI: {fileID: 0}
   combatUI: {fileID: 0}
   combatLog: {fileID: 0}

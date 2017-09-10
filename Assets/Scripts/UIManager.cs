@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject sailorPrefab;
 	public GameObject sailorContainer;
 	private List<SailorUI> sailorsOnUI = new List<SailorUI>();
+	public GameObject portPanel;
 	public GameObject cityUI;
 	public GameObject combatUI;
 	public Text combatLog;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour {
 		instance = this;
 		questPanel.SetActive(false);
 		tavernPanel.SetActive(false);
+		portPanel.SetActive(false);
 		completedQuestPanel.SetActive(false);
 		combatOptionPanel.SetActive(false);
 		combatUI.SetActive(false);
@@ -40,6 +42,7 @@ public class UIManager : MonoBehaviour {
 	public void QuestPanelOpen(){
 		if (!questPanel.active){
 			TavernPanelClose();
+			PortPanelClose();
 			List<QuestManager.QuestData> q;
 			q = QuestManager.instance.GetQuests();
 			questContainer.transform.localPosition = new Vector3(0, 0, 0);		
@@ -82,6 +85,7 @@ public class UIManager : MonoBehaviour {
 	public void TavernPanelOpen(){
 		if (!tavernPanel.active){
 			QuestPanelClose();
+			PortPanelClose();
 			List<Sailor> sailors = AvalivleSailors.instance.GetAvalivleSailors();
 			for(int i = 0; i < sailors.Count; i++){
 				GameObject nSailor = Instantiate(sailorPrefab);
@@ -129,6 +133,18 @@ public class UIManager : MonoBehaviour {
 		for (int i = 0; i < sailorsOnUI.Count; i++){
 			sailorsOnUI[i].gameObject.transform.localPosition = new Vector3(0, -(100 * i), 0);
 		}
+	}
+
+	public void PortPanelOpen(){
+		if (!portPanel.active){
+			QuestPanelClose();
+			TavernPanelClose();
+			portPanel.SetActive(true);
+		}
+	}
+
+	public void PortPanelClose(){
+		portPanel.SetActive(false);
 	}
 
 	IEnumerator ChangeInstanceToCombat()
