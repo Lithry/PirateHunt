@@ -51,3 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379afed9df6149c4783289e35bc14ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultFace: {fileID: 21300000, guid: 797cb4fee3e7d4d49b1cb36431814a0d, type: 3}
+  honor: {fileID: 21300000, guid: 27bad7b177aca6d409254e23ad838ad1, type: 3}
+  fear: {fileID: 21300000, guid: 48b86829c78d0af4a853a0d44970d846, type: 3}
+  idle: {fileID: 21300000, guid: 6b8a8a238dc6ea84c880b72d629c4e56, type: 3}

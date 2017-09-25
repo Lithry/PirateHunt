@@ -8,6 +8,8 @@ public class SailorUI : MonoBehaviour {
 	private Text cost;
 	private Button button;
 	private Text buttonText;
+	public Image portrait;
+
 	private int id;
 
 	private int honorCost;
@@ -18,6 +20,7 @@ public class SailorUI : MonoBehaviour {
 	void Awake () {
 		button = GetComponentInChildren<Button>();
 		buttonText = button.GetComponentInChildren<Text>();
+		//portrait = gameObject.GetComponentInChildren<Image>();
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();
 
@@ -49,6 +52,10 @@ public class SailorUI : MonoBehaviour {
 
 	public int GetId(){
 		return id;
+	}
+
+	public void SetPortrait(Sprite port){
+		portrait.sprite = port;
 	}
 
 	public void SetDescription(string des){

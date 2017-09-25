@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sailor : MonoBehaviour {
 	private int id;
+	private Sprite portrait;
 	private int honorRequired;
 	private int fearRequired;
 	private int idleRequired;
@@ -24,6 +25,14 @@ public class Sailor : MonoBehaviour {
 
 	public int GetId(){
 		return id;
+	}
+
+	public void SetPortrait(Sprite portrait){
+		this.portrait = portrait;
+	}
+
+	public Sprite GetPortrait(){
+		return portrait;
 	}
 
 	public void SetRequirements(int honor, int fear, int idle, int gold){

@@ -95,12 +95,13 @@ public class UIManager : MonoBehaviour {
 				GameObject nSailor = Instantiate(sailorPrefab);
 				nSailor.transform.SetParent(sailorContainer.transform);
 				nSailor.transform.localPosition = new Vector3(0, -(100 * i), 0);
-				
+
 				RectTransform trans = nSailor.GetComponent<RectTransform>();
 				trans.sizeDelta = new Vector2(0, 95);
 				
 				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
 				sailorUI.SetId(sailors[i].GetId());
+				sailorUI.SetPortrait(sailors[i].GetPortrait());
 				sailorUI.SetCost(sailors[i].GetHonorRequired(), sailors[i].GetFearRequired(), sailors[i].GetIdleRequired(), sailors[i].GetGoldRequired());
 				sailorUI.SetButtonToHire();
 
@@ -147,14 +148,17 @@ public class UIManager : MonoBehaviour {
 			for (int i = 0; i < sailors.Count; i++){
 				GameObject nSailor = Instantiate(sailorPrefab);
 				nSailor.transform.SetParent(sailorReservContainer.transform);
+
 				RectTransform trans = nSailor.GetComponent<RectTransform>();
 				trans.anchorMin = new Vector2(0.05f, 1);
 				trans.anchorMax = new Vector2(0.95f, 1);
 				nSailor.transform.localPosition = new Vector3(0, -(60 * i), 0);
 				trans.sizeDelta = new Vector2(0, 55);
+				
 				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
 				sailorUI.SetButtonToAdministrate();
 				sailorUI.SetId(sailors[i].GetId());
+				sailorUI.SetPortrait(sailors[i].GetPortrait());
 				sailorUI.SetCostNull();
 				reservSailorsOnUI.Add(sailorUI);
 			}
