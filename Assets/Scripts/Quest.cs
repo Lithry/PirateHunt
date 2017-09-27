@@ -8,11 +8,13 @@ public class Quest : MonoBehaviour {
 	private Text enemyCountDisplay;
 	private Button button;
 	private int id;
+	private PoolObject po;
 
 
 	void Awake () {
 		button = GetComponentInChildren<Button>();
         button.onClick.AddListener(delegate() { UIManager.instance.AceptQuest(id); });
+		po = GetComponent<PoolObject>();
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();
 
@@ -36,7 +38,7 @@ public class Quest : MonoBehaviour {
 		return id;
 	}
 
-	public void Destroy(){
-		Destroy(gameObject);
+	public void Destroy(Pool pool){
+		pool.Recycl(po);
 	}
 }

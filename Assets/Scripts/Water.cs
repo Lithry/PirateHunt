@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class Water : MonoBehaviour {
 	public float scrollSpeed = 0.5F;
-	private bool isInside;
-	private RectTransform rtra;
-	private RectTransform pRtra;
-	private Vector3 localSpacePoint;
-	private Vector3[] corners = new Vector3[4];
+	private Transform trans;
     
 	void Start() {
-		rtra = GetComponent<RectTransform>();
-		pRtra = GetComponentInParent<RectTransform>();
-		rtra.GetWorldCorners(corners);
+		trans = transform;
     }
     
 	void LateUpdate() {
-		if (transform.position.y <= 1)
-			transform.position = new Vector3(transform.position.x, Screen.height * 2 - 8, transform.position.z);
+		if (trans.position.y <= 1)
+			trans.position = new Vector3(trans.position.x, Screen.height * 2 - 8, trans.position.z);
 		
-		transform.position = new Vector3(transform.position.x, transform.position.y - scrollSpeed * Time.deltaTime, transform.position.z);
+		trans.position = new Vector3(trans.position.x, trans.position.y - scrollSpeed * Time.deltaTime, trans.position.z);
   	}
 }

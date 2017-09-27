@@ -14,22 +14,25 @@ public class AvalivleSailors : MonoBehaviour {
 		instance = this;
 		avalivle.Clear();
 
-		GameObject a = new GameObject();
-		Sailor set = a.AddComponent<Sailor>();
+		//GameObject a = new GameObject();
+		//Sailor set = a.AddComponent<Sailor>();
+		Sailor set = new Sailor();
 		set.SetId(1);
 		set.SetPortrait(honor);
 		set.SetRequirements(1, 0, 0, 10);
 		avalivle.Add(set);
 		
-		GameObject b = new GameObject();
-		Sailor set2 = b.AddComponent<Sailor>();
+		//GameObject b = new GameObject();
+		//Sailor set2 = b.AddComponent<Sailor>();
+		Sailor set2 = new Sailor();
 		set2.SetId(2);
 		set2.SetPortrait(fear);
 		set2.SetRequirements(0, 1, 0, 10);
 		avalivle.Add(set2);
 		
-		GameObject c = new GameObject();
-		Sailor set3 = c.AddComponent<Sailor>();
+		//GameObject c = new GameObject();
+		//Sailor set3 = c.AddComponent<Sailor>();
+		Sailor set3 = new Sailor();
 		set3.SetId(3);
 		set3.SetPortrait(idle);
 		set3.SetRequirements(0, 0, 1, 10);

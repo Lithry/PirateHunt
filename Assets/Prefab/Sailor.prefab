@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 222106852004237736}
   - component: {fileID: 114698183900508316}
   - component: {fileID: 114403292697664910}
+  - component: {fileID: 114340599642793118}
   m_Layer: 5
   m_Name: Sailor
   m_TagString: Untagged
@@ -115,6 +116,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114340599642793118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802906638160690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ba0b5740cc8034b8b6fa0c1470d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114375499524502650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8064afad6e53f714aac708b1cc6a2db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: {fileID: 114790304327235622}
+  cost: {fileID: 114568700341020364}
   portrait: {fileID: 114375499524502650}
 --- !u!114 &114433414265514812
 MonoBehaviour:

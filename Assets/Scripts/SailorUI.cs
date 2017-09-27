@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SailorUI : MonoBehaviour {
-	private Text description;
-	private Text cost;
+	public Text description;
+	public Text cost;
 	private Button button;
 	private Text buttonText;
 	public Image portrait;
+	private PoolObject po;
 
 	private int id;
 
@@ -20,18 +21,7 @@ public class SailorUI : MonoBehaviour {
 	void Awake () {
 		button = GetComponentInChildren<Button>();
 		buttonText = button.GetComponentInChildren<Text>();
-		//portrait = gameObject.GetComponentInChildren<Image>();
-		Text[] texts;
-		texts = GetComponentsInChildren<Text>();
-
-		foreach(Text text in texts){
-			if (text.name == "DescriptionText"){
-				description = text;
-			}
-			else if (text.name == "CostText"){
-				cost = text;
-			}
-		}
+		po = GetComponent<PoolObject>();
 	}
 	
 	public void SetButtonToHire(){
@@ -82,7 +72,7 @@ public class SailorUI : MonoBehaviour {
 			button.interactable = true;
 	}
 
-	public void Destroy(){
-		Destroy(gameObject);
+	public void Destroy(Pool pool){
+		pool.Recycl(po);
 	}
 }

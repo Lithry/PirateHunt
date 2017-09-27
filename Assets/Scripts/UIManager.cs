@@ -24,9 +24,15 @@ public class UIManager : MonoBehaviour {
 	public Text questRewardText;
 	public GameObject combatOptionPanel;
 	public GameObject completedQuestPanel;
+	public GameObject questUIPoolManager;
+	private Pool questUIPool;
+	public GameObject sailorUIPoolManager;
+	private Pool sailorUIPool;
 	
 	void Start () {
 		instance = this;
+		questUIPool = questUIPoolManager.GetComponent<Pool>();
+		sailorUIPool = sailorUIPoolManager.GetComponent<Pool>();
 		questPanel.SetActive(false);
 		tavernPanel.SetActive(false);
 		crewPanel.SetActive(false);
@@ -51,10 +57,10 @@ public class UIManager : MonoBehaviour {
 			q = QuestManager.instance.GetQuests();
 			questContainer.transform.localPosition = new Vector3(0, 0, 0);		
 			for (int i = 0; i < q.Count; i++){
-				GameObject nQuest = Instantiate(questPrefab);
-				nQuest.transform.SetParent(questContainer.transform);
-				nQuest.transform.localPosition = new Vector3(0, -(100 * i), 0);
-				RectTransform trans = nQuest.GetComponent<RectTransform>();
+				PoolObject nQuest = questUIPool.Spawn();
+				nQuest.gameObject.transform.SetParent(questContainer.transform);
+				nQuest.gameObject.transform.localPosition = new Vector3(0, -(100 * i), 0);
+				RectTransform trans = nQuest.gameObject.GetComponent<RectTransform>();
 				trans.sizeDelta = new Vector2(0, 95);
 				Quest que = nQuest.GetComponent<Quest>();
 				que.SetTexts(q[i].id, q[i].dificult, q[i].numEnemis);
@@ -69,7 +75,7 @@ public class UIManager : MonoBehaviour {
 
 	public void QuestPanelClose(){
 		foreach (Quest que in questList){
-			que.Destroy();
+			que.Destroy(questUIPool);
 		}
 		questList.Clear();
 		questPanel.SetActive(false);
@@ -92,14 +98,14 @@ public class UIManager : MonoBehaviour {
 			CrewPanelClose();
 			List<Sailor> sailors = AvalivleSailors.instance.GetAvalivleSailors();
 			for(int i = 0; i < sailors.Count; i++){
-				GameObject nSailor = Instantiate(sailorPrefab);
-				nSailor.transform.SetParent(sailorContainer.transform);
-				nSailor.transform.localPosition = new Vector3(0, -(100 * i), 0);
+				PoolObject nSailor = sailorUIPool.Spawn();
+				nSailor.gameObject.transform.SetParent(sailorContainer.transform);
+				nSailor.gameObject.transform.localPosition = new Vector3(0, -(100 * i), 0);
 
-				RectTransform trans = nSailor.GetComponent<RectTransform>();
+				RectTransform trans = nSailor.gameObject.GetComponent<RectTransform>();
 				trans.sizeDelta = new Vector2(0, 95);
 				
-				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
+				SailorUI sailorUI = nSailor.gameObject.GetComponent<SailorUI>();
 				sailorUI.SetId(sailors[i].GetId());
 				sailorUI.SetPortrait(sailors[i].GetPortrait());
 				sailorUI.SetCost(sailors[i].GetHonorRequired(), sailors[i].GetFearRequired(), sailors[i].GetIdleRequired(), sailors[i].GetGoldRequired());
@@ -115,7 +121,7 @@ public class UIManager : MonoBehaviour {
 
 	public void TavernPanelClose(){
 		foreach(SailorUI sailor in sailorsOnUI){
-			sailor.Destroy();
+			sailor.Destroy(sailorUIPool);
 		}
 		sailorsOnUI.Clear();
 		tavernPanel.SetActive(false);
@@ -126,7 +132,7 @@ public class UIManager : MonoBehaviour {
 			if (id == sailor.GetId()){
 				AvalivleSailors.instance.HireSailor(id);
 				sailorsOnUI.Remove(sailor);
-				sailor.Destroy();
+				sailor.Destroy(sailorUIPool);
 				RearrangeSailorsOnUI();
 				break;
 			}
@@ -146,16 +152,16 @@ public class UIManager : MonoBehaviour {
 			TavernPanelClose();
 			List<Sailor> sailors = CrewManager.instance.GetSailorsInReserv();
 			for (int i = 0; i < sailors.Count; i++){
-				GameObject nSailor = Instantiate(sailorPrefab);
-				nSailor.transform.SetParent(sailorReservContainer.transform);
+				PoolObject nSailor = sailorUIPool.Spawn();
+				nSailor.gameObject.transform.SetParent(sailorReservContainer.transform);
 
-				RectTransform trans = nSailor.GetComponent<RectTransform>();
+				RectTransform trans = nSailor.gameObject.GetComponent<RectTransform>();
 				trans.anchorMin = new Vector2(0.05f, 1);
 				trans.anchorMax = new Vector2(0.95f, 1);
-				nSailor.transform.localPosition = new Vector3(0, -(60 * i), 0);
+				nSailor.gameObject.transform.localPosition = new Vector3(0, -(60 * i), 0);
 				trans.sizeDelta = new Vector2(0, 55);
 				
-				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
+				SailorUI sailorUI = nSailor.gameObject.GetComponent<SailorUI>();
 				sailorUI.SetButtonToAdministrate();
 				sailorUI.SetId(sailors[i].GetId());
 				sailorUI.SetPortrait(sailors[i].GetPortrait());
@@ -165,14 +171,14 @@ public class UIManager : MonoBehaviour {
 
 			sailors = CrewManager.instance.GetSailorsActives();
 			for (int i = 0; i < sailors.Count; i++){
-				GameObject nSailor = Instantiate(sailorPrefab);
-				nSailor.transform.SetParent(sailorActiveContainer.transform);
-				RectTransform trans = nSailor.GetComponent<RectTransform>();
+				PoolObject nSailor = sailorUIPool.Spawn();
+				nSailor.gameObject.transform.SetParent(sailorActiveContainer.transform);
+				RectTransform trans = nSailor.gameObject.GetComponent<RectTransform>();
 				trans.anchorMin = new Vector2(0.05f, 1);
 				trans.anchorMax = new Vector2(0.95f, 1);
-				nSailor.transform.localPosition = new Vector3(0, -(60 * i), 0);
+				nSailor.gameObject.transform.localPosition = new Vector3(0, -(60 * i), 0);
 				trans.sizeDelta = new Vector2(0, 55);
-				SailorUI sailorUI = nSailor.GetComponent<SailorUI>();
+				SailorUI sailorUI = nSailor.gameObject.GetComponent<SailorUI>();
 				sailorUI.SetButtonToAdministrate();
 				sailorUI.SetId(sailors[i].GetId());
 				sailorUI.SetCostNull();
@@ -184,11 +190,11 @@ public class UIManager : MonoBehaviour {
 
 	public void CrewPanelClose(){
 		foreach(SailorUI sailor in reservSailorsOnUI){
-			sailor.Destroy();
+			sailor.Destroy(sailorUIPool);
 		}
 		reservSailorsOnUI.Clear();
 		foreach(SailorUI sailor in activeSailorsOnUI){
-			sailor.Destroy();
+			sailor.Destroy(sailorUIPool);
 		}
 		activeSailorsOnUI.Clear();
 		crewPanel.SetActive(false);

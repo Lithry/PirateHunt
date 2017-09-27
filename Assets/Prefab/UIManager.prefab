@@ -59,7 +59,7 @@ MonoBehaviour:
   sailorPrefab: {fileID: 1802906638160690, guid: 8d57e2ce141fb8d4aa9efa112692974b,
     type: 2}
   sailorContainer: {fileID: 0}
-  portPanel: {fileID: 0}
+  crewPanel: {fileID: 0}
   sailorActiveContainer: {fileID: 0}
   sailorReservContainer: {fileID: 0}
   cityUI: {fileID: 0}
@@ -68,3 +68,5 @@ MonoBehaviour:
   questRewardText: {fileID: 0}
   combatOptionPanel: {fileID: 0}
   completedQuestPanel: {fileID: 0}
+  questUIPoolManager: {fileID: 0}
+  sailorUIPoolManager: {fileID: 0}
