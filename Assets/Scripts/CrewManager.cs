@@ -11,8 +11,23 @@ public class CrewManager : MonoBehaviour {
 		instance = this;
 	}
 
+	void Update(){
+		Debug.Log("Reserv: " + reserv.Count);
+		Debug.Log("Active: " + active.Count);
+	}
+
 	public void AddSailorToCrew(Sailor sailor){
 		reserv.Add(sailor.GetId(), sailor);
+	}
+
+	public void MoveToReserv(int id){
+		reserv.Add(id, active[id]);
+		active.Remove(id);
+	}
+
+	public void MoveToActive(int id){
+		active.Add(id, reserv[id]);
+		reserv.Remove(id);
 	}
 
 	public void MoveSailor(int id){
@@ -24,8 +39,6 @@ public class CrewManager : MonoBehaviour {
 			reserv.Add(id, active[id]);
 			active.Remove(id);
 		}
-		else
-			Debug.Log("No tengo el marinero ni en reserva ni activo");
 	}
 
 	public List<Sailor> GetSailorsInReserv(){

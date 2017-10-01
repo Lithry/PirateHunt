@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class SailorUI : MonoBehaviour {
 	public Text description;
 	public Text cost;
-	private Button button;
-	private Text buttonText;
+	public Button buttonHire;
+	public Button buttonMoveToReserv;
+	public Button buttonMoveToActive;
+	private RectTransform buttonTransform;
+	private Text buttonMoveText;
 	public Image portrait;
+	private RectTransform trans;
 	private PoolObject po;
 
 	private int id;
@@ -19,21 +23,38 @@ public class SailorUI : MonoBehaviour {
 	private int goldCost;
 
 	void Awake () {
-		button = GetComponentInChildren<Button>();
-		buttonText = button.GetComponentInChildren<Text>();
+		trans = gameObject.GetComponent<RectTransform>();
+		buttonHire.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
+		buttonMoveToReserv.onClick.AddListener(delegate() { UIManager.instance.SailorToReserv(id); });
+		buttonMoveToActive.onClick.AddListener(delegate() { UIManager.instance.SailorToActive(id); });
 		po = GetComponent<PoolObject>();
 	}
 	
 	public void SetButtonToHire(){
-		button.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
-		buttonText.text = "Contratar";
+		buttonMoveToReserv.gameObject.SetActive(false);
+		buttonMoveToActive.gameObject.SetActive(false);
+		buttonHire.gameObject.SetActive(true);
 		CheckIfCanHire();
 	}
 
-	public void SetButtonToAdministrate(){
-		button.onClick.AddListener(delegate() { UIManager.instance.MoveSailorInCrew(id); });
-		buttonText.text = "Mover";
-		button.interactable = true;
+	public void SetButtonToMoveReservActive(){
+		buttonMoveToReserv.gameObject.SetActive(false);
+		buttonHire.gameObject.SetActive(false);
+		buttonMoveToActive.gameObject.SetActive(true);
+	
+	}
+
+	public void SetButtonToMoveActiveReserv(){
+		buttonMoveToActive.gameObject.SetActive(false);
+		buttonHire.gameObject.SetActive(false);
+		buttonMoveToReserv.gameObject.SetActive(true);
+
+	}
+
+	public void SetParentAndSize(ref GameObject parent, Vector2 size, Vector2 anchorMin, Vector2 anchorMax, Vector3 pos){
+		gameObject.transform.SetParent(parent.transform);
+		gameObject.transform.localPosition = pos;
+		trans.sizeDelta = size;
 	}
 
 	public void SetId(int id){
@@ -46,6 +67,7 @@ public class SailorUI : MonoBehaviour {
 
 	public void SetPortrait(Sprite port){
 		portrait.sprite = port;
+		portrait.preserveAspect = true;
 	}
 
 	public void SetDescription(string des){
@@ -67,9 +89,9 @@ public class SailorUI : MonoBehaviour {
 
 	public void CheckIfCanHire(){
 		if ((honorCost > ResourcesManager.instance.GetHonor()) || (fearCost > ResourcesManager.instance.GetFear()) || (idleCost > ResourcesManager.instance.GetIdle()) || (goldCost > ResourcesManager.instance.GetGold()))
-			button.interactable = false;
+			buttonHire.interactable = false;
 		else
-			button.interactable = true;
+			buttonHire.interactable = true;
 	}
 
 	public void Destroy(Pool pool){
