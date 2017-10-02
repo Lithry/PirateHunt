@@ -8,6 +8,7 @@ public class QuestAndRewards : MonoBehaviour {
 	private int catchs;
 	private int kills;
 	private int misses;
+	private int exp;
 
 	void Start () {
 		instance = this;
@@ -31,6 +32,7 @@ public class QuestAndRewards : MonoBehaviour {
 		catchs = 0;
 		kills = 0;
 		misses = 0;
+		exp = 0;
 	}
 
 	public int GetCatch(){
@@ -57,10 +59,19 @@ public class QuestAndRewards : MonoBehaviour {
 		misses += value;
 	}
 
+	public void AddExp(int value){
+		exp += value;
+	}
+
+	public int GetExp(){
+		return exp;
+	}
+
 	public void QuestCompleted(){
 		ResourcesManager.instance.AddHonor(catchs * 2);
 		ResourcesManager.instance.AddFear(kills * 2);
 		ResourcesManager.instance.AddIdle(misses * 2);
 		ResourcesManager.instance.AddGold((catchs + (int)(kills / 2)) * 5);
+		ResourcesManager.instance.AddExp(exp);
 	}
 }

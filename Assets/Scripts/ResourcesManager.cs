@@ -8,6 +8,7 @@ public class ResourcesManager : MonoBehaviour {
 	private int fear;
 	private int idle;
 	private int gold;
+    private int exp;
 
 
     void Start () {
@@ -16,6 +17,7 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
+        exp = 0;
 	}
 
 	public int GetHonor() {
@@ -52,5 +54,13 @@ public class ResourcesManager : MonoBehaviour {
 
     public void ReduceGold(int value){
         gold -= value;
+    }
+
+    public void AddExp(int value){
+        exp += value;
+    }
+
+    public int GetExp(){
+        return exp;
     }
 }

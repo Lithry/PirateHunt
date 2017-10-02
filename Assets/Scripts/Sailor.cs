@@ -9,6 +9,7 @@ public class Sailor : MonoBehaviour {
 	private int fearRequired;
 	private int idleRequired;
 	private int goldRequired;
+	private int exp;
 	// Use this for initialization
 	void Start () {
 		
@@ -35,11 +36,12 @@ public class Sailor : MonoBehaviour {
 		return portrait;
 	}
 
-	public void SetRequirements(int honor, int fear, int idle, int gold){
+	public void SetRequirements(int honor, int fear, int idle, int gold, int exp){
 		honorRequired = honor;
 		fearRequired = fear;
 		idleRequired = idle;
 		goldRequired = gold;
+		this.exp = exp;
 	}
 
 	public int GetHonorRequired(){
@@ -56,5 +58,9 @@ public class Sailor : MonoBehaviour {
 
 	public int GetGoldRequired(){
 		return goldRequired;
+	}
+
+	public int GetExp(){
+		return exp;
 	}
 }

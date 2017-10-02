@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 	static public UIManager instance;
@@ -41,12 +42,6 @@ public class UIManager : MonoBehaviour {
 		completedQuestPanel.SetActive(false);
 		combatOptionPanel.SetActive(false);
 		combatUI.SetActive(false);
-	}
-
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Q)){
-			Application.Quit();
-		}
 	}
 
 	// QUEST OPTIONS ===================================================================
@@ -254,6 +249,7 @@ public class UIManager : MonoBehaviour {
 
 	public void Catch(){
 		QuestAndRewards.instance.AddCatch(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.AddExp(QuestAndRewards.instance.GetQuestData().numEnemis * 10);
 		QuestAndRewards.instance.QuestCompleted();
 		combatOptionPanel.SetActive(false);
 		
@@ -266,6 +262,7 @@ public class UIManager : MonoBehaviour {
 
 	public void Kill(){
 		QuestAndRewards.instance.AddKilled(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.AddExp(QuestAndRewards.instance.GetQuestData().numEnemis * 10);
 		QuestAndRewards.instance.QuestCompleted();
 		combatOptionPanel.SetActive(false);
 		
@@ -278,6 +275,7 @@ public class UIManager : MonoBehaviour {
 
 	public void Idle(){
 		QuestAndRewards.instance.AddAway(QuestAndRewards.instance.GetQuestData().numEnemis);
+		QuestAndRewards.instance.AddExp(QuestAndRewards.instance.GetQuestData().numEnemis * 6);
 		QuestAndRewards.instance.QuestCompleted();
 		combatOptionPanel.SetActive(false);
 		
@@ -301,4 +299,15 @@ public class UIManager : MonoBehaviour {
         cityUI.SetActive(true);
 		FadeTransition.instance.BeginFade(-1);		
     }
+
+	// =================================================================================
+	// GAMEOVER OPTIONS ================================================================
+
+	public void Restart(){
+		SceneManager.LoadScene("Pirate Hunt");
+	}
+
+	public void Quit(){
+		Application.Quit();
+	}
 }

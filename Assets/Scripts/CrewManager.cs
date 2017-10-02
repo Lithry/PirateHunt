@@ -11,11 +11,6 @@ public class CrewManager : MonoBehaviour {
 		instance = this;
 	}
 
-	void Update(){
-		Debug.Log("Reserv: " + reserv.Count);
-		Debug.Log("Active: " + active.Count);
-	}
-
 	public void AddSailorToCrew(Sailor sailor){
 		reserv.Add(sailor.GetId(), sailor);
 	}

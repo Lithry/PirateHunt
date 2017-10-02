@@ -19,7 +19,7 @@ public class AvalivleSailors : MonoBehaviour {
 		Sailor set = new Sailor();
 		set.SetId(1);
 		set.SetPortrait(honor);
-		set.SetRequirements(1, 0, 0, 10);
+		set.SetRequirements(1, 0, 0, 10, 250);
 		avalivle.Add(set);
 		
 		//GameObject b = new GameObject();
@@ -27,7 +27,7 @@ public class AvalivleSailors : MonoBehaviour {
 		Sailor set2 = new Sailor();
 		set2.SetId(2);
 		set2.SetPortrait(fear);
-		set2.SetRequirements(0, 1, 0, 10);
+		set2.SetRequirements(0, 1, 0, 10, 250);
 		avalivle.Add(set2);
 		
 		//GameObject c = new GameObject();
@@ -35,7 +35,7 @@ public class AvalivleSailors : MonoBehaviour {
 		Sailor set3 = new Sailor();
 		set3.SetId(3);
 		set3.SetPortrait(idle);
-		set3.SetRequirements(0, 0, 1, 10);
+		set3.SetRequirements(0, 0, 1, 10, 250);
 		avalivle.Add(set3);
 	}
 
@@ -48,6 +48,7 @@ public class AvalivleSailors : MonoBehaviour {
 			if (id == avalivle[i].GetId()){
 				CrewManager.instance.AddSailorToCrew(avalivle[i]);
 				ResourcesManager.instance.ReduceGold(avalivle[i].GetGoldRequired());
+				ResourcesManager.instance.AddExp(avalivle[i].GetExp());
 				avalivle.Remove(avalivle[i]);
 			}
 		}
