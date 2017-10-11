@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ResourcesManager : MonoBehaviour {
 	static public ResourcesManager instance;
+    private int troops;
 	private int honor;
 	private int fear;
 	private int idle;
@@ -13,6 +14,7 @@ public class ResourcesManager : MonoBehaviour {
 
     void Start () {
 		instance = this;
+        troops = 0;
         honor = 0;
         fear = 0;
         idle = 0;
@@ -20,6 +22,20 @@ public class ResourcesManager : MonoBehaviour {
         AddGold(500);
         exp = 0;
 	}
+
+    public int GetTroops(){
+        return troops;
+    }
+
+    public void AddTroops(int value){
+        AddGold(TroopsCost.Gold * value);
+        AddHonor(TroopsCost.Honor * value);
+        AddFear(TroopsCost.Fear * value);
+        AddIdle(TroopsCost.Idle * value);
+
+        troops += value;
+        UIManager.instance.SetTroopsDisplay(troops);
+    }
 
 	public int GetHonor() {
         return honor;
