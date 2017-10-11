@@ -17,6 +17,7 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
+        AddGold(500);
         exp = 0;
 	}
 
@@ -26,6 +27,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHonor(int value) {
         honor += value;
+        UIManager.instance.SetHonorDisplay(honor);
     }
 
 	public int GetFear() {
@@ -34,6 +36,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFear(int value) {
         fear += value;
+        UIManager.instance.SetFearDisplay(fear);
     }
 
 	public int GetIdle() {
@@ -42,6 +45,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddIdle(int value) {
         idle += value;
+        UIManager.instance.SetIdleDisplay(idle);
     }
 
 	public int GetGold() {
@@ -50,6 +54,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddGold(int value) {
         gold += value;
+        UIManager.instance.SetGoldDisplay(gold);
     }
 
     public void ReduceGold(int value){

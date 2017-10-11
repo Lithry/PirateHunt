@@ -13,7 +13,7 @@ public class Quest : MonoBehaviour {
 
 	void Awake () {
 		button = GetComponentInChildren<Button>();
-        button.onClick.AddListener(delegate() { UIManager.instance.AceptQuest(id); });
+        //button.onClick.AddListener(delegate() { UIManager.instance.AceptQuest(id); });
 		po = GetComponent<PoolObject>();
 		Text[] texts;
 		texts = GetComponentsInChildren<Text>();

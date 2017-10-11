@@ -24,9 +24,9 @@ public class SailorUI : MonoBehaviour {
 
 	void Awake () {
 		trans = gameObject.GetComponent<RectTransform>();
-		buttonHire.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
-		buttonMoveToReserv.onClick.AddListener(delegate() { UIManager.instance.SailorToReserv(id); });
-		buttonMoveToActive.onClick.AddListener(delegate() { UIManager.instance.SailorToActive(id); });
+		//buttonHire.onClick.AddListener(delegate() { UIManager.instance.HireSailor(id); });
+		//buttonMoveToReserv.onClick.AddListener(delegate() { UIManager.instance.SailorToReserv(id); });
+		//buttonMoveToActive.onClick.AddListener(delegate() { UIManager.instance.SailorToActive(id); });
 		po = GetComponent<PoolObject>();
 	}
 	
