@@ -9,6 +9,8 @@ public class ResourcesManager : MonoBehaviour {
 	private int fear;
 	private int idle;
 	private int gold;
+    private int ships;
+    private int resources;
     private int exp;
 
 
@@ -20,6 +22,7 @@ public class ResourcesManager : MonoBehaviour {
         idle = 0;
         gold = 0;
         AddGold(500);
+        AddResources(100);
         exp = 0;
 	}
 
@@ -43,7 +46,6 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHonor(int value) {
         honor += value;
-        UIManager.instance.SetHonorDisplay(honor);
     }
 
 	public int GetFear() {
@@ -52,7 +54,6 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFear(int value) {
         fear += value;
-        UIManager.instance.SetFearDisplay(fear);
     }
 
 	public int GetIdle() {
@@ -61,7 +62,6 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddIdle(int value) {
         idle += value;
-        UIManager.instance.SetIdleDisplay(idle);
     }
 
 	public int GetGold() {
@@ -75,6 +75,24 @@ public class ResourcesManager : MonoBehaviour {
 
     public void ReduceGold(int value){
         gold -= value;
+    }
+
+    public void AddShip(int value){
+        ships += value;
+        UIManager.instance.SetShipsDisplay(ships);
+    }
+
+    public int GetShips(){
+        return ships;
+    }
+
+    public void AddResources(int value){
+        resources += value;
+        UIManager.instance.SetResourcesDisplay(resources);
+    }
+
+    public int GetResources(){
+        return resources;
     }
 
     public void AddExp(int value){

@@ -8,16 +8,17 @@ public class UIManager : MonoBehaviour {
 	static public UIManager instance;
 	public GameObject cityUI;
 	public GameObject objetivePanel;
+	public GameObject troopsPanel;
 	public Text troopsDisplay;
-	public GameObject honorPanel;
-	public Text honorDisplay;
-	public GameObject fearPanel;
-	public Text fearDisplay;
-	public GameObject idlePanel;
-	public Text idleDisplay;
+	public GameObject shipsPanel;
+	public Text shipsDisplay;
+	public Toggle shipPayToggle;
+	public Toggle shipForceToggle;
+	public GameObject resourcesPanel;
+	public Text resourcesDisplay;
+
 	public GameObject goldPanel;
 	public Text goldDisplay;
-	public GameObject troopsPanel;
 	private int troopsCount;
 	public Text troopsCountDisplay;
 	public Text troopsGoldCost;
@@ -28,9 +29,8 @@ public class UIManager : MonoBehaviour {
 		instance = this;
 		objetivePanel.SetActive(true);
 		troopsPanel.SetActive(false);
-		honorPanel.SetActive(false);
-		fearPanel.SetActive(false);
-		idlePanel.SetActive(false);
+		shipsPanel.SetActive(false);
+		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(false);
 	}
 
@@ -40,16 +40,12 @@ public class UIManager : MonoBehaviour {
 		troopsDisplay.text = "x " + value.ToString();
 	}
 
-	public void SetHonorDisplay(int value){
-		honorDisplay.text = "x " + value.ToString();
+	public void SetShipsDisplay(int value){
+		shipsDisplay.text = "x " + value.ToString();
 	}
 	
-	public void SetFearDisplay(int value){
-		fearDisplay.text = "x " + value.ToString();
-	}
-	
-	public void SetIdleDisplay(int value){
-		idleDisplay.text = "x " + value.ToString();
+	public void SetResourcesDisplay(int value){
+		resourcesDisplay.text = "x " + value.ToString();
 	}
 
 	public void SetGoldDisplay(int value){
@@ -72,9 +68,8 @@ public class UIManager : MonoBehaviour {
 				troopsAddButton.interactable = false;
 		
 		troopsGoldCost.text = "0";
-		honorPanel.SetActive(false);
-		fearPanel.SetActive(false);
-		idlePanel.SetActive(false);
+		shipsPanel.SetActive(false);
+		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(false);
 		troopsPanel.SetActive(true);
 	}
@@ -85,7 +80,7 @@ public class UIManager : MonoBehaviour {
 		if (troopsCount > 0)
 			troopsDeductButton.interactable = true;
 	
-		if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1))
+		if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1) || ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip < (troopsCount + 1))
 			troopsAddButton.interactable = false;
 
 		troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
@@ -122,62 +117,49 @@ public class UIManager : MonoBehaviour {
 	}
 
 	// =================================================================================
-	// HONOR PANEL =====================================================================
+	// SHIPS PANEL =====================================================================
 
-	public void OpenHonorPanel(){
+	public void OpenShipsPanel(){
 		troopsPanel.SetActive(false);
-		fearPanel.SetActive(false);
-		idlePanel.SetActive(false);
+		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(false);
-		honorPanel.SetActive(true);
-		TimeManager.instance.AddTime(1);
+		shipsPanel.SetActive(true);
 	}
 
-	public void AcceptHonorPanel(){
+	public void AcceptShipsPanel(){
 
 	}
 
-	public void CancelHonorPanel(){
-		honorPanel.SetActive(false);
+	public void PayToggle(){
+		shipForceToggle.isOn = false;
+		shipPayToggle.isOn = true;
+	}
+
+	public void ForceToggle(){
+		shipPayToggle.isOn = false;
+		shipForceToggle.isOn = true;
+	}
+
+	public void CancelShipsPanel(){
+		shipsPanel.SetActive(false);
 	}
 
 	// =================================================================================
-	// Fear PANEL ======================================================================
+	// RESOURCES PANEL =================================================================
 
-	public void OpenFearPanel(){
+	public void OpenResourcesPanel(){
 		troopsPanel.SetActive(false);
-		honorPanel.SetActive(false);
-		idlePanel.SetActive(false);
+		shipsPanel.SetActive(false);
 		goldPanel.SetActive(false);
-		fearPanel.SetActive(true);
-		TimeManager.instance.AddTime(3);
+		resourcesPanel.SetActive(true);
 	}
 
-	public void AcceptFearPanel(){
-
-	}
-
-	public void CancelFearPanel(){
-		fearPanel.SetActive(false);
-	}
-
-	// =================================================================================
-	// IDLE PANEL ======================================================================
-
-	public void OpenIdlePanel(){
-		troopsPanel.SetActive(false);
-		honorPanel.SetActive(false);
-		fearPanel.SetActive(false);
-		goldPanel.SetActive(false);
-		idlePanel.SetActive(true);
-	}
-
-	public void AcceptIdlePanel(){
+	public void AcceptResourcesPanel(){
 
 	}
 
-	public void CancelIdlePanel(){
-		idlePanel.SetActive(false);
+	public void CancelResourcesPanel(){
+		resourcesPanel.SetActive(false);
 	}
 
 	// =================================================================================
@@ -185,9 +167,8 @@ public class UIManager : MonoBehaviour {
 
 	public void OpenGoldPanel(){
 		troopsPanel.SetActive(false);
-		honorPanel.SetActive(false);
-		fearPanel.SetActive(false);
-		idlePanel.SetActive(false);
+		shipsPanel.SetActive(false);
+		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(true);
 	}
 
