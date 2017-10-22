@@ -31,11 +31,6 @@ public class ResourcesManager : MonoBehaviour {
     }
 
     public void AddTroops(int value){
-        AddGold(TroopsCost.Gold * value);
-        AddHonor(TroopsCost.Honor * value);
-        AddFear(TroopsCost.Fear * value);
-        AddIdle(TroopsCost.Idle * value);
-
         troops += value;
         UIManager.instance.SetTroopsDisplay(troops);
     }
@@ -64,22 +59,48 @@ public class ResourcesManager : MonoBehaviour {
         idle += value;
     }
 
+    public void ReduceIdle(int value) {
+        idle -= value;
+    }
+
 	public int GetGold() {
         return gold;
     }
 
     public void AddGold(int value) {
-        gold += value;
-        UIManager.instance.SetGoldDisplay(gold);
+        if (value > 0){
+            gold += value;
+            UIManager.instance.SetGoldDisplay(gold);
+        }
     }
 
     public void ReduceGold(int value){
-        gold -= value;
+        if (value > 0){
+            gold -= value;
+            
+            if (gold < 0)
+                gold = 0;
+
+            UIManager.instance.SetGoldDisplay(gold);
+        }
     }
 
     public void AddShip(int value){
-        ships += value;
-        UIManager.instance.SetShipsDisplay(ships);
+        if (value > 0){
+            ships += value;
+            UIManager.instance.SetShipsDisplay(ships);
+        }
+    }
+
+    public void ReduceShip(int value){
+        if (value > 0){
+            ships += value;
+
+            if (ships < 0)
+                ships = 0;
+
+            UIManager.instance.SetShipsDisplay(ships);
+        }
     }
 
     public int GetShips(){
@@ -87,8 +108,21 @@ public class ResourcesManager : MonoBehaviour {
     }
 
     public void AddResources(int value){
-        resources += value;
-        UIManager.instance.SetResourcesDisplay(resources);
+        if (value > 0){
+            resources += value;
+            UIManager.instance.SetResourcesDisplay(resources);
+        }
+    }
+
+    public void ReduceResources(int value){
+        if (value > 0){
+            resources -= value;
+
+            if (resources < 0)
+                resources = 0;
+
+            UIManager.instance.SetResourcesDisplay(resources);
+        }
     }
 
     public int GetResources(){

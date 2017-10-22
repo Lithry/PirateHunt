@@ -11,12 +11,11 @@ public class UIManager : MonoBehaviour {
 	public GameObject troopsPanel;
 	public Text troopsDisplay;
 	public GameObject shipsPanel;
+	public Button ship1Pay;
+	public Button ship5Pay;
 	public Text shipsDisplay;
-	public Toggle shipPayToggle;
-	public Toggle shipForceToggle;
 	public GameObject resourcesPanel;
 	public Text resourcesDisplay;
-
 	public GameObject goldPanel;
 	public Text goldDisplay;
 	private int troopsCount;
@@ -64,8 +63,10 @@ public class UIManager : MonoBehaviour {
 		troopsCountDisplay.text = troopsCount.ToString();
 		troopsDeductButton.interactable = false;
 		
-		if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1))
-				troopsAddButton.interactable = false;
+		if (ResourcesManager.instance.GetGold() < TroopsCost.Gold * (troopsCount + 1) || ResourcesManager.instance.GetTroops() >= TroopsSlots.TroopsForShip * ResourcesManager.instance.GetShips())
+			troopsAddButton.interactable = false;
+		else
+			troopsAddButton.interactable = true;
 		
 		troopsGoldCost.text = "0";
 		shipsPanel.SetActive(false);
@@ -80,10 +81,10 @@ public class UIManager : MonoBehaviour {
 		if (troopsCount > 0)
 			troopsDeductButton.interactable = true;
 	
-		if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1) || ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip < (troopsCount + 1))
+		if (ResourcesManager.instance.GetGold() < TroopsCost.Gold * (troopsCount + 1) || ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip < ((troopsCount + 1) + ResourcesManager.instance.GetTroops()))
 			troopsAddButton.interactable = false;
 
-		troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
+		troopsGoldCost.text = (TroopsCost.Gold * troopsCount).ToString();
 		troopsCountDisplay.text = troopsCount.ToString();
 	}
 
@@ -101,6 +102,10 @@ public class UIManager : MonoBehaviour {
 
 	public void AcceptTroopsPanel(){
 		ResourcesManager.instance.AddTroops(troopsCount);
+		ResourcesManager.instance.ReduceGold(TroopsCost.Gold * troopsCount);
+        ResourcesManager.instance.AddHonor(TroopsCost.Honor * troopsCount);
+        ResourcesManager.instance.AddFear(TroopsCost.Fear * troopsCount);
+        ResourcesManager.instance.ReduceIdle(TroopsCost.Idle * troopsCount);
 
 		troopsCount = 0;
 		troopsCountDisplay.text = troopsCount.ToString();
@@ -123,21 +128,58 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(false);
+
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+			ship1Pay.interactable = false;
+			ship5Pay.interactable = false;
+		}
+		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+			ship5Pay.interactable = false;
+		}
+
 		shipsPanel.SetActive(true);
 	}
 
-	public void AcceptShipsPanel(){
-
+	public void Ships1Pay(){
+		ResourcesManager.instance.AddShip(1);
+		ResourcesManager.instance.ReduceResources(ShipsCost.ResourcesCost);
+		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay);
+		TimeManager.instance.AddTime(1);
+		
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+			ship1Pay.interactable = false;
+			ship5Pay.interactable = false;
+		}
+		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+			ship5Pay.interactable = false;
+		}
 	}
 
-	public void PayToggle(){
-		shipForceToggle.isOn = false;
-		shipPayToggle.isOn = true;
+	public void Ships5Pay(){
+		ResourcesManager.instance.AddShip(5);
+		ResourcesManager.instance.ReduceResources((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct));
+		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay * 5);
+		TimeManager.instance.AddTime(3);
+
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+			ship1Pay.interactable = false;
+			ship5Pay.interactable = false;
+		}
+		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+			ship5Pay.interactable = false;
+		}
 	}
 
-	public void ForceToggle(){
-		shipPayToggle.isOn = false;
-		shipForceToggle.isOn = true;
+	public void Ships1Force(){
+		ResourcesManager.instance.AddShip(1);
+		ResourcesManager.instance.AddFear(ShipsCost.FearIfForce);
+		TimeManager.instance.AddTime(1);
+	}
+
+	public void Ships5Force(){
+		ResourcesManager.instance.AddShip(5);
+		ResourcesManager.instance.AddFear(ShipsCost.FearIfForce * 5);
+		TimeManager.instance.AddTime(3);
 	}
 
 	public void CancelShipsPanel(){
