@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour {
 	public Button ship5Pay;
 	public Text shipsDisplay;
 	public GameObject resourcesPanel;
+	public Button resources100Pay;
+	public Button resources500Pay;
 	public Text resourcesDisplay;
 	public GameObject goldPanel;
 	public Text goldDisplay;
@@ -128,12 +130,14 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		resourcesPanel.SetActive(false);
 		goldPanel.SetActive(false);
+		ship1Pay.interactable = true;
+		ship5Pay.interactable = true;
 
 		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
 			ship5Pay.interactable = false;
 		}
 
@@ -150,7 +154,7 @@ public class UIManager : MonoBehaviour {
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
 			ship5Pay.interactable = false;
 		}
 	}
@@ -165,7 +169,7 @@ public class UIManager : MonoBehaviour {
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (ShipsCost.ResourcesCost * 5 > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
 			ship5Pay.interactable = false;
 		}
 	}
@@ -193,11 +197,60 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
 		goldPanel.SetActive(false);
+		resources100Pay.interactable = true;
+		resources500Pay.interactable = true;
+
+		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
+			resources100Pay.interactable = false;
+			resources500Pay.interactable = false;
+		}
+		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
+			resources500Pay.interactable = false;
+		}
+
 		resourcesPanel.SetActive(true);
 	}
 
-	public void AcceptResourcesPanel(){
+	public void Resources100Pay(){
+		ResourcesManager.instance.AddResources(100);
+		ResourcesManager.instance.ReduceGold(ResourceCost.ResourcesCost100);
+		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay);
+		TimeManager.instance.AddTime(1);
+		
+		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
+			resources100Pay.interactable = false;
+			resources500Pay.interactable = false;
+		}
+		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
+			resources500Pay.interactable = false;
+		}
+	}
 
+	public void Resources500Pay(){
+		ResourcesManager.instance.AddResources(500);
+		ResourcesManager.instance.ReduceGold((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct));
+		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay * 5);
+		TimeManager.instance.AddTime(4);
+
+		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
+			resources100Pay.interactable = false;
+			resources500Pay.interactable = false;
+		}
+		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
+			resources500Pay.interactable = false;
+		}
+	}
+
+	public void Resources100Force(){
+		ResourcesManager.instance.AddResources(100);
+		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce);
+		TimeManager.instance.AddTime(1);
+	}
+
+	public void Resources500Force(){
+		ResourcesManager.instance.AddResources(500);
+		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce * 5);
+		TimeManager.instance.AddTime(4);
 	}
 
 	public void CancelResourcesPanel(){

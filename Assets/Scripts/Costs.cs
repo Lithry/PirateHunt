@@ -20,3 +20,10 @@ public static class ShipsCost{
 	public const int HonorIfPay = 5;
 	public const int FearIfForce = 20;
 }
+
+public static class ResourceCost{
+	public const int ResourcesCost100 = 40;
+	public const int DiscountForMassProduct = 5;
+	public const int HonorIfPay = 3;
+	public const int FearIfForce = 30;
+}
