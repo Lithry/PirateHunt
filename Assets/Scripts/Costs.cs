@@ -27,3 +27,10 @@ public static class ResourceCost{
 	public const int HonorIfPay = 3;
 	public const int FearIfForce = 30;
 }
+
+public static class Taxes{
+	public const int Gold = 100;
+	public const int HonorIfCollected = 2;
+	public const int TimeToWait = 8;
+	public const int FearIfForced = 10;
+}

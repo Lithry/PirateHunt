@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour {
 	public Button resources500Pay;
 	public Text resourcesDisplay;
 	public GameObject goldPanel;
+	public Text timeToCollect;
+	public Button goldCollectButton;
+	private int lastCollectedTaxesTurn;
 	public Text goldDisplay;
 	private int troopsCount;
 	public Text troopsCountDisplay;
@@ -28,6 +31,7 @@ public class UIManager : MonoBehaviour {
 
 	void Awake () {
 		instance = this;
+		lastCollectedTaxesTurn = 0;
 		objetivePanel.SetActive(true);
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
@@ -59,6 +63,16 @@ public class UIManager : MonoBehaviour {
 
 	// =================================================================================
 	// PANEL OPTIONS ===================================================================
+	// GENERAL =========================================================================
+
+	public void ClossAllPanels(){
+		objetivePanel.SetActive(false);
+		troopsPanel.SetActive(false);
+		shipsPanel.SetActive(false);
+		resourcesPanel.SetActive(false);
+		goldPanel.SetActive(false);
+	}
+
 	// TROOPS PANEL ====================================================================
 	public void OpenTroopsPanel(){
 		troopsCount = 0;
@@ -264,11 +278,32 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
 		resourcesPanel.SetActive(false);
+
+		if (TimeManager.instance.GetCurrentTime() - lastCollectedTaxesTurn < Taxes.TimeToWait){
+			goldCollectButton.interactable = false;
+			timeToCollect.text = "Espera\n" + (Taxes.TimeToWait - (TimeManager.instance.GetCurrentTime() - lastCollectedTaxesTurn)).ToString() + " turnos";
+		}
+		else{
+			goldCollectButton.interactable = true;
+			timeToCollect.text = "Puedes\nRecolectar";
+		}
+		
 		goldPanel.SetActive(true);
 	}
 
-	public void AcceptGoldPanel(){
+	public void CollectTaxes(){
+		ResourcesManager.instance.AddGold(Taxes.Gold);
+		ResourcesManager.instance.AddHonor(Taxes.HonorIfCollected);
+		lastCollectedTaxesTurn = TimeManager.instance.GetCurrentTime();
+		goldCollectButton.interactable = false;
+		timeToCollect.text = "Espera\n"+ (Taxes.TimeToWait - 1).ToString() + " turnos";
+		TimeManager.instance.AddTime(1);
+	}
 
+	public void ForceTaxes(){
+		ResourcesManager.instance.AddGold(Taxes.Gold);
+		ResourcesManager.instance.AddFear(Taxes.FearIfForced);
+		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelGoldPanel(){

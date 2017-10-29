@@ -20,5 +20,15 @@ public class TimeManager : MonoBehaviour {
 		
 		display.text = time.ToString();
 	}
+
+	public int GetCurrentTime(){
+		return time;
+	}
+
+	public void ForwardButton(){
+		UIManager.instance.ClossAllPanels();
+		time++;
+		display.text = time.ToString();
+	}
 	
 }
