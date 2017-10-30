@@ -35,6 +35,18 @@ public class ResourcesManager : MonoBehaviour {
         UIManager.instance.SetTroopsDisplay(troops);
     }
 
+    public void ReduceTroops(int value){
+        if (value > 0){
+            troops -= value;
+
+            if (troops < 0)
+                troops = 0;
+
+            UIManager.instance.SetTroopsDisplay(troops);
+
+        }
+    }
+
 	public int GetHonor() {
         return honor;
     }

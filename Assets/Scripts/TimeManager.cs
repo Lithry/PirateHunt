@@ -7,18 +7,21 @@ public class TimeManager : MonoBehaviour {
 	static public TimeManager instance;
 	public Text display;
 	private int time;
+	private int timeOfLastEvent;
 
 	// Use this for initialization
 	void Start () {
 		instance = this;
 		time = 0;
-		display.text = time.ToString();
+		timeOfLastEvent = time;
+		display.text = (time - timeOfLastEvent).ToString();
 	}
 	
 	public void AddTime(int value){
 		time += value;
-		
-		display.text = time.ToString();
+		display.text = (time - timeOfLastEvent).ToString();
+
+		EventManager.instance.CheckEvents();
 	}
 
 	public int GetCurrentTime(){
@@ -28,7 +31,18 @@ public class TimeManager : MonoBehaviour {
 	public void ForwardButton(){
 		UIManager.instance.ClossAllPanels();
 		time++;
-		display.text = time.ToString();
+		display.text = (time - timeOfLastEvent).ToString();
+
+		EventManager.instance.CheckEvents();
+	}
+
+	public int GetTimeOfLastEvent(){
+		return timeOfLastEvent;
+	}
+	
+	public void EventLaunched(){
+		timeOfLastEvent = time;
+		display.text = (time - timeOfLastEvent).ToString();
 	}
 	
 }

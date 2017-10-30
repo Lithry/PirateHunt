@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1856301754041610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 297.15292, y: 199.80309, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,22 +51,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3c00c42206cb4584f8678d06a63da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questPanel: {fileID: 0}
-  questPrefab: {fileID: 1044377396319280, guid: 012410f1bab683241af1a5612bfb8fb0,
-    type: 2}
-  questContainer: {fileID: 0}
-  tavernPanel: {fileID: 0}
-  sailorPrefab: {fileID: 1802906638160690, guid: 8d57e2ce141fb8d4aa9efa112692974b,
-    type: 2}
-  sailorContainer: {fileID: 0}
-  crewPanel: {fileID: 0}
-  sailorActiveContainer: {fileID: 0}
-  sailorReservContainer: {fileID: 0}
   cityUI: {fileID: 0}
-  combatUI: {fileID: 0}
-  combatLog: {fileID: 0}
-  questRewardText: {fileID: 0}
-  combatOptionPanel: {fileID: 0}
-  completedQuestPanel: {fileID: 0}
-  questUIPoolManager: {fileID: 0}
-  sailorUIPoolManager: {fileID: 0}
+  objetivePanel: {fileID: 0}
+  troopsPanel: {fileID: 0}
+  troopsDisplay: {fileID: 0}
+  shipsPanel: {fileID: 0}
+  ship1Pay: {fileID: 0}
+  ship5Pay: {fileID: 0}
+  shipsDisplay: {fileID: 0}
+  resourcesPanel: {fileID: 0}
+  resources100Pay: {fileID: 0}
+  resources500Pay: {fileID: 0}
+  resourcesDisplay: {fileID: 0}
+  goldPanel: {fileID: 0}
+  timeToCollect: {fileID: 0}
+  goldCollectButton: {fileID: 0}
+  goldDisplay: {fileID: 0}
+  troopsCountDisplay: {fileID: 0}
+  troopsGoldCost: {fileID: 0}
+  troopsAddButton: {fileID: 0}
+  troopsDeductButton: {fileID: 0}
