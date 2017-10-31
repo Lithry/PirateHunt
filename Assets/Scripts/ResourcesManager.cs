@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourcesManager : MonoBehaviour {
 	static public ResourcesManager instance;
+    public Image honorBar;
+    public Image fearBar;
     private int troops;
 	private int honor;
 	private int fear;
@@ -11,7 +14,6 @@ public class ResourcesManager : MonoBehaviour {
 	private int gold;
     private int ships;
     private int resources;
-    private int exp;
 
 
     void Start () {
@@ -21,9 +23,9 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
-        AddGold(500);
-        AddResources(100);
-        exp = 0;
+        AddGold(300);
+        honorBar.fillAmount = 0;
+        fearBar.fillAmount = 0;
 	}
 
     public int GetTroops(){
@@ -53,6 +55,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHonor(int value) {
         honor += value;
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
     }
 
 	public int GetFear() {
@@ -61,6 +64,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFear(int value) {
         fear += value;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
     }
 
 	public int GetIdle() {
@@ -69,10 +73,16 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddIdle(int value) {
         idle += value;
+        
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
     }
 
     public void ReduceIdle(int value) {
         idle -= value;
+
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
     }
 
 	public int GetGold() {
@@ -139,13 +149,5 @@ public class ResourcesManager : MonoBehaviour {
 
     public int GetResources(){
         return resources;
-    }
-
-    public void AddExp(int value){
-        exp += value;
-    }
-
-    public int GetExp(){
-        return exp;
     }
 }

@@ -130,7 +130,7 @@ public class UIManager : MonoBehaviour {
 				troopsAddButton.interactable = false;
 		troopsDeductButton.interactable = false;
 
-		TimeManager.instance.AddTime(2);
+		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelTroopsPanel(){
@@ -177,7 +177,7 @@ public class UIManager : MonoBehaviour {
 		ResourcesManager.instance.AddShip(5);
 		ResourcesManager.instance.ReduceResources((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct));
 		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay * 5);
-		TimeManager.instance.AddTime(3);
+		TimeManager.instance.AddTime(1);
 
 		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
 			ship1Pay.interactable = false;
@@ -197,7 +197,7 @@ public class UIManager : MonoBehaviour {
 	public void Ships5Force(){
 		ResourcesManager.instance.AddShip(5);
 		ResourcesManager.instance.AddFear(ShipsCost.FearIfForce * 5);
-		TimeManager.instance.AddTime(3);
+		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelShipsPanel(){
@@ -244,7 +244,7 @@ public class UIManager : MonoBehaviour {
 		ResourcesManager.instance.AddResources(500);
 		ResourcesManager.instance.ReduceGold((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct));
 		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay * 5);
-		TimeManager.instance.AddTime(4);
+		TimeManager.instance.AddTime(1);
 
 		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
 			resources100Pay.interactable = false;
@@ -264,7 +264,7 @@ public class UIManager : MonoBehaviour {
 	public void Resources500Force(){
 		ResourcesManager.instance.AddResources(500);
 		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce * 5);
-		TimeManager.instance.AddTime(4);
+		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelResourcesPanel(){

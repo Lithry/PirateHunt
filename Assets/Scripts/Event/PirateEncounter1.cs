@@ -14,6 +14,7 @@ public class PirateEncounter1 : Event {
 	private int shipReward;
 	private int troopLost;
 	private int idleReward;
+	private int honorReward;
 
     public PirateEncounter1() : base(){}
 
@@ -41,6 +42,7 @@ public class PirateEncounter1 : Event {
 		if (troopLost < 0)
 			troopLost = 0;
 		idleReward = (int)(pirateNumber / 2);
+		honorReward = 2 * (pirateNumber / 2);
 
 		b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Atacar";
@@ -63,6 +65,7 @@ public class PirateEncounter1 : Event {
 		ResourcesManager.instance.AddResources(resourcesReward);
 		ResourcesManager.instance.AddShip(shipReward);
 		ResourcesManager.instance.AddGold(goldReward);
+		ResourcesManager.instance.AddHonor(honorReward);
 		
 		EventManager.instance.EndEvent();
 		
