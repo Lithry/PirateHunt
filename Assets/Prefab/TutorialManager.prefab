@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1307808364783794}
+  m_RootGameObject: {fileID: 1124172196808272}
   m_IsPrefabParent: 1
---- !u!1 &1307808364783794
+--- !u!1 &1124172196808272
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4862084778319328}
-  - component: {fileID: 114481327646752692}
+  - component: {fileID: 4384177368282402}
+  - component: {fileID: 114276880247870818}
   m_Layer: 0
-  m_Name: EventManager
+  m_Name: TutorialManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4862084778319328
+--- !u!4 &4384177368282402
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307808364783794}
+  m_GameObject: {fileID: 1124172196808272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,23 +40,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114481327646752692
+--- !u!114 &114276880247870818
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307808364783794}
+  m_GameObject: {fileID: 1124172196808272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87fc058361fad4445bf70b85eef10267, type: 3}
+  m_Script: {fileID: 11500000, guid: f63ffb2a36a79f14cb32a10b8480b344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  troopsButton: {fileID: 0}
+  troopsPanel: {fileID: 0}
+  troopsButton1: {fileID: 0}
+  troopsText1: {fileID: 0}
+  troopsButton2: {fileID: 0}
+  troopsButton3: {fileID: 0}
+  shipButton: {fileID: 0}
+  shipsPanel: {fileID: 0}
+  shipsButton1: {fileID: 0}
+  shipsButton2: {fileID: 0}
+  resourcesButton: {fileID: 0}
+  resourcesPanel: {fileID: 0}
+  resourcesButton1: {fileID: 0}
+  resourcesButton2: {fileID: 0}
+  resourcesButtonNo: {fileID: 0}
+  goldButton: {fileID: 0}
+  goldPanel: {fileID: 0}
+  goldButton1: {fileID: 0}
+  goldButton2: {fileID: 0}
+  forwardButton: {fileID: 0}
+  finger: {fileID: 0}
+  tutorialPanel: {fileID: 0}
+  tutorialText: {fileID: 0}
+  objetivePanel: {fileID: 0}
+  godBabBar: {fileID: 0}
   eventPanel: {fileID: 0}
   eventText: {fileID: 0}
   button1: {fileID: 0}
   button2: {fileID: 0}
-  troopsButton: {fileID: 0}
-  shipsButton: {fileID: 0}
-  resourcesButton: {fileID: 0}
-  goldButton: {fileID: 0}
-  forwardButton: {fileID: 0}

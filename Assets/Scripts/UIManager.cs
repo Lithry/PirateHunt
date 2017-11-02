@@ -117,20 +117,22 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void AcceptTroopsPanel(){
-		ResourcesManager.instance.AddTroops(troopsCount);
-		ResourcesManager.instance.ReduceGold(TroopsCost.Gold * troopsCount);
-        ResourcesManager.instance.AddHonor(TroopsCost.Honor * troopsCount);
-        ResourcesManager.instance.AddFear(TroopsCost.Fear * troopsCount);
-        ResourcesManager.instance.ReduceIdle(TroopsCost.Idle * troopsCount);
-
-		troopsCount = 0;
-		troopsCountDisplay.text = troopsCount.ToString();
-		troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
-		if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1))
-				troopsAddButton.interactable = false;
-		troopsDeductButton.interactable = false;
-
-		TimeManager.instance.AddTime(1);
+		if (troopsCount != 0){
+			ResourcesManager.instance.AddTroops(troopsCount);
+			ResourcesManager.instance.ReduceGold(TroopsCost.Gold * troopsCount);
+        	ResourcesManager.instance.AddHonor(TroopsCost.Honor * troopsCount);
+        	ResourcesManager.instance.AddFear(TroopsCost.Fear * troopsCount);
+        	ResourcesManager.instance.ReduceIdle(TroopsCost.Idle * troopsCount);
+	
+			troopsCount = 0;
+			troopsCountDisplay.text = troopsCount.ToString();
+			troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
+			if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1))
+					troopsAddButton.interactable = false;
+			troopsDeductButton.interactable = false;
+	
+			TimeManager.instance.AddTime(1);
+		}
 	}
 
 	public void CancelTroopsPanel(){

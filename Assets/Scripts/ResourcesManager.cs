@@ -23,7 +23,7 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
-        AddGold(300);
+        AddGold(190);
         honorBar.fillAmount = 0;
         fearBar.fillAmount = 0;
 	}

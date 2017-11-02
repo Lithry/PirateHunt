@@ -37,7 +37,7 @@ public class PirateEncounter1 : Event {
 
 		resourcesReward = 30 + Random.Range(-5, 6);
 		shipReward = 0;
-		goldReward = 15 + (int)(pirateNumber / 4) + Random.Range(0, 6);
+		goldReward = 15 + (int)(pirateNumber / 4) + Random.Range(0, 6) + Random.Range(5, 16);
 		troopLost = pirateNumber - ResourcesManager.instance.GetTroops();
 		if (troopLost < 0)
 			troopLost = 0;
@@ -49,12 +49,12 @@ public class PirateEncounter1 : Event {
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Ignorar";
 
-		t.text = "Te as encontrado con " + pirateNumber.ToString() + " piratas.\n\n\n" + 
-				 "Es un grupo pequeño, puede que se halla separado de su grupo por alguna razon, " + 
-				 "o que este investigando algo.\n\n\n\n\n" + 
-				 "\t--Recompenza por destruirlos--\nRecurzsos: " + resourcesReward.ToString() +
+		t.text = "Te has encontrado un barco con " + pirateNumber.ToString() + " piratas.\n\n\n" + 
+				 "Es un grupo pequeño, puede que se halla separado de su flota por alguna razón, " + 
+				 "o que esté investigando algo.\n\n\n\n\n" + 
+				 "\t--Recompensa por destruirlos--\nRecursos: " + resourcesReward.ToString() +
 				 "\nBarcos: " + shipReward.ToString() + "\nOro: " + goldReward.ToString() + "\n\n" +
-				 "\t--Perdidas por combate--\nTropas: " + troopLost.ToString();
+				 "\t--Pérdidas por combate--\nTropas: " + troopLost.ToString();
 		
 		count++;
 		TimeManager.instance.EventLaunched();
