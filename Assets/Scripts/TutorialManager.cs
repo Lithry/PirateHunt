@@ -85,6 +85,7 @@ public class TutorialManager : MonoBehaviour {
 			troopsButton.interactable = false;
 			shipButton.interactable = false;
 			resourcesButton.interactable = false;
+			resourcesButtonNo.interactable = false;
 			goldButton.interactable = false;
 			forwardButton.interactable = false;
 			finger.transform.position = resourcesButton1.transform.position;
@@ -234,7 +235,7 @@ public class TutorialManager : MonoBehaviour {
 			tutorialPanelTransform.anchorMax = new Vector2(0.6f, 0.8f);
 			tutorialText.text = "\nPor ultimo, aqui tenes un medidor que te irá diciendo cómo piensa la " +
 								"población de vos.\nLa barra verde es el apoyo que te dan mientras que la " +
-								"roja representa el miedo que te tienen.\n\n(clic izquierdo para terminar)\n";
+								"roja representa el miedo que te tienen.\n\n(clic izquierdo/Tocar pantalla para terminar)\n";
 			finger.transform.position = godBabBar.transform.position;
 			steps = 16;
 		}

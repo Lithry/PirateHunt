@@ -120,9 +120,6 @@ public class UIManager : MonoBehaviour {
 		if (troopsCount != 0){
 			ResourcesManager.instance.AddTroops(troopsCount);
 			ResourcesManager.instance.ReduceGold(TroopsCost.Gold * troopsCount);
-        	ResourcesManager.instance.AddHonor(TroopsCost.Honor * troopsCount);
-        	ResourcesManager.instance.AddFear(TroopsCost.Fear * troopsCount);
-        	ResourcesManager.instance.ReduceIdle(TroopsCost.Idle * troopsCount);
 	
 			troopsCount = 0;
 			troopsCountDisplay.text = troopsCount.ToString();

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 abstract public class Event {
+	protected int count = 0;
 	public Event(){}
 
 	abstract public Event CheckEvent();
@@ -13,4 +14,8 @@ abstract public class Event {
 	abstract protected void Button1(Button b1, Button b2);
 
 	abstract protected void Button2(Button b1, Button b2);
+
+	public int Count(){
+		return count;
+	}
 }

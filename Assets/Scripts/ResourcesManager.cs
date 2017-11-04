@@ -7,6 +7,7 @@ public class ResourcesManager : MonoBehaviour {
 	static public ResourcesManager instance;
     public Image honorBar;
     public Image fearBar;
+    private float honorFearBarLong;
     private int troops;
 	private int honor;
 	private int fear;
@@ -24,6 +25,7 @@ public class ResourcesManager : MonoBehaviour {
         idle = 0;
         gold = 0;
         AddGold(190);
+        honorFearBarLong = 1.0f;
         honorBar.fillAmount = 0;
         fearBar.fillAmount = 0;
 	}
@@ -55,7 +57,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHonor(int value) {
         honor += value;
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
     }
 
 	public int GetFear() {
@@ -64,7 +66,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFear(int value) {
         fear += value;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
     }
 
 	public int GetIdle() {
@@ -74,15 +76,15 @@ public class ResourcesManager : MonoBehaviour {
     public void AddIdle(int value) {
         idle += value;
         
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
     }
 
     public void ReduceIdle(int value) {
         idle -= value;
 
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / 2;;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / 2;;
+        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
+        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
     }
 
 	public int GetGold() {
@@ -149,5 +151,13 @@ public class ResourcesManager : MonoBehaviour {
 
     public int GetResources(){
         return resources;
+    }
+
+    public float GetHonorLevel(){
+        return honorBar.fillAmount;
+    }
+
+    public float GetFearLevel(){
+        return fearBar.fillAmount;
     }
 }
