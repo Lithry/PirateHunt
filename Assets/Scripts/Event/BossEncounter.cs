@@ -27,7 +27,7 @@ public class BossEncounter : Event {
 		random = Random.Range(1, 101);
 
 
-		if (random <= probability && ResourcesManager.instance.GetTroops() >= 30 && requiredEvent.Count() >= 1){
+		if (random <= probability && requiredEvent.Count() >= 1){
 			return this;
 		}
 		else{

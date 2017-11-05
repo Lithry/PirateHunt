@@ -23,7 +23,7 @@ public class PirateEncounter1 : Event {
 		random = Random.Range(1, 101);
 
 
-		if (random <= probability && ResourcesManager.instance.GetTroops() >= 10 && count < 4){
+		if (random <= probability && ResourcesManager.instance.GetTroops() >= 10 && count <= 4){
 			return this;
 		}
 		else{
