@@ -233,9 +233,20 @@ public class TutorialManager : MonoBehaviour {
 		else if (!goldPanel.activeSelf && steps == 15){
 			tutorialPanelTransform.anchorMin = new Vector2(0.2f, 0.2f);
 			tutorialPanelTransform.anchorMax = new Vector2(0.6f, 0.8f);
-			tutorialText.text = "\nPor ultimo, aqui tenes un medidor que te irá diciendo cómo piensa la " +
-								"población de vos.\nLa barra verde es el apoyo que te dan mientras que la " +
-								"roja representa el miedo que te tienen.\n\n(clic izquierdo/Tocar pantalla para terminar)\n";
+			#if   UNITY_EDITOR
+        		tutorialText.text = "\nPor ultimo, aqui tenes un medidor que te irá diciendo cómo piensa la " +
+									"población de vos.\nLa barra verde es el apoyo que te dan mientras que la " +
+									"roja representa el miedo que te tienen.\n\n(clic izquierdo para terminar)\n";
+			#elif UNITY_STANDALONE_WIN
+       			tutorialText.text = "\nPor ultimo, aqui tenes un medidor que te irá diciendo cómo piensa la " +
+									"población de vos.\nLa barra verde es el apoyo que te dan mientras que la " +
+									"roja representa el miedo que te tienen.\n\n(clic izquierdo para terminar)\n";
+			#elif UNITY_ANDROID
+        		tutorialText.text = "\nPor ultimo, aqui tenes un medidor que te irá diciendo cómo piensa la " +
+									"población de vos.\nLa barra verde es el apoyo que te dan mientras que la " +
+									"roja representa el miedo que te tienen.\n\n(Tocar pantalla para terminar)\n";
+			#endif
+			
 			finger.transform.position = godBabBar.transform.position;
 			steps = 16;
 		}
