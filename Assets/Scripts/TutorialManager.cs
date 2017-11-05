@@ -101,7 +101,8 @@ public class TutorialManager : MonoBehaviour {
 		else if (!resourcesPanel.activeSelf && steps == 3){
 			tutorialPanelTransform.anchorMin = new Vector2(0.4f, 0.25f);
 			tutorialPanelTransform.anchorMax = new Vector2(0.9f, 0.85f);
-			tutorialText.text = "\n\n\n\nAhora que tienes recursos, pasa a construir un barco.\n\n\n\n";
+			tutorialText.text = "\n\n\n\nAhora que tienes recursos, pasa a construir un barco.\nLos barcos son lo que limita " +
+								"las tropas que podras teren. por cada uno podras contratar 15 tropas.\n\n\n\n";
 			shipButton.interactable = true;
 			finger.transform.position = shipButton.transform.position;
 			steps = 4;

@@ -42,13 +42,13 @@ public class EndGame : Event {
 					 	 "isla deshabitada.\n\nMuchas Gracias por Jugar!";
 			}
 			else if (diference > 0.10f && diference < 0.50f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 						 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 						 "Por suerte, tu reputación no es tan mala, por lo que pudiste conservar el puesto " +
 						 "de Capitán de flota.\n\nMuchas Gracias por Jugar!";
 			}
 			else if (diference >= 0.50f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 						 "En cuanto a tu ascenso, lo has conseguido!.\n" +
 						 "Tu reputación te precede y la población te alaba como un salvador!\nBienvenido al " +
 						 "rango de Almirante!\n\nMuchas Gracias por Jugar!";
@@ -57,20 +57,20 @@ public class EndGame : Event {
 		else if (fearLevel > honorLevel){
 			diference = fearLevel - honorLevel;
 			if (diference <= 0.10f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 					 	 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 					 	 "Tu reputación es mala y los ciudadanos han presentado quejas a tus superiores, " +
 					 	 "haciendo que recibas un castigo de su parte, seguido de una relocalización a una " +
 					 	 "isla deshabitada.\n\nMuchas Gracias por Jugar!";
 			}
 			else if (diference > 0.10f && diference < 0.50f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 						 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 						 "Pero la población te teme lo suficiente, y utilizando el temor te lanzas a un " +
 						 "nuevo camino, el del Tirano!!.\n\nMuchas Gracias por Jugar!";
 			}
 			else if (diference >= 0.50f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 						 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 						 "Más que apoyo, has ganado el odio de esta, y los ciudadanos se han levantado " +
 						 "en armas para deshacerse de ti.\nPor suerte lograste escapar, convirtiendote luego " +
@@ -79,7 +79,7 @@ public class EndGame : Event {
 			
 		}
 		else{
-			t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+			t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 					 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 					 "Tu reputación es mala y los ciudadanos han presentado quejas a tus superiores, " +
 					 "haciendo que recibas un castigo de su parte, seguido de una relocalización a una " +
