@@ -14,7 +14,6 @@ public class PirateEncounter2 : Event {
 	private int goldReward;
 	private int shipReward;
 	private int troopLost;
-	private int idleReward;
 	private int honorReward;
 
     public PirateEncounter2(Event requiredEvent) : base(){
@@ -53,7 +52,6 @@ public class PirateEncounter2 : Event {
 		else if (troopLost > ResourcesManager.instance.GetTroops())
 			troopLost = ResourcesManager.instance.GetTroops();
 
-		idleReward = (int)(pirateNumber / 2);
 		honorReward = 10;
 
 		b1.onClick.AddListener(delegate{Button1(b1, b2);});
@@ -87,8 +85,7 @@ public class PirateEncounter2 : Event {
 	}
 
 	override protected void Button2(Button b1, Button b2){
-		ResourcesManager.instance.AddFear(honorReward);
-		ResourcesManager.instance.AddIdle(idleReward);
+		ResourcesManager.instance.AddFear(honorReward + 2);
 
 		EventManager.instance.EndEvent();
 
