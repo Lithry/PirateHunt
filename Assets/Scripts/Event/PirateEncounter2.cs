@@ -27,7 +27,7 @@ public class PirateEncounter2 : Event {
 		random = Random.Range(1, 101);
 
 
-		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1){
+		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetTroops() >= 20){
 			return this;
 		}
 		else{

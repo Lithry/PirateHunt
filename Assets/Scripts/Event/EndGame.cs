@@ -35,7 +35,7 @@ public class EndGame : Event {
 		if (honorLevel > fearLevel){
 			diference = honorLevel - fearLevel;
 			if (diference <= 0.10f){
-				t.text = "Felisidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
+				t.text = "Felicidades!!\nHas logrado destruir a los piratas que rondaban estos mares.\n\n" +
 					 	 "En cuanto a tu ascenso, no has conseguido el apoyo necesario de la población.\n" +
 					 	 "Tu reputación es mala y los ciudadanos han presentado quejas a tus superiores, " +
 					 	 "haciendo que recibas un castigo de su parte, seguido de una relocalización a una " +
