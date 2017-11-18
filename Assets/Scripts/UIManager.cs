@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour {
 	public Text troopsGoldCost;
 	public Button troopsAddButton;
 	public Button troopsDeductButton;
+	public Text troopsWoodForNexTurn;
+	public Text troopsGoldForNexTurn;
 	public Text citizenDisplay;
 
 	void Awake () {
@@ -83,12 +85,14 @@ public class UIManager : MonoBehaviour {
 		troopsCountDisplay.text = troopsCount.ToString();
 		troopsDeductButton.interactable = false;
 		
-		if (ResourcesManager.instance.GetGold() < TroopsCost.Gold * (troopsCount + 1) || ResourcesManager.instance.GetTroops() >= TroopsSlots.TroopsForShip * ResourcesManager.instance.GetShips())
-			troopsAddButton.interactable = false;
+		if (ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip <= troopsCount + ResourcesManager.instance.GetTroops() || ResourcesManager.instance.GetCitizen() - troopsCount < 1)
+				troopsAddButton.interactable = false;
 		else
 			troopsAddButton.interactable = true;
 		
 		troopsGoldCost.text = "0";
+		troopsWoodForNexTurn.text = "- " + "0";
+		troopsGoldForNexTurn.text = "- " + "0";
 		shipsPanel.SetActive(false);
 		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
@@ -101,10 +105,11 @@ public class UIManager : MonoBehaviour {
 		if (troopsCount > 0)
 			troopsDeductButton.interactable = true;
 	
-		if (ResourcesManager.instance.GetGold() < TroopsCost.Gold * (troopsCount + 1) || ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip < ((troopsCount + 1) + ResourcesManager.instance.GetTroops()))
+		if (ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip <= troopsCount + ResourcesManager.instance.GetTroops() || ResourcesManager.instance.GetCitizen() - troopsCount < 1)
 			troopsAddButton.interactable = false;
 
-		troopsGoldCost.text = (TroopsCost.Gold * troopsCount).ToString();
+		troopsWoodForNexTurn.text = "- " + "0";
+		troopsGoldForNexTurn.text = "- " + "0";
 		troopsCountDisplay.text = troopsCount.ToString();
 	}
 
@@ -116,23 +121,23 @@ public class UIManager : MonoBehaviour {
 		if (!troopsDeductButton.interactable || troopsCount == 0)
 			troopsDeductButton.interactable = false;
 
-		troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
+		troopsWoodForNexTurn.text = "- " + "0";
+		troopsGoldForNexTurn.text = "- " + "0";
 		troopsCountDisplay.text = troopsCount.ToString();
 	}
 
 	public void AcceptTroopsPanel(){
 		if (troopsCount != 0){
 			ResourcesManager.instance.AddTroops(troopsCount);
-			ResourcesManager.instance.ReduceGold(TroopsCost.Gold * troopsCount);
+			ResourcesManager.instance.ReduceCitizen(troopsCount);
 	
 			troopsCount = 0;
 			troopsCountDisplay.text = troopsCount.ToString();
-			troopsGoldCost.text = (Mathf.Abs(TroopsCost.Gold) * troopsCount).ToString();
-			if (ResourcesManager.instance.GetGold() < Mathf.Abs(TroopsCost.Gold) * (troopsCount + 1))
+
+			if (ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip <= troopsCount + ResourcesManager.instance.GetTroops() || ResourcesManager.instance.GetCitizen() - troopsCount < 1)
 					troopsAddButton.interactable = false;
+			
 			troopsDeductButton.interactable = false;
-	
-			TimeManager.instance.AddTime(1);
 		}
 	}
 

@@ -25,8 +25,8 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
-        AddWood(ShipsCost.WoodCost);
-        AddCitizens(20);
+        AddWood(ShipsCost.WoodCost*2);
+        AddCitizens(25);
         AddGold(190);
         honorFearBarLong = 1.0f;
         honorBar.fillAmount = 0;
