@@ -14,10 +14,10 @@ public class UIManager : MonoBehaviour {
 	public Button ship1Pay;
 	public Button ship5Pay;
 	public Text shipsDisplay;
-	public GameObject resourcesPanel;
-	public Button resources100Pay;
-	public Button resources500Pay;
-	public Text resourcesDisplay;
+	public GameObject WoodPanel;
+	public Button wood100Pay;
+	public Button wood500Pay;
+	public Text woodDisplay;
 	public GameObject goldPanel;
 	public Text timeToCollect;
 	public Button goldCollectButton;
@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour {
 	public Text troopsGoldCost;
 	public Button troopsAddButton;
 	public Button troopsDeductButton;
+	public Text citizenDisplay;
 
 	void Awake () {
 		instance = this;
@@ -35,7 +36,7 @@ public class UIManager : MonoBehaviour {
 		objetivePanel.SetActive(true);
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
 	}
 
@@ -49,12 +50,16 @@ public class UIManager : MonoBehaviour {
 		shipsDisplay.text = "x " + value.ToString();
 	}
 	
-	public void SetResourcesDisplay(int value){
-		resourcesDisplay.text = "x " + value.ToString();
+	public void SetWoodDisplay(int value){
+		woodDisplay.text = "x " + value.ToString();
 	}
 
 	public void SetGoldDisplay(int value){
 		goldDisplay.text = "x " + value.ToString();
+	}
+
+	public void SetCitizenDisplay(int value){
+		citizenDisplay.text = "x " + value.ToString();
 	}
 
 	public void CloseObjetivePanel(){
@@ -69,7 +74,7 @@ public class UIManager : MonoBehaviour {
 		objetivePanel.SetActive(false);
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
 	}
 
@@ -86,7 +91,7 @@ public class UIManager : MonoBehaviour {
 		
 		troopsGoldCost.text = "0";
 		shipsPanel.SetActive(false);
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
 		troopsPanel.SetActive(true);
 	}
@@ -141,16 +146,16 @@ public class UIManager : MonoBehaviour {
 
 	public void OpenShipsPanel(){
 		troopsPanel.SetActive(false);
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
 		ship1Pay.interactable = true;
 		ship5Pay.interactable = true;
 
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
 			ship5Pay.interactable = false;
 		}
 
@@ -159,30 +164,30 @@ public class UIManager : MonoBehaviour {
 
 	public void Ships1Pay(){
 		ResourcesManager.instance.AddShip(1);
-		ResourcesManager.instance.ReduceResources(ShipsCost.ResourcesCost);
+		ResourcesManager.instance.ReduceWood(ShipsCost.ResourcesCost);
 		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay);
 		TimeManager.instance.AddTime(1);
 		
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
 			ship5Pay.interactable = false;
 		}
 	}
 
 	public void Ships5Pay(){
 		ResourcesManager.instance.AddShip(5);
-		ResourcesManager.instance.ReduceResources((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct));
+		ResourcesManager.instance.ReduceWood((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct));
 		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay * 5);
 		TimeManager.instance.AddTime(1);
 
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetResources()){
+		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
 			ship1Pay.interactable = false;
 			ship5Pay.interactable = false;
 		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetResources()){
+		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
 			ship5Pay.interactable = false;
 		}
 	}
@@ -210,64 +215,64 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
 		goldPanel.SetActive(false);
-		resources100Pay.interactable = true;
-		resources500Pay.interactable = true;
+		wood100Pay.interactable = true;
+		wood500Pay.interactable = true;
 
 		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			resources100Pay.interactable = false;
-			resources500Pay.interactable = false;
+			wood100Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			resources500Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 
-		resourcesPanel.SetActive(true);
+		WoodPanel.SetActive(true);
 	}
 
 	public void Resources100Pay(){
-		ResourcesManager.instance.AddResources(100);
+		ResourcesManager.instance.AddWood(100);
 		ResourcesManager.instance.ReduceGold(ResourceCost.ResourcesCost100);
 		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay);
 		TimeManager.instance.AddTime(1);
 		
 		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			resources100Pay.interactable = false;
-			resources500Pay.interactable = false;
+			wood100Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			resources500Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 	}
 
 	public void Resources500Pay(){
-		ResourcesManager.instance.AddResources(500);
+		ResourcesManager.instance.AddWood(500);
 		ResourcesManager.instance.ReduceGold((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct));
 		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay * 5);
 		TimeManager.instance.AddTime(1);
 
 		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			resources100Pay.interactable = false;
-			resources500Pay.interactable = false;
+			wood100Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			resources500Pay.interactable = false;
+			wood500Pay.interactable = false;
 		}
 	}
 
 	public void Resources100Force(){
-		ResourcesManager.instance.AddResources(100);
+		ResourcesManager.instance.AddWood(100);
 		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce);
 		TimeManager.instance.AddTime(1);
 	}
 
 	public void Resources500Force(){
-		ResourcesManager.instance.AddResources(500);
+		ResourcesManager.instance.AddWood(500);
 		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce * 5);
 		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelResourcesPanel(){
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 	}
 
 	// =================================================================================
@@ -276,7 +281,7 @@ public class UIManager : MonoBehaviour {
 	public void OpenGoldPanel(){
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
-		resourcesPanel.SetActive(false);
+		WoodPanel.SetActive(false);
 
 		if (TimeManager.instance.GetCurrentTime() - lastCollectedTaxesTurn < Taxes.TimeToWait){
 			goldCollectButton.interactable = false;

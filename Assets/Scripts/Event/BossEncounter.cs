@@ -76,7 +76,7 @@ public class BossEncounter : Event {
 	override protected void Button1(Button b1, Button b2){
 		count++;
 		ResourcesManager.instance.ReduceTroops(troopLost);
-		ResourcesManager.instance.AddResources(resourcesReward);
+		ResourcesManager.instance.AddWood(resourcesReward);
 		ResourcesManager.instance.AddShip(shipReward);
 		ResourcesManager.instance.AddGold(goldReward);
 		ResourcesManager.instance.AddHonor(honorReward);

@@ -91,7 +91,7 @@ public class TutorialManager : MonoBehaviour {
 			finger.transform.position = resourcesButton1.transform.position;
 			steps = 2;
 		}
-		else if (ResourcesManager.instance.GetResources() != 0 && steps == 2){
+		else if (ResourcesManager.instance.GetWood() != 0 && steps == 2){
 			tutorialPanelTransform.anchorMin = new Vector2(0.3f, 0.2f);
 			tutorialPanelTransform.anchorMax = new Vector2(0.65f, 0.8f);
 			tutorialText.text = "\n\n\n\nCierra el panel luego de haber terminado.\n\n\n\n";

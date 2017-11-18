@@ -14,7 +14,8 @@ public class ResourcesManager : MonoBehaviour {
 	private int idle;
 	private int gold;
     private int ships;
-    private int resources;
+    private int wood;
+    private int citizens;
 
 
     void Start () {
@@ -24,6 +25,7 @@ public class ResourcesManager : MonoBehaviour {
         fear = 0;
         idle = 0;
         gold = 0;
+        AddCitizens(20);
         AddGold(190);
         honorFearBarLong = 1.0f;
         honorBar.fillAmount = 0;
@@ -131,26 +133,48 @@ public class ResourcesManager : MonoBehaviour {
         return ships;
     }
 
-    public void AddResources(int value){
+    public void AddWood(int value){
         if (value > 0){
-            resources += value;
-            UIManager.instance.SetResourcesDisplay(resources);
+            wood += value;
+            UIManager.instance.SetWoodDisplay(wood);
         }
     }
 
-    public void ReduceResources(int value){
+    public void ReduceWood(int value){
         if (value > 0){
-            resources -= value;
+            wood -= value;
 
-            if (resources < 0)
-                resources = 0;
+            if (wood < 0)
+                wood = 0;
 
-            UIManager.instance.SetResourcesDisplay(resources);
+            UIManager.instance.SetWoodDisplay(wood);
         }
     }
 
-    public int GetResources(){
-        return resources;
+    public int GetWood(){
+        return wood;
+    }
+
+    public void AddCitizens(int value){
+        if (value > 0){
+            citizens += value;
+            UIManager.instance.SetCitizenDisplay(citizens);
+        }
+    }
+
+    public void ReduceCitizen(int value){
+        if (value > 0){
+            citizens -= value;
+
+            if (citizens < 0)
+                citizens = 0;
+
+            UIManager.instance.SetCitizenDisplay(citizens);
+        }
+    }
+
+    public int GetCitizen(){
+        return citizens;
     }
 
     public float GetHonorLevel(){
