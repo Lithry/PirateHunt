@@ -12,10 +12,7 @@ public static class TroopsSlots{
 }
 
 public static class ShipsCost{
-	public const int ResourcesCost = 50;
-	public const int DiscountForMassProduct = 10;
-	public const int HonorIfPay = 1;
-	public const int FearIfForce = 4;
+	public const int WoodCost = 20;
 }
 
 public static class ResourceCost{

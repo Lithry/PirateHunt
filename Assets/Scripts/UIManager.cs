@@ -11,8 +11,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject troopsPanel;
 	public Text troopsDisplay;
 	public GameObject shipsPanel;
-	public Button ship1Pay;
-	public Button ship5Pay;
+	public Button shipBuild;
 	public Text shipsDisplay;
 	public GameObject WoodPanel;
 	public Button wood100Pay;
@@ -148,60 +147,22 @@ public class UIManager : MonoBehaviour {
 		troopsPanel.SetActive(false);
 		WoodPanel.SetActive(false);
 		goldPanel.SetActive(false);
-		ship1Pay.interactable = true;
-		ship5Pay.interactable = true;
+		shipBuild.interactable = true;
 
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
-			ship1Pay.interactable = false;
-			ship5Pay.interactable = false;
-		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
-			ship5Pay.interactable = false;
+		if (ShipsCost.WoodCost > ResourcesManager.instance.GetWood()){
+			shipBuild.interactable = false;
 		}
 
 		shipsPanel.SetActive(true);
 	}
 
-	public void Ships1Pay(){
+	public void ShipsBuild(){
 		ResourcesManager.instance.AddShip(1);
-		ResourcesManager.instance.ReduceWood(ShipsCost.ResourcesCost);
-		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay);
-		TimeManager.instance.AddTime(1);
+		ResourcesManager.instance.ReduceWood(ShipsCost.WoodCost);
 		
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
-			ship1Pay.interactable = false;
-			ship5Pay.interactable = false;
+		if (ShipsCost.WoodCost > ResourcesManager.instance.GetWood()){
+			shipBuild.interactable = false;
 		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
-			ship5Pay.interactable = false;
-		}
-	}
-
-	public void Ships5Pay(){
-		ResourcesManager.instance.AddShip(5);
-		ResourcesManager.instance.ReduceWood((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct));
-		ResourcesManager.instance.AddHonor(ShipsCost.HonorIfPay * 5);
-		TimeManager.instance.AddTime(1);
-
-		if (ShipsCost.ResourcesCost > ResourcesManager.instance.GetWood()){
-			ship1Pay.interactable = false;
-			ship5Pay.interactable = false;
-		}
-		else if (((ShipsCost.ResourcesCost * 5) - (((ShipsCost.ResourcesCost * 5) / 100) * ShipsCost.DiscountForMassProduct)) > ResourcesManager.instance.GetWood()){
-			ship5Pay.interactable = false;
-		}
-	}
-
-	public void Ships1Force(){
-		ResourcesManager.instance.AddShip(1);
-		ResourcesManager.instance.AddFear(ShipsCost.FearIfForce);
-		TimeManager.instance.AddTime(1);
-	}
-
-	public void Ships5Force(){
-		ResourcesManager.instance.AddShip(5);
-		ResourcesManager.instance.AddFear(ShipsCost.FearIfForce * 5);
-		TimeManager.instance.AddTime(1);
 	}
 
 	public void CancelShipsPanel(){
