@@ -14,14 +14,17 @@ public class UIManager : MonoBehaviour {
 	public Button shipBuild;
 	public Text shipsDisplay;
 	public GameObject WoodPanel;
-	public Button wood100Pay;
-	public Button wood500Pay;
 	public Text woodDisplay;
+	public Text woodForNextTurnDisplay;
+	public Slider woodSetter;
+	public Text woodValue;
+	public Text woodMaxValue;
 	public GameObject goldPanel;
-	public Text timeToCollect;
-	public Button goldCollectButton;
-	private int lastCollectedTaxesTurn;
 	public Text goldDisplay;
+	public Text goldForNextTurnDisplay;
+	public Slider goldSetter;
+	public Text goldValue;
+	public Text goldMaxValue;
 	private int troopsCount;
 	public Text troopsCountDisplay;
 	public Text troopsGoldCost;
@@ -33,7 +36,6 @@ public class UIManager : MonoBehaviour {
 
 	void Awake () {
 		instance = this;
-		lastCollectedTaxesTurn = 0;
 		objetivePanel.SetActive(true);
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
@@ -175,69 +177,29 @@ public class UIManager : MonoBehaviour {
 	}
 
 	// =================================================================================
-	// RESOURCES PANEL =================================================================
+	// WOOD PANEL ======================================================================
 
-	public void OpenResourcesPanel(){
+	public void OpenWoodPanel(){
 		troopsPanel.SetActive(false);
 		shipsPanel.SetActive(false);
 		goldPanel.SetActive(false);
-		wood100Pay.interactable = true;
-		wood500Pay.interactable = true;
 
-		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			wood100Pay.interactable = false;
-			wood500Pay.interactable = false;
-		}
-		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			wood500Pay.interactable = false;
-		}
+		woodSetter.maxValue = (float)ResourcesManager.instance.GetCitizen();
+		woodValue.text = woodSetter.value.ToString();
+		woodMaxValue.text = woodSetter.maxValue.ToString();
 
 		WoodPanel.SetActive(true);
 	}
 
-	public void Resources100Pay(){
-		ResourcesManager.instance.AddWood(100);
-		ResourcesManager.instance.ReduceGold(ResourceCost.ResourcesCost100);
-		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay);
-		TimeManager.instance.AddTime(1);
-		
-		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			wood100Pay.interactable = false;
-			wood500Pay.interactable = false;
-		}
-		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			wood500Pay.interactable = false;
-		}
+	public void WoodChangePanel(){
+		woodValue.text = woodSetter.value.ToString();
+
+		ResourcesManager.instance.SetWoodForNextTunr(woodSetter.value);
+		woodForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetWoodForNextTunr();
+		TimeManager.instance.SetResourcesForNextTurnDisplay();
 	}
 
-	public void Resources500Pay(){
-		ResourcesManager.instance.AddWood(500);
-		ResourcesManager.instance.ReduceGold((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct));
-		ResourcesManager.instance.AddHonor(ResourceCost.HonorIfPay * 5);
-		TimeManager.instance.AddTime(1);
-
-		if (ResourceCost.ResourcesCost100 > ResourcesManager.instance.GetGold()){
-			wood100Pay.interactable = false;
-			wood500Pay.interactable = false;
-		}
-		else if (((ResourceCost.ResourcesCost100 * 5) - (((ResourceCost.ResourcesCost100 * 5) / 100) * ResourceCost.DiscountForMassProduct)) > ResourcesManager.instance.GetGold()){
-			wood500Pay.interactable = false;
-		}
-	}
-
-	public void Resources100Force(){
-		ResourcesManager.instance.AddWood(100);
-		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce);
-		TimeManager.instance.AddTime(1);
-	}
-
-	public void Resources500Force(){
-		ResourcesManager.instance.AddWood(500);
-		ResourcesManager.instance.AddFear(ResourceCost.FearIfForce * 5);
-		TimeManager.instance.AddTime(1);
-	}
-
-	public void CancelResourcesPanel(){
+	public void CancelWoodPanel(){
 		WoodPanel.SetActive(false);
 	}
 
@@ -249,31 +211,19 @@ public class UIManager : MonoBehaviour {
 		shipsPanel.SetActive(false);
 		WoodPanel.SetActive(false);
 
-		if (TimeManager.instance.GetCurrentTime() - lastCollectedTaxesTurn < Taxes.TimeToWait){
-			goldCollectButton.interactable = false;
-			timeToCollect.text = "Espera\n" + (Taxes.TimeToWait - (TimeManager.instance.GetCurrentTime() - lastCollectedTaxesTurn)).ToString() + " turnos";
-		}
-		else{
-			goldCollectButton.interactable = true;
-			timeToCollect.text = "Puedes\nRecolectar";
-		}
+		goldSetter.maxValue = (float)ResourcesManager.instance.GetCitizen();
+		goldValue.text = goldSetter.value.ToString();
+		goldMaxValue.text = goldSetter.maxValue.ToString();
 		
 		goldPanel.SetActive(true);
 	}
 
-	public void CollectTaxes(){
-		ResourcesManager.instance.AddGold(Taxes.Gold);
-		ResourcesManager.instance.AddHonor(Taxes.HonorIfCollected);
-		lastCollectedTaxesTurn = TimeManager.instance.GetCurrentTime();
-		goldCollectButton.interactable = false;
-		timeToCollect.text = "Espera\n"+ (Taxes.TimeToWait - 1).ToString() + " turnos";
-		TimeManager.instance.AddTime(1);
-	}
-
-	public void ForceTaxes(){
-		ResourcesManager.instance.AddGold(Taxes.Gold);
-		ResourcesManager.instance.AddFear(Taxes.FearIfForced);
-		TimeManager.instance.AddTime(1);
+	public void GoldChangePanel(){
+		goldValue.text = goldSetter.value.ToString();
+		
+		ResourcesManager.instance.SetGoldForNextTunr(goldSetter.value);
+		goldForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetGoldForNextTunr();
+		TimeManager.instance.SetResourcesForNextTurnDisplay();
 	}
 
 	public void CancelGoldPanel(){

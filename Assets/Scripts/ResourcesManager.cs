@@ -15,6 +15,8 @@ public class ResourcesManager : MonoBehaviour {
 	private int gold;
     private int ships;
     private int wood;
+    private float woodForNextTurn;
+    private float goldForNextTurn;
     private int citizens;
 
 
@@ -28,6 +30,8 @@ public class ResourcesManager : MonoBehaviour {
         AddWood(ShipsCost.WoodCost*2);
         AddCitizens(25);
         AddGold(190);
+        woodForNextTurn = 0.0f;
+        goldForNextTurn = 0.0f;
         honorFearBarLong = 1.0f;
         honorBar.fillAmount = 0;
         fearBar.fillAmount = 0;
@@ -112,6 +116,14 @@ public class ResourcesManager : MonoBehaviour {
         }
     }
 
+    public void SetGoldForNextTunr(float value){
+        goldForNextTurn = value;
+    }
+
+    public int GetGoldForNextTunr(){
+        return (int)((goldForNextTurn * (float)citizens) / Taxes.exp);
+    }
+
     public void AddShip(int value){
         if (value > 0){
             ships += value;
@@ -156,6 +168,14 @@ public class ResourcesManager : MonoBehaviour {
         return wood;
     }
 
+    public void SetWoodForNextTunr(float value){
+        woodForNextTurn = value;
+    }
+    
+    public int GetWoodForNextTunr(){
+        return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp);
+    }
+
     public void AddCitizens(int value){
         if (value > 0){
             citizens += value;
@@ -176,6 +196,11 @@ public class ResourcesManager : MonoBehaviour {
 
     public int GetCitizen(){
         return citizens;
+    }
+
+    public void TurnPassed(){
+        AddWood((int)((woodForNextTurn * (float)citizens) / WoodCost.exp));
+        AddGold((int)((goldForNextTurn * (float)citizens) / Taxes.exp));
     }
 
     public float GetHonorLevel(){

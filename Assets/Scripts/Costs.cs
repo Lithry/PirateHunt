@@ -15,14 +15,12 @@ public static class ShipsCost{
 	public const int WoodCost = 20;
 }
 
-public static class ResourceCost{
-	public const int ResourcesCost100 = 40;
-	public const int DiscountForMassProduct = 5;
-	public const int HonorIfPay = 1;
-	public const int FearIfForce = 3;
+public static class WoodCost{
+	public const float exp = 100.0f;
 }
 
 public static class Taxes{
+	public const float exp = 100.0f;
 	public const int Gold = 150;
 	public const int HonorIfCollected = 2;
 	public const int TimeToWait = 4;

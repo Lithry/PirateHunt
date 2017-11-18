@@ -8,6 +8,8 @@ public class TimeManager : MonoBehaviour {
 	public Text display;
 	private int time;
 	private int timeOfLastEvent;
+	public Text woodDisplay;
+	public Text goldDisplay;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +17,6 @@ public class TimeManager : MonoBehaviour {
 		time = 0;
 		timeOfLastEvent = time;
 		display.text = (time - timeOfLastEvent).ToString();
-	}
-	
-	public void AddTime(int value){
-		time += value;
-		display.text = (time - timeOfLastEvent).ToString();
-
-		EventManager.instance.CheckEvents();
 	}
 
 	public int GetCurrentTime(){
@@ -32,7 +27,7 @@ public class TimeManager : MonoBehaviour {
 		UIManager.instance.ClossAllPanels();
 		time++;
 		display.text = (time - timeOfLastEvent).ToString();
-
+		ResourcesManager.instance.TurnPassed();
 		EventManager.instance.CheckEvents();
 	}
 
@@ -43,6 +38,11 @@ public class TimeManager : MonoBehaviour {
 	public void EventLaunched(){
 		timeOfLastEvent = time;
 		display.text = (time - timeOfLastEvent).ToString();
+	}
+
+	public void SetResourcesForNextTurnDisplay(){
+		woodDisplay.text = "+ " + ResourcesManager.instance.GetWoodForNextTunr();
+		goldDisplay.text = "+ " + ResourcesManager.instance.GetGoldForNextTunr();
 	}
 	
 }

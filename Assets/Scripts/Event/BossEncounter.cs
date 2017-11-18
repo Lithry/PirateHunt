@@ -85,7 +85,6 @@ public class BossEncounter : Event {
 		
 		b1.onClick.RemoveAllListeners();
 		b2.onClick.RemoveAllListeners();
-		TimeManager.instance.AddTime(1);
 	}
 
 	override protected void Button2(Button b1, Button b2){
