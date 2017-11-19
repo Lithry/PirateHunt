@@ -26,3 +26,7 @@ public static class Taxes{
 	public const int TimeToWait = 4;
 	public const int FearIfForced = 10;
 }
+
+public static class HonorAndFear{
+	public const float Max = 150.0f;
+}

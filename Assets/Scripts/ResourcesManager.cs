@@ -11,7 +11,6 @@ public class ResourcesManager : MonoBehaviour {
     private int troops;
 	private int honor;
 	private int fear;
-	private int idle;
 	private int gold;
     private int ships;
     private int wood;
@@ -25,7 +24,6 @@ public class ResourcesManager : MonoBehaviour {
         troops = 0;
         honor = 0;
         fear = 0;
-        idle = 0;
         gold = 0;
         AddWood(ShipsCost.WoodCost*2);
         AddCitizens(25);
@@ -64,7 +62,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddHonor(int value) {
         honor += value;
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
+        honorBar.fillAmount = (float)honor / HonorAndFear.Max;
     }
 
 	public int GetFear() {
@@ -73,25 +71,7 @@ public class ResourcesManager : MonoBehaviour {
 
     public void AddFear(int value) {
         fear += value;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
-    }
-
-	public int GetIdle() {
-        return idle;
-    }
-
-    public void AddIdle(int value) {
-        idle += value;
-        
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
-    }
-
-    public void ReduceIdle(int value) {
-        idle -= value;
-
-        honorBar.fillAmount = ((float)(honor - idle) / 100) / honorFearBarLong;
-        fearBar.fillAmount = ((float)(fear - idle) / 100) / honorFearBarLong;
+        fearBar.fillAmount = (float)fear / HonorAndFear.Max;
     }
 
 	public int GetGold() {
@@ -201,6 +181,42 @@ public class ResourcesManager : MonoBehaviour {
     public void TurnPassed(){
         AddWood((int)((woodForNextTurn * (float)citizens) / WoodCost.exp));
         AddGold((int)((goldForNextTurn * (float)citizens) / Taxes.exp));
+        
+        AddFearAndHonor();
+    }
+
+    private void AddFearAndHonor(){
+        float woodFearVal = woodForNextTurn / (float)citizens;
+        if (woodFearVal > 0.5f){
+            if (woodFearVal <= 0.65f)
+                AddFear(1);
+            else if (woodFearVal <= 0.9f)
+                AddFear(2);
+            else
+                AddFear(3);
+        }
+        else{
+            if (woodFearVal >= 0.1f && woodFearVal <= 0.25f)
+                AddHonor(2);
+            else if (woodFearVal > 0.25f && woodFearVal <= 0.4f)
+                AddHonor(1);
+        }
+
+        float goldFearVal = goldForNextTurn / (float)citizens;
+        if (goldFearVal > 0.5f){
+            if (goldFearVal <= 0.7f)
+                AddFear(1);
+            else if (goldFearVal <= 0.8f)
+                AddFear(2);
+            else
+                AddFear(3);
+        }
+        else{
+            if (goldFearVal > 0.15f && goldFearVal <= 0.3f)
+                AddHonor(2);
+            else if (goldFearVal > 0.3f && goldFearVal < 0.4f)
+                AddHonor(1);
+        }
     }
 
     public float GetHonorLevel(){
