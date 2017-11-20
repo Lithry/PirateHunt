@@ -46,7 +46,6 @@ public class PirateEncounter2 : Event {
 		troopLost = Random.Range(3, 9);
 		pluss1 = Random.Range(1, 11);
 		pluss2 = Random.Range(1, 11);
-		int checkLoss = troopLost;
 		
 		while (troopLost + pluss1 >= ResourcesManager.instance.GetTroops())
 		{
