@@ -110,8 +110,8 @@ public class UIManager : MonoBehaviour {
 		if (ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip <= troopsCount + ResourcesManager.instance.GetTroops() || ResourcesManager.instance.GetCitizen() - troopsCount < 1)
 			troopsAddButton.interactable = false;
 
-		troopsWoodForNexTurn.text = "- " + "0";
-		troopsGoldForNexTurn.text = "- " + "0";
+		troopsWoodForNexTurn.text = "- " + ResourcesManager.instance.GetEstimateWoodLostForNexTurn(troopsCount).ToString();
+		troopsGoldForNexTurn.text = "- " + ResourcesManager.instance.GetEstimateGoldLostForNexTurn(troopsCount).ToString();
 		troopsCountDisplay.text = troopsCount.ToString();
 	}
 
@@ -123,8 +123,8 @@ public class UIManager : MonoBehaviour {
 		if (!troopsDeductButton.interactable || troopsCount == 0)
 			troopsDeductButton.interactable = false;
 
-		troopsWoodForNexTurn.text = "- " + "0";
-		troopsGoldForNexTurn.text = "- " + "0";
+		troopsWoodForNexTurn.text = "- " + ResourcesManager.instance.GetEstimateWoodLostForNexTurn(troopsCount).ToString();
+		troopsGoldForNexTurn.text = "- " + ResourcesManager.instance.GetEstimateGoldLostForNexTurn(troopsCount).ToString();
 		troopsCountDisplay.text = troopsCount.ToString();
 	}
 
@@ -135,10 +135,12 @@ public class UIManager : MonoBehaviour {
 	
 			troopsCount = 0;
 			troopsCountDisplay.text = troopsCount.ToString();
+			troopsWoodForNexTurn.text = "- 0";
+			troopsGoldForNexTurn.text = "- 0";
 
 			if (ResourcesManager.instance.GetShips() * TroopsSlots.TroopsForShip <= troopsCount + ResourcesManager.instance.GetTroops() || ResourcesManager.instance.GetCitizen() - troopsCount < 1)
 					troopsAddButton.interactable = false;
-			
+
 			troopsDeductButton.interactable = false;
 		}
 	}
@@ -184,16 +186,14 @@ public class UIManager : MonoBehaviour {
 		shipsPanel.SetActive(false);
 		goldPanel.SetActive(false);
 
+		woodForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetWoodForNextTunr();
+
 		woodSetter.maxValue = (float)ResourcesManager.instance.GetCitizen();
-		woodValue.text = woodSetter.value.ToString();
-		woodMaxValue.text = woodSetter.maxValue.ToString();
 
 		WoodPanel.SetActive(true);
 	}
 
 	public void WoodChangePanel(){
-		woodValue.text = woodSetter.value.ToString();
-
 		ResourcesManager.instance.SetWoodForNextTunr(woodSetter.value);
 		woodForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetWoodForNextTunr();
 		TimeManager.instance.SetResourcesForNextTurnDisplay();
@@ -211,16 +211,14 @@ public class UIManager : MonoBehaviour {
 		shipsPanel.SetActive(false);
 		WoodPanel.SetActive(false);
 
+		goldForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetGoldForNextTunr();
+
 		goldSetter.maxValue = (float)ResourcesManager.instance.GetCitizen();
-		goldValue.text = goldSetter.value.ToString();
-		goldMaxValue.text = goldSetter.maxValue.ToString();
 		
 		goldPanel.SetActive(true);
 	}
 
 	public void GoldChangePanel(){
-		goldValue.text = goldSetter.value.ToString();
-		
 		ResourcesManager.instance.SetGoldForNextTunr(goldSetter.value);
 		goldForNextTurnDisplay.text = "+ " + ResourcesManager.instance.GetGoldForNextTunr();
 		TimeManager.instance.SetResourcesForNextTurnDisplay();

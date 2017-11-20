@@ -9,7 +9,10 @@ public class EventManager : MonoBehaviour {
 	private EventSetter setter = new EventSetter();
 	private Event eventActive;
 	public GameObject eventPanel;
-	public Text eventText;
+	public Text eventTitle;
+	public Text eventDescription;
+	public Text eventB1Text;
+	public Text eventB2Text;
 	public Button button1;
 	private Text button1Text;
 	public Button button2;
@@ -24,7 +27,7 @@ public class EventManager : MonoBehaviour {
 		instance = this;
 		button1Text = button1.GetComponentInChildren<Text>();
 		button2Text = button2.GetComponentInChildren<Text>();
-		
+		SetEvents();
 	}
 	
 	public void SetEvents(){
@@ -40,7 +43,7 @@ public class EventManager : MonoBehaviour {
 				resourcesButton.interactable = false;
 				goldButton.interactable = false;
 				forwardButton.interactable = false;
-				eventActive.PlayEvent(eventText, button1, button1Text, button2, button2Text);
+				eventActive.PlayEvent(eventTitle, eventDescription, eventB1Text, button1, button1Text, eventB2Text ,button2, button2Text);
 				eventPanel.SetActive(true);		
 				eventActive = null;
 				break;

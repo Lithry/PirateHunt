@@ -185,7 +185,7 @@ public class TutorialManager : MonoBehaviour {
 		}
 		else if (TimeManager.instance.GetCurrentTime() == turn + 1 && steps == 11){
 			Event tutorialEvent = new PirateEncounter1();
-			tutorialEvent.PlayEvent(eventText, button1, button1Text, button2, button2Text);
+			//tutorialEvent.PlayEvent(eventText, button1, button1Text, button2, button2Text);
 			eventPanel.SetActive(true);
 
 			tutorialPanelTransform.anchorMin = new Vector2(0.8f, 0.2f);

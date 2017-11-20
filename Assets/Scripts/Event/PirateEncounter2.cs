@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PirateEncounter2 : Event {
-	private int maxAtTime = 10;
+	private int maxAtTime = 30;
 	private int probability;
 	private int random;
 	private Event requiredEvent;
-	private int shipsNumber;
-	private int pirateNumber;
-	private int resourcesReward;
+	private int woodReward;
 	private int goldReward;
-	private int shipReward;
+	private int pluss1;
+	private int pluss2;
 	private int troopLost;
-	private int honorReward;
 
     public PirateEncounter2(Event requiredEvent) : base(){
 		this.requiredEvent = requiredEvent;
@@ -26,7 +24,7 @@ public class PirateEncounter2 : Event {
 		random = Random.Range(1, 101);
 
 
-		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetTroops() >= 20){
+		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetShips() >= 4 && ResourcesManager.instance.GetTroops() >= 25){
 			return this;
 		}
 		else{
@@ -34,49 +32,47 @@ public class PirateEncounter2 : Event {
 		}
 	}
 
-    public override void PlayEvent(Text t, Button b1, Text b1text, Button b2, Text b2text){
-		shipsNumber = Random.Range(2, 4);
-		pirateNumber = Random.Range((int)(TroopsSlots.TroopsForShip / 2), TroopsSlots.TroopsForShip + 1) * shipsNumber;
-
-		resourcesReward = 50 + Random.Range(-5, 6) * shipsNumber;
-		if (shipsNumber >= 2){
-			shipReward = (int)Random.Range(0.0f, 1.3f);
-		}
-		else
-			shipReward = 0;
-		
-		goldReward = 30 + (int)(pirateNumber / 4) + Random.Range(0, 12) + Random.Range(10, 21);
-		troopLost = pirateNumber - ResourcesManager.instance.GetTroops();
-		if (troopLost < 0)
-			troopLost = 0;
-		else if (troopLost > ResourcesManager.instance.GetTroops())
-			troopLost = ResourcesManager.instance.GetTroops();
-
-		honorReward = 10;
-
+    public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
 		b1.onClick.AddListener(delegate{Button1(b1, b2);});
-		b1text.text = "Atacar";
+		b1text.text = "Atrapar";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
-		b2text.text = "Ignorar";
+		b2text.text = "Matar";
 
-		t.text = "Te has encontrado una flota pirata de " + shipsNumber.ToString() + " barcos con " + 
-				  pirateNumber.ToString() + " piratas.\n" + 
-				 "Es una flota normal de piratas, puede que estén regresando de saquear algún " + 
-				 "barco mercante.\n\n\n" + 
-				 "\t--Recompensa por destruirlos--\nRecursos: " + resourcesReward.ToString() +
-				 "\nBarcos: " + shipReward.ToString() + "\nOro: " + goldReward.ToString() + "\n\n" +
-				 "\t--Pérdidas por combate--\nTropas: " + troopLost.ToString();
+		t.text = "¡Flota pirata avistada!";
+		d.text = "\nUna de tus patrullas se ha encontrado una flota pirata\n\n";
+		
+		woodReward = Random.Range(5, 16);
+		goldReward = Random.Range(7, 14);
+		troopLost = Random.Range(3, 9);
+		pluss1 = Random.Range(1, 11);
+		pluss2 = Random.Range(1, 11);
+		int checkLoss = troopLost;
+		
+		while (troopLost + pluss1 >= ResourcesManager.instance.GetTroops())
+		{
+			if (troopLost > 0)
+				troopLost--;
+			else
+				pluss1--;
+		}
+
+		b1d.text = 	"\nMadera: + " + woodReward.ToString() +
+				 	"\nOro: + " + goldReward.ToString() +
+				 	"\nTropas: - " + (troopLost + pluss1).ToString();
+		
+		b2d.text = 	"\n\nOro: + " + (goldReward + pluss2).ToString() +
+				 	"\nTropas: - " + troopLost.ToString();
 		
 		count++;
 		TimeManager.instance.EventLaunched();
     }
 
 	override protected void Button1(Button b1, Button b2){
-		ResourcesManager.instance.ReduceTroops(troopLost);
-		ResourcesManager.instance.AddWood(resourcesReward);
-		ResourcesManager.instance.AddShip(shipReward);
+		ResourcesManager.instance.ReduceTroops(troopLost + pluss1);
+		ResourcesManager.instance.AddWood(woodReward);
 		ResourcesManager.instance.AddGold(goldReward);
-		ResourcesManager.instance.AddHonor(honorReward);
+		
+		ResourcesManager.instance.AddHonor(1);
 		
 		EventManager.instance.EndEvent();
 		
@@ -85,10 +81,13 @@ public class PirateEncounter2 : Event {
 	}
 
 	override protected void Button2(Button b1, Button b2){
-		ResourcesManager.instance.AddFear(honorReward + 2);
-
+		ResourcesManager.instance.ReduceTroops(troopLost);
+		ResourcesManager.instance.AddGold(goldReward + pluss2);
+		
+		ResourcesManager.instance.AddFear(1);
+		
 		EventManager.instance.EndEvent();
-
+		
 		b1.onClick.RemoveAllListeners();
 		b2.onClick.RemoveAllListeners();
 	}

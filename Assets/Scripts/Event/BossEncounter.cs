@@ -34,7 +34,7 @@ public class BossEncounter : Event {
 		}
 	}
 
-    public override void PlayEvent(Text t, Button b1, Text b1text, Button b2, Text b2text){
+    public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
 		shipsNumber = Random.Range(4, 8);
 		pirateNumber = Random.Range((int)(TroopsSlots.TroopsForShip / 2) + 5, TroopsSlots.TroopsForShip + 1) * shipsNumber;
 

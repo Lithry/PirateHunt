@@ -12,10 +12,13 @@ public class EventSetter {
 		Event pAtack2 = new PirateEncounter2(pAtack1);
 		events.Add(pAtack2);
 
-		Event boss = new BossEncounter(pAtack2);
-		events.Add(boss);
+		Event merchant = new MerchantArrive();
+		events.Add(merchant);
 
-		Event endGame = new EndGame(boss);
+		Event refugees = new RefugeesAarrive();
+		events.Add(refugees);
+		
+		Event endGame = new EndGame();
 		events.Add(endGame);
 
 		return events;

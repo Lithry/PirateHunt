@@ -9,7 +9,7 @@ abstract public class Event {
 
 	abstract public Event CheckEvent();
 
-	abstract public void PlayEvent(Text t, Button b1, Text b1text, Button b2, Text b2text);
+	abstract public void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text);
 
 	abstract protected void Button1(Button b1, Button b2);
 

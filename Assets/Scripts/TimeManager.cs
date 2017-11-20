@@ -12,11 +12,11 @@ public class TimeManager : MonoBehaviour {
 	public Text goldDisplay;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		instance = this;
 		time = 0;
 		timeOfLastEvent = time;
-		display.text = (time - timeOfLastEvent).ToString();
+		display.text = time.ToString();
 	}
 
 	public int GetCurrentTime(){
@@ -26,7 +26,7 @@ public class TimeManager : MonoBehaviour {
 	public void ForwardButton(){
 		UIManager.instance.ClossAllPanels();
 		time++;
-		display.text = (time - timeOfLastEvent).ToString();
+		display.text = time.ToString();
 		ResourcesManager.instance.TurnPassed();
 		EventManager.instance.CheckEvents();
 	}
@@ -37,7 +37,6 @@ public class TimeManager : MonoBehaviour {
 	
 	public void EventLaunched(){
 		timeOfLastEvent = time;
-		display.text = (time - timeOfLastEvent).ToString();
 	}
 
 	public void SetResourcesForNextTurnDisplay(){

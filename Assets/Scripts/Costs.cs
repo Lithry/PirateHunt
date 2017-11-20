@@ -28,5 +28,5 @@ public static class Taxes{
 }
 
 public static class HonorAndFear{
-	public const float Max = 150.0f;
+	public const float Max = 50.0f;
 }

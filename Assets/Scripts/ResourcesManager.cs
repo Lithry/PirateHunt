@@ -7,7 +7,6 @@ public class ResourcesManager : MonoBehaviour {
 	static public ResourcesManager instance;
     public Image honorBar;
     public Image fearBar;
-    private float honorFearBarLong;
     private int troops;
 	private int honor;
 	private int fear;
@@ -25,12 +24,11 @@ public class ResourcesManager : MonoBehaviour {
         honor = 0;
         fear = 0;
         gold = 0;
-        AddWood(ShipsCost.WoodCost*2);
-        AddCitizens(25);
-        AddGold(190);
+        AddWood(ShipsCost.WoodCost + 5);
+        AddCitizens(45);
+        AddGold(20);
         woodForNextTurn = 0.0f;
         goldForNextTurn = 0.0f;
-        honorFearBarLong = 1.0f;
         honorBar.fillAmount = 0;
         fearBar.fillAmount = 0;
 	}
@@ -104,6 +102,10 @@ public class ResourcesManager : MonoBehaviour {
         return (int)((goldForNextTurn * (float)citizens) / Taxes.exp);
     }
 
+    public int GetEstimateGoldLostForNexTurn(int value){
+        return (int)((goldForNextTurn * (float)citizens) / Taxes.exp) - (int)((goldForNextTurn * (float)(citizens - value)) / Taxes.exp);
+    }
+
     public void AddShip(int value){
         if (value > 0){
             ships += value;
@@ -156,11 +158,17 @@ public class ResourcesManager : MonoBehaviour {
         return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp);
     }
 
+    public int GetEstimateWoodLostForNexTurn(int value){
+        return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp) - (int)((woodForNextTurn * (float)(citizens - value)) / WoodCost.exp);
+    }
+
     public void AddCitizens(int value){
         if (value > 0){
             citizens += value;
             UIManager.instance.SetCitizenDisplay(citizens);
+            TimeManager.instance.SetResourcesForNextTurnDisplay();
         }
+
     }
 
     public void ReduceCitizen(int value){
@@ -171,6 +179,7 @@ public class ResourcesManager : MonoBehaviour {
                 citizens = 0;
 
             UIManager.instance.SetCitizenDisplay(citizens);
+            TimeManager.instance.SetResourcesForNextTurnDisplay();
         }
     }
 
