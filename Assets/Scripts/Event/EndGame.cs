@@ -72,7 +72,7 @@ public class EndGame : Event {
 			honorName = "Almirante";
 
 		if (fearLevel < 0.2f)
-			fearName = "Desconocido";
+			fearName = "Santo";
 		else if (fearLevel >= 0.2f && fearLevel < 0.4f)
 			fearName = "Travieso";
 		else if (fearLevel >= 0.4f && fearLevel < 0.6f)

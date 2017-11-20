@@ -9,51 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1475712880244242}
+  m_RootGameObject: {fileID: 1136131800040868}
   m_IsPrefabParent: 1
---- !u!1 &1475712880244242
+--- !u!1 &1136131800040868
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4730410939598770}
-  - component: {fileID: 114742298537450796}
+  - component: {fileID: 4906614967419540}
+  - component: {fileID: 114605731476971344}
   m_Layer: 0
-  m_Name: TutorialManager
+  m_Name: TipManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4730410939598770
+--- !u!4 &4906614967419540
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1475712880244242}
+  m_GameObject: {fileID: 1136131800040868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 435.84186, y: 206.39232, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114742298537450796
+--- !u!114 &114605731476971344
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1475712880244242}
+  m_GameObject: {fileID: 1136131800040868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63ffb2a36a79f14cb32a10b8480b344, type: 3}
+  m_Script: {fileID: 11500000, guid: b0c0ae2a85536254db545d7fabd62c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objetivePanel: {fileID: 0}
-  troops: {fileID: 0}
-  ships: {fileID: 0}
-  wood: {fileID: 0}
-  gold: {fileID: 0}
-  forward: {fileID: 0}
+  woodForShipCost: {fileID: 0}
+  troopsPerShip: {fileID: 0}
