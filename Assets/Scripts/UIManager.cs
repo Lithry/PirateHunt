@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour {
 	public Button troopsDeductButton;
 	public Text troopsWoodForNexTurn;
 	public Text troopsGoldForNexTurn;
+	public Text foodDisplay;
 	public Text citizenDisplay;
 
 	void Awake () {
@@ -59,6 +60,10 @@ public class UIManager : MonoBehaviour {
 
 	public void SetGoldDisplay(int value){
 		goldDisplay.text = "x " + value.ToString();
+	}
+	
+	public void SetFoodDisplay(int value){
+		foodDisplay.text = "x " + value.ToString();
 	}
 
 	public void SetCitizenDisplay(int value){

@@ -13,8 +13,12 @@ public class ResourcesManager : MonoBehaviour {
 	private int gold;
     private int ships;
     private int wood;
-    private float woodForNextTurn;
+    private int food;
+    private float troopsForNextTurn;
     private float goldForNextTurn;
+    private float shipsForNextTurn;
+    private float woodForNextTurn;
+    private float foodForNextTurn;
     private int citizens;
 
 
@@ -24,9 +28,11 @@ public class ResourcesManager : MonoBehaviour {
         honor = 0;
         fear = 0;
         gold = 0;
+        food = 0;
         AddWood(ShipsCost.WoodCost + 5);
         AddCitizens(45);
         AddGold(20);
+        AddFood(40);
         woodForNextTurn = 0.0f;
         goldForNextTurn = 0.0f;
         honorBar.fillAmount = 0;
@@ -160,6 +166,24 @@ public class ResourcesManager : MonoBehaviour {
 
     public int GetEstimateWoodLostForNexTurn(int value){
         return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp) - (int)((woodForNextTurn * (float)(citizens - value)) / WoodCost.exp);
+    }
+
+    public void AddFood(int value) {
+        if (value > 0){
+            food += value;
+            UIManager.instance.SetFoodDisplay(food);
+        }
+    }
+
+    public void ReduceFood(int value){
+        if (value > 0){
+            food -= value;
+            
+            if (food < 0)
+                food = 0;
+
+            UIManager.instance.SetFoodDisplay(food);
+        }
     }
 
     public void AddCitizens(int value){
