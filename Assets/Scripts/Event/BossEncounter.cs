@@ -21,7 +21,7 @@ public class BossEncounter : Event {
 	}
 
 	override public Event CheckEvent(){
-		probability = TimeManager.instance.GetCurrentTime() - TimeManager.instance.GetTimeOfLastEvent();
+	/*	probability = TimeManager.instance.GetCurrentTime() - TimeManager.instance.GetTimeOfLastEvent();
 		probability = (probability * 100) / maxAtTime;
 		random = Random.Range(1, 101);
 
@@ -29,13 +29,13 @@ public class BossEncounter : Event {
 		if (random <= probability && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetTroops() >= 40){
 			return this;
 		}
-		else{
+		else{*/
 			return null;
-		}
+		//}
 	}
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
-		shipsNumber = Random.Range(4, 8);
+		/*shipsNumber = Random.Range(4, 8);
 		pirateNumber = Random.Range((int)(TroopsSlots.TroopsForShip / 2) + 5, TroopsSlots.TroopsForShip + 1) * shipsNumber;
 
 		resourcesReward = (80 + Random.Range(-15, 16)) * shipsNumber;
@@ -47,11 +47,11 @@ public class BossEncounter : Event {
 		
 		goldReward = 200 + (int)(pirateNumber / 4) + Random.Range(0, 12) + Random.Range(10, 21);
 		
-		troopLost = (pirateNumber + 15) - ResourcesManager.instance.GetTroops();
+		troopLost = (pirateNumber + 15) - (int)ResourcesManager.instance.GetTroops();
 		if (troopLost < 0)
 			troopLost = 0;
 		else if (troopLost > ResourcesManager.instance.GetTroops())
-			troopLost = ResourcesManager.instance.GetTroops();
+			troopLost = (int)ResourcesManager.instance.GetTroops();
 
 		honorReward = 5;
 
@@ -70,11 +70,11 @@ public class BossEncounter : Event {
 				 "\t--Pérdidas por combate--\nTropas: " + troopLost.ToString();
 		
 		
-		TimeManager.instance.EventLaunched();
+		TimeManager.instance.EventLaunched();*/
     }
 
 	override protected void Button1(Button b1, Button b2){
-		count++;
+		/*count++;
 		ResourcesManager.instance.ReduceTroops(troopLost);
 		ResourcesManager.instance.AddWood(resourcesReward);
 		ResourcesManager.instance.AddShip(shipReward);
@@ -84,15 +84,15 @@ public class BossEncounter : Event {
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
 	}
 
 	override protected void Button2(Button b1, Button b2){
-		ResourcesManager.instance.AddFear(honorReward + 5);
+		/*ResourcesManager.instance.AddFear(honorReward + 5);
 
 		EventManager.instance.EndEvent();
 
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
 	}
 }

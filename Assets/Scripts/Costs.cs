@@ -2,6 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public static class Food{
+	public const float foodPerWorker = 0.2f;
+}
+
+
+
+
+
+
+
+
+
+
 public static class TroopsCost
 {
 	public const int Gold 		= 10;

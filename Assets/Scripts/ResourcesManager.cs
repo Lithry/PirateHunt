@@ -1,262 +1,149 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResourcesManager : MonoBehaviour {
 	static public ResourcesManager instance;
-    public Image honorBar;
-    public Image fearBar;
-    private int troops;
-	private int honor;
-	private int fear;
-	private int gold;
-    private int ships;
-    private int wood;
-    private int food;
-    private float troopsForNextTurn;
-    private float goldForNextTurn;
-    private float shipsForNextTurn;
-    private float woodForNextTurn;
-    private float foodForNextTurn;
-    private int citizens;
+	private float honor;
+	private float fear;
+	private float citizens;
+	private float food;
+	private float foodWorking;
+	private float foodForNextTurn;
+	private float gold;
+	private float goldWorking;
+	private float wood;
+	private float woodWorking;
+	private float ships;
+	private float shipsWorking;
+	private float troops;
+	private float troopsWorking;
 
-
-    void Start () {
+	void Start () {
 		instance = this;
-        troops = 0;
-        honor = 0;
-        fear = 0;
-        gold = 0;
-        food = 0;
-        AddWood(ShipsCost.WoodCost + 5);
-        AddCitizens(45);
-        AddGold(20);
-        AddFood(40);
-        woodForNextTurn = 0.0f;
-        goldForNextTurn = 0.0f;
-        honorBar.fillAmount = 0;
-        fearBar.fillAmount = 0;
+		honor = 0;
+		fear = 0;
+		citizens = 0;
+		AddCitizens(45);
+		food = 0;
+		foodWorking = 0;
+		AddFood(40);
 	}
 
-    public int GetTroops(){
-        return troops;
-    }
+#region Honor
+	public void AddHonor(float value){
+		if (value > 0)
+			honor += value;
+	}
 
-    public void AddTroops(int value){
-        troops += value;
-        UIManager.instance.SetTroopsDisplay(troops);
-    }
+	public void ReduceHonor(float value){
+		if (value > 0)
+			honor -= value;
 
-    public void ReduceTroops(int value){
-        if (value > 0){
-            troops -= value;
+		if (honor < 0)
+			honor = 0;
+	}
 
-            if (troops < 0)
-                troops = 0;
+	public float GetHonor(){
+		return honor;
+	}
+#endregion
 
-            UIManager.instance.SetTroopsDisplay(troops);
+#region Fear
+	public void AddFear(float value){
+		if (value > 0)
+			fear += value;
+	}
 
-        }
-    }
+	public void ReduceFear(float value){
+		if (value > 0)
+			fear -= value;
 
-	public int GetHonor() {
-        return honor;
-    }
+		if (fear < 0)
+			fear = 0;
+	}
 
-    public void AddHonor(int value) {
-        honor += value;
-        honorBar.fillAmount = (float)honor / HonorAndFear.Max;
-    }
+	public float GetFear(){
+		return fear;
+	}
+#endregion
 
-	public int GetFear() {
-        return fear;
-    }
+#region Citizens
+	public void AddCitizens(float value){
+		if (value > 0)
+			citizens += value;
 
-    public void AddFear(int value) {
-        fear += value;
-        fearBar.fillAmount = (float)fear / HonorAndFear.Max;
-    }
+		UIManager.instance.CitizensDisplay(citizens);
+	}
 
-	public int GetGold() {
-        return gold;
-    }
+	public void ReduceCitizens(float value){
+		if (value > 0)
+			citizens -= value;
 
-    public void AddGold(int value) {
-        if (value > 0){
-            gold += value;
-            UIManager.instance.SetGoldDisplay(gold);
-        }
-    }
+		if (citizens < 0)
+			citizens = 0;
 
-    public void ReduceGold(int value){
-        if (value > 0){
-            gold -= value;
-            
-            if (gold < 0)
-                gold = 0;
+		UIManager.instance.CitizensDisplay(citizens);
+	}
 
-            UIManager.instance.SetGoldDisplay(gold);
-        }
-    }
+	public float GetCitizens(){
+		return citizens;
+	}
+#endregion
 
-    public void SetGoldForNextTunr(float value){
-        goldForNextTurn = value;
-    }
+#region Food
+	public void AddFood(float value){
+		if (value > 0)
+			food += value;
 
-    public int GetGoldForNextTunr(){
-        return (int)((goldForNextTurn * (float)citizens) / Taxes.exp);
-    }
+		UIManager.instance.FoodDisplay(food);
+	}
 
-    public int GetEstimateGoldLostForNexTurn(int value){
-        return (int)((goldForNextTurn * (float)citizens) / Taxes.exp) - (int)((goldForNextTurn * (float)(citizens - value)) / Taxes.exp);
-    }
+	public void ReduceFood(float value){
+		if (value > 0)
+			food -= value;
 
-    public void AddShip(int value){
-        if (value > 0){
-            ships += value;
-            UIManager.instance.SetShipsDisplay(ships);
-        }
-    }
+		if (food < 0)
+			food = 0;
 
-    public void ReduceShip(int value){
-        if (value > 0){
-            ships += value;
+		UIManager.instance.FoodDisplay(food);
+	}
 
-            if (ships < 0)
-                ships = 0;
+	public void AddToWorkFood(){
+		if (citizens >= 1){
+			ReduceCitizens(1);
+			foodWorking++;
+			foodForNextTurn = foodWorking * Food.foodPerWorker;
+		}
 
-            UIManager.instance.SetShipsDisplay(ships);
-        }
-    }
+		UIManager.instance.FoodWorkingDisplay(foodWorking);
+		UIManager.instance.FoodPerNextTurnDisplay(foodForNextTurn);
+	}
 
-    public int GetShips(){
-        return ships;
-    }
+	public void ReduceToWorkFood(){
+		if (foodWorking >= 1){
+			AddCitizens(1);
+			foodWorking--; 
+			foodForNextTurn = foodWorking * Food.foodPerWorker;
+		}
 
-    public void AddWood(int value){
-        if (value > 0){
-            wood += value;
-            UIManager.instance.SetWoodDisplay(wood);
-        }
-    }
+		UIManager.instance.FoodWorkingDisplay(foodWorking);
+		UIManager.instance.FoodPerNextTurnDisplay(foodForNextTurn);
+	}
 
-    public void ReduceWood(int value){
-        if (value > 0){
-            wood -= value;
+	public float GetFood(){
+		return food;
+	}
 
-            if (wood < 0)
-                wood = 0;
+	public float GetFoodWorking(){
+		return foodWorking;
+	}
+#endregion
 
-            UIManager.instance.SetWoodDisplay(wood);
-        }
-    }
 
-    public int GetWood(){
-        return wood;
-    }
 
-    public void SetWoodForNextTunr(float value){
-        woodForNextTurn = value;
-    }
-    
-    public int GetWoodForNextTunr(){
-        return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp);
-    }
+	public void TurnPassed(){
+		AddFood(foodForNextTurn);
+	}
 
-    public int GetEstimateWoodLostForNexTurn(int value){
-        return (int)((woodForNextTurn * (float)citizens) / WoodCost.exp) - (int)((woodForNextTurn * (float)(citizens - value)) / WoodCost.exp);
-    }
-
-    public void AddFood(int value) {
-        if (value > 0){
-            food += value;
-            UIManager.instance.SetFoodDisplay(food);
-        }
-    }
-
-    public void ReduceFood(int value){
-        if (value > 0){
-            food -= value;
-            
-            if (food < 0)
-                food = 0;
-
-            UIManager.instance.SetFoodDisplay(food);
-        }
-    }
-
-    public void AddCitizens(int value){
-        if (value > 0){
-            citizens += value;
-            UIManager.instance.SetCitizenDisplay(citizens);
-            TimeManager.instance.SetResourcesForNextTurnDisplay();
-        }
-
-    }
-
-    public void ReduceCitizen(int value){
-        if (value > 0){
-            citizens -= value;
-
-            if (citizens < 0)
-                citizens = 0;
-
-            UIManager.instance.SetCitizenDisplay(citizens);
-            TimeManager.instance.SetResourcesForNextTurnDisplay();
-        }
-    }
-
-    public int GetCitizen(){
-        return citizens;
-    }
-
-    public void TurnPassed(){
-        AddWood((int)((woodForNextTurn * (float)citizens) / WoodCost.exp));
-        AddGold((int)((goldForNextTurn * (float)citizens) / Taxes.exp));
-        
-        AddFearAndHonor();
-    }
-
-    private void AddFearAndHonor(){
-        float woodFearVal = woodForNextTurn / (float)citizens;
-        if (woodFearVal > 0.5f){
-            if (woodFearVal <= 0.65f)
-                AddFear(1);
-            else if (woodFearVal <= 0.9f)
-                AddFear(2);
-            else
-                AddFear(3);
-        }
-        else{
-            if (woodFearVal >= 0.1f && woodFearVal <= 0.25f)
-                AddHonor(2);
-            else if (woodFearVal > 0.25f && woodFearVal <= 0.4f)
-                AddHonor(1);
-        }
-
-        float goldFearVal = goldForNextTurn / (float)citizens;
-        if (goldFearVal > 0.5f){
-            if (goldFearVal <= 0.7f)
-                AddFear(1);
-            else if (goldFearVal <= 0.8f)
-                AddFear(2);
-            else
-                AddFear(3);
-        }
-        else{
-            if (goldFearVal > 0.15f && goldFearVal <= 0.3f)
-                AddHonor(2);
-            else if (goldFearVal > 0.3f && goldFearVal < 0.4f)
-                AddHonor(1);
-        }
-    }
-
-    public float GetHonorLevel(){
-        return honorBar.fillAmount;
-    }
-
-    public float GetFearLevel(){
-        return fearBar.fillAmount;
-    }
 }

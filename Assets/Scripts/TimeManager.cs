@@ -8,10 +8,7 @@ public class TimeManager : MonoBehaviour {
 	public Text display;
 	private int time;
 	private int timeOfLastEvent;
-	public Text woodDisplay;
-	public Text goldDisplay;
 
-	// Use this for initialization
 	void Awake () {
 		instance = this;
 		time = 0;
@@ -24,11 +21,10 @@ public class TimeManager : MonoBehaviour {
 	}
 
 	public void ForwardButton(){
-		UIManager.instance.ClossAllPanels();
 		time++;
 		display.text = time.ToString();
 		ResourcesManager.instance.TurnPassed();
-		EventManager.instance.CheckEvents();
+		//EventManager.instance.CheckEvents();
 	}
 
 	public int GetTimeOfLastEvent(){
@@ -38,10 +34,4 @@ public class TimeManager : MonoBehaviour {
 	public void EventLaunched(){
 		timeOfLastEvent = time;
 	}
-
-	public void SetResourcesForNextTurnDisplay(){
-		woodDisplay.text = "+ " + ResourcesManager.instance.GetWoodForNextTunr();
-		goldDisplay.text = "+ " + ResourcesManager.instance.GetGoldForNextTunr();
-	}
-	
 }

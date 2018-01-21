@@ -19,7 +19,7 @@ public class PirateEncounter2 : Event {
 	}
 
 	override public Event CheckEvent(){
-		probability = TimeManager.instance.GetCurrentTime() - TimeManager.instance.GetTimeOfLastEvent();
+		/*probability = TimeManager.instance.GetCurrentTime() - TimeManager.instance.GetTimeOfLastEvent();
 		probability = (probability * 100) / maxAtTime;
 		random = Random.Range(1, 101);
 
@@ -27,13 +27,13 @@ public class PirateEncounter2 : Event {
 		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetShips() >= 4 && ResourcesManager.instance.GetTroops() >= 25){
 			return this;
 		}
-		else{
+		else{*/
 			return null;
-		}
+		//}
 	}
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
-		b1.onClick.AddListener(delegate{Button1(b1, b2);});
+		/*b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Atrapar";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Matar";
@@ -63,11 +63,11 @@ public class PirateEncounter2 : Event {
 				 	"\nTropas: - " + troopLost.ToString();
 		
 		count++;
-		TimeManager.instance.EventLaunched();
+		TimeManager.instance.EventLaunched();*/
     }
 
 	override protected void Button1(Button b1, Button b2){
-		ResourcesManager.instance.ReduceTroops(troopLost + pluss1);
+		/*ResourcesManager.instance.ReduceTroops(troopLost + pluss1);
 		ResourcesManager.instance.AddWood(woodReward);
 		ResourcesManager.instance.AddGold(goldReward);
 		
@@ -76,11 +76,11 @@ public class PirateEncounter2 : Event {
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
 	}
 
 	override protected void Button2(Button b1, Button b2){
-		ResourcesManager.instance.ReduceTroops(troopLost);
+		/*ResourcesManager.instance.ReduceTroops(troopLost);
 		ResourcesManager.instance.AddGold(goldReward + pluss2);
 		
 		ResourcesManager.instance.AddFear(1);
@@ -88,6 +88,6 @@ public class PirateEncounter2 : Event {
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
 	}
 }

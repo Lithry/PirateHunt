@@ -14,16 +14,16 @@ public class EndGame : Event {
     public EndGame(){}
 
 	override public Event CheckEvent(){
-		if (ResourcesManager.instance.GetHonorLevel() == 1.0f || ResourcesManager.instance.GetFearLevel() == 1.0f){
+		/*if (ResourcesManager.instance.GetHonorLevel() == 1.0f || ResourcesManager.instance.GetFearLevel() == 1.0f){
 			return this;
 		}
-		else{
+		else{*/
 			return null;
-		}
+		//}
 	}
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
-		b1.onClick.AddListener(delegate{Button1(b1, b2);});
+		/*b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Jugar nuevamente";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Salir";
@@ -48,7 +48,7 @@ public class EndGame : Event {
 		
 		b2d.text = 	"";
 
-		TimeManager.instance.EventLaunched();
+		TimeManager.instance.EventLaunched();*/
     }
 
 	override protected void Button1(Button b1, Button b2){

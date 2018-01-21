@@ -13,17 +13,17 @@ public class MerchantArrive : Event{
 
     public override Event CheckEvent()
     {
-        random = Random.Range(1, 101);
+        /*random = Random.Range(1, 101);
 
 		if (random <= 15 && TimeManager.instance.GetCurrentTime() - lastTime >= 5 && ResourcesManager.instance.GetGold() >= 25)
 			return this;
-		else
+		else*/
 			return null;
     }
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text)
     {
-		b1.onClick.AddListener(delegate{Button1(b1, b2);});
+		/*b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Comerciar";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Deportar";
@@ -44,29 +44,29 @@ public class MerchantArrive : Event{
 		b2d.text = 	"\n\n\nMadera: + " + ((int)(wood / 2)).ToString();
 
 		lastTime = TimeManager.instance.GetCurrentTime();
-		TimeManager.instance.EventLaunched();
+		TimeManager.instance.EventLaunched();*/
     }
 
     protected override void Button1(Button b1, Button b2)
     {
-		ResourcesManager.instance.AddWood(wood);
+		/*ResourcesManager.instance.AddWood(wood);
 		ResourcesManager.instance.ReduceGold(gold);
 		
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
     }
 
     protected override void Button2(Button b1, Button b2)
     {
-        ResourcesManager.instance.AddWood((int)(wood / 2));
+       /* ResourcesManager.instance.AddWood((int)(wood / 2));
 		
 		ResourcesManager.instance.AddFear(2);
 
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();
+		b2.onClick.RemoveAllListeners();*/
     }
 }
