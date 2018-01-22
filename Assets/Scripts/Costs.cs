@@ -8,7 +8,9 @@ public static class Food{
 	public const float foodPerWorker = 0.2f;
 }
 
-
+public static class Gold{
+	public const float goldPerWorker = 0.15f;
+}
 
 
 

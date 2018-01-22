@@ -12,6 +12,7 @@ public class ResourcesManager : MonoBehaviour {
 	private float foodForNextTurn;
 	private float gold;
 	private float goldWorking;
+	private float goldForNextTurn;
 	private float wood;
 	private float woodWorking;
 	private float ships;
@@ -140,10 +141,60 @@ public class ResourcesManager : MonoBehaviour {
 	}
 #endregion
 
+#region Gold
+	public void AddGold(float value){
+		if (value > 0)
+			gold += value;
+
+		UIManager.instance.GoldDisplay(gold);
+	}
+
+	public void ReduceGold(float value){
+		if (value > 0)
+			gold -= value;
+
+		if (gold < 0)
+			gold = 0;
+
+		UIManager.instance.GoldDisplay(gold);
+	}
+
+	public void AddToWorkGold(){
+		if (citizens >= 1){
+			ReduceCitizens(1);
+			goldWorking++;
+			goldForNextTurn = goldWorking * Gold.goldPerWorker;
+		}
+
+		UIManager.instance.GoldWorkingDisplay(goldWorking);
+		UIManager.instance.GoldPerNextTurnDisplay(goldForNextTurn);
+	}
+
+	public void ReduceToWorkGold(){
+		if (goldWorking >= 1){
+			AddCitizens(1);
+			goldWorking--; 
+			goldForNextTurn = goldWorking * Gold.goldPerWorker;
+		}
+
+		UIManager.instance.GoldWorkingDisplay(goldWorking);
+		UIManager.instance.GoldPerNextTurnDisplay(goldForNextTurn);
+	}
+
+	public float GetGold(){
+		return gold;
+	}
+
+	public float GetGoldWorking(){
+		return goldWorking;
+	}
+#endregion
+
 
 
 	public void TurnPassed(){
 		AddFood(foodForNextTurn);
+		AddGold(goldForNextTurn);
 	}
 
 }
