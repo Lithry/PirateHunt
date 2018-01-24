@@ -12,7 +12,9 @@ public static class Gold{
 	public const float goldPerWorker = 0.15f;
 }
 
-
+public static class Wood{
+	public const float woodPerWorker = 0.3f;
+}
 
 
 

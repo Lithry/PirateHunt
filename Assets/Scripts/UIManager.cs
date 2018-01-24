@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour {
 	public Text goldDisplay;
 	public Text goldWorkingDisplay;
 	public Text goldPerNextTurnDisplay;
+	public Text woodDisplay;
+	public Text woodWorkingDisplay;
+	public Text woodPerNextTurnDisplay;
 
 	public void CitizensDisplay(float value){
 		citizensDisplay.text = "x " + value.ToString("F0");
@@ -46,6 +49,18 @@ public class UIManager : MonoBehaviour {
 	public void GoldPerNextTurnDisplay(float value){
 		goldPerNextTurnDisplay.text = "+ " + value.ToString("F1");
 	}
+
+	public void WoodDisplay(float value){
+		woodDisplay.text = value.ToString("F1");
+	}
+
+	public void WoodWorkingDisplay(float value){
+		woodWorkingDisplay.text = value.ToString("F0");
+	}
+
+	public void WoodPerNextTurnDisplay(float value){
+		woodPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+	}
 #endregion
 
 #region FoodPanel
@@ -69,6 +84,18 @@ public class UIManager : MonoBehaviour {
 	public void GoldReduceWorking(){
 		if (ResourcesManager.instance.GetGoldWorking() >= 1)
 			ResourcesManager.instance.ReduceToWorkGold();
+	}
+#endregion
+
+#region WoodPanel
+	public void WoodAddWorking(){
+		if (ResourcesManager.instance.GetCitizens() >= 1)
+			ResourcesManager.instance.AddToWorkWood();
+	}
+	
+	public void WoodReduceWorking(){
+		if (ResourcesManager.instance.GetWoodWorking() >= 1)
+			ResourcesManager.instance.ReduceToWorkWood();
 	}
 #endregion
 
