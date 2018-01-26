@@ -13,39 +13,17 @@ public static class Gold{
 }
 
 public static class Wood{
-	public const float woodPerWorker = 0.3f;
+	public const float woodPerWorker = 0.11f;
 }
 
-
-
-
-
-
-public static class TroopsCost
-{
-	public const int Gold 		= 10;
+public static class Ships{
+	public const float shipsPerWorker = 0.01f;
+	public const float shipCost = 0.7f;
+	public const int troopsPerShip = 15;
 }
 
-public static class TroopsSlots{
-	public const int TroopsForShip = 15;
-}
-
-public static class ShipsCost{
-	public const int WoodCost = 20;
-}
-
-public static class WoodCost{
-	public const float exp = 100.0f;
-}
-
-public static class Taxes{
-	public const float exp = 100.0f;
-	public const int Gold = 150;
-	public const int HonorIfCollected = 2;
-	public const int TimeToWait = 4;
-	public const int FearIfForced = 10;
-}
-
-public static class HonorAndFear{
-	public const float Max = 50.0f;
+public static class Troops{
+	public const float troopsPerWorker = 0.08f;
+	public const float foodCost = 0.04f;
+	public const float goldCost = 0.2f;
 }

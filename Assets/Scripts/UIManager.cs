@@ -21,6 +21,12 @@ public class UIManager : MonoBehaviour {
 	public Text woodDisplay;
 	public Text woodWorkingDisplay;
 	public Text woodPerNextTurnDisplay;
+	public Text shipsDisplay;
+	public Text shipsWorkingDisplay;
+	public Text shipsPerNextTurnDisplay;
+	public Text troopsDisplay;
+	public Text troopsWorkingDisplay;
+	public Text troopsPerNextTurnDisplay;
 
 	public void CitizensDisplay(float value){
 		citizensDisplay.text = "x " + value.ToString("F0");
@@ -35,7 +41,14 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void FoodPerNextTurnDisplay(float value){
-		foodPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		if (value < 0){
+			foodPerNextTurnDisplay.color = Color.red;
+			foodPerNextTurnDisplay.text = "- " + Mathf.Abs(value).ToString("F1");
+		}
+		else{
+			foodPerNextTurnDisplay.color = Color.green;
+			foodPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		}
 	}
 
 	public void GoldDisplay(float value){
@@ -47,7 +60,14 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void GoldPerNextTurnDisplay(float value){
-		goldPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		if (value < 0){
+			goldPerNextTurnDisplay.color = Color.red;
+			goldPerNextTurnDisplay.text = "- " + Mathf.Abs(value).ToString("F1");
+		}
+		else{
+			goldPerNextTurnDisplay.color = Color.green;
+			goldPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		}
 	}
 
 	public void WoodDisplay(float value){
@@ -59,7 +79,38 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void WoodPerNextTurnDisplay(float value){
-		woodPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		if (value < 0){
+			woodPerNextTurnDisplay.color = Color.red;
+			woodPerNextTurnDisplay.text = "- " + Mathf.Abs(value).ToString("F1");
+		}
+		else{
+			woodPerNextTurnDisplay.color = Color.green;
+			woodPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+		}
+	}
+
+	public void ShipsDisplay(float value){
+		shipsDisplay.text = value.ToString("F1");
+	}
+
+	public void ShipsWorkingDisplay(float value){
+		shipsWorkingDisplay.text = value.ToString("F0");
+	}
+
+	public void ShipsPerNextTurnDisplay(float value){
+		shipsPerNextTurnDisplay.text = "+ " + value.ToString("F1");
+	}
+
+	public void TroopsDisplay(float value, int max){
+		troopsDisplay.text = value.ToString("F0") + "/" + max.ToString();
+	}
+
+	public void TroopsWorkingDisplay(float value){
+		troopsWorkingDisplay.text = value.ToString("F0");
+	}
+
+	public void TroopsPerNextTurnDisplay(float value){
+		troopsPerNextTurnDisplay.text = "+ " + value.ToString("F1");
 	}
 #endregion
 
@@ -96,6 +147,30 @@ public class UIManager : MonoBehaviour {
 	public void WoodReduceWorking(){
 		if (ResourcesManager.instance.GetWoodWorking() >= 1)
 			ResourcesManager.instance.ReduceToWorkWood();
+	}
+#endregion
+
+#region ShipsPanel
+	public void ShipsAddWorking(){
+		if (ResourcesManager.instance.GetCitizens() >= 1)
+			ResourcesManager.instance.AddToWorkShips();
+	}
+	
+	public void ShipsReduceWorking(){
+		if (ResourcesManager.instance.GetShipsWorking() >= 1)
+			ResourcesManager.instance.ReduceToWorkShips();
+	}
+#endregion
+
+#region TroopsPanel
+	public void TroopsAddWorking(){
+		if (ResourcesManager.instance.GetCitizens() >= 1)
+			ResourcesManager.instance.AddToWorkTroops();
+	}
+	
+	public void TroopsReduceWorking(){
+		if (ResourcesManager.instance.GetTroopsWorking() >= 1)
+			ResourcesManager.instance.ReduceToWorkTroops();
 	}
 #endregion
 
