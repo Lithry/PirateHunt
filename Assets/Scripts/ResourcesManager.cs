@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourcesManager : MonoBehaviour {
+#region Variables
 	static public ResourcesManager instance;
+	public Image honorBar;
 	private float honor;
+	public Image fearBar;
 	private float fear;
 	private float citizens;
 	private float food;
@@ -22,11 +26,14 @@ public class ResourcesManager : MonoBehaviour {
 	private float troops;
 	private float troopsWorking;
 	private float troopsForNextTurn;
-
+#endregion
+	
 	void Start () {
 		instance = this;
 		honor = 0;
+		AddHonor(0);
 		fear = 0;
+		AddFear(0);
 		citizens = 0;
 		AddCitizens(45);
 		food = 0;
@@ -34,10 +41,10 @@ public class ResourcesManager : MonoBehaviour {
 		AddFood(40);
 		gold = 0;
 		goldWorking = 0;
-		AddGold(0);
+		AddGold(100);
 		wood = 0;
 		woodWorking = 0;
-		AddWood(0);
+		AddWood(100);
 		ships = 0;
 		shipsWorking = 0;
 		AddShips(0);
@@ -50,6 +57,8 @@ public class ResourcesManager : MonoBehaviour {
 	public void AddHonor(float value){
 		if (value > 0)
 			honor += value;
+
+		honorBar.fillAmount = (honor * 0.01f) / HonorFear.pluss;
 	}
 
 	public void ReduceHonor(float value){
@@ -58,6 +67,8 @@ public class ResourcesManager : MonoBehaviour {
 
 		if (honor < 0)
 			honor = 0;
+
+		honorBar.fillAmount = (honor * 0.01f) / HonorFear.pluss;
 	}
 
 	public float GetHonor(){
@@ -69,6 +80,8 @@ public class ResourcesManager : MonoBehaviour {
 	public void AddFear(float value){
 		if (value > 0)
 			fear += value;
+
+		fearBar.fillAmount = (fear * 0.01f) / HonorFear.pluss;
 	}
 
 	public void ReduceFear(float value){
@@ -77,6 +90,8 @@ public class ResourcesManager : MonoBehaviour {
 
 		if (fear < 0)
 			fear = 0;
+
+		fearBar.fillAmount = (fear * 0.01f) / HonorFear.pluss;
 	}
 
 	public float GetFear(){
@@ -130,6 +145,7 @@ public class ResourcesManager : MonoBehaviour {
 			ReduceCitizens(1);
 			foodWorking++;
 			foodForNextTurn = (foodWorking * Food.foodPerWorker) - (troops * Troops.foodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 		
 		DisplayResources();
@@ -140,6 +156,7 @@ public class ResourcesManager : MonoBehaviour {
 			AddCitizens(1);
 			foodWorking--; 
 			foodForNextTurn = (foodWorking * Food.foodPerWorker) - (troops * Troops.foodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -151,6 +168,10 @@ public class ResourcesManager : MonoBehaviour {
 
 	public float GetFoodWorking(){
 		return foodWorking;
+	}
+
+	public float GetFoodForNextTurn(){
+		return foodForNextTurn;
 	}
 #endregion
 
@@ -176,7 +197,7 @@ public class ResourcesManager : MonoBehaviour {
 		if (citizens >= 1){
 			ReduceCitizens(1);
 			goldWorking++;
-			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -186,7 +207,7 @@ public class ResourcesManager : MonoBehaviour {
 		if (goldWorking >= 1){
 			AddCitizens(1);
 			goldWorking--; 
-			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -198,6 +219,10 @@ public class ResourcesManager : MonoBehaviour {
 
 	public float GetGoldWorking(){
 		return goldWorking;
+	}
+
+	public float GetGoldForNextTurn(){
+		return goldForNextTurn;
 	}
 #endregion
 
@@ -223,7 +248,8 @@ public class ResourcesManager : MonoBehaviour {
 		if (citizens >= 1){
 			ReduceCitizens(1);
 			woodWorking++;
-			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.shipCost);
+			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.woodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 		
 		DisplayResources();
@@ -233,7 +259,8 @@ public class ResourcesManager : MonoBehaviour {
 		if (woodWorking >= 1){
 			AddCitizens(1);
 			woodWorking--; 
-			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.shipCost);
+			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.woodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -245,6 +272,10 @@ public class ResourcesManager : MonoBehaviour {
 
 	public float GetWoodWorking(){
 		return woodWorking;
+	}
+
+	public float GetWoodForNextTurn(){
+		return woodForNextTurn;
 	}
 #endregion
 
@@ -271,7 +302,8 @@ public class ResourcesManager : MonoBehaviour {
 			ReduceCitizens(1);
 			shipsWorking++;
 			shipsForNextTurn = shipsWorking * Ships.shipsPerWorker;
-			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.shipCost);
+			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.woodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -282,7 +314,8 @@ public class ResourcesManager : MonoBehaviour {
 			AddCitizens(1);
 			shipsWorking--; 
 			shipsForNextTurn = shipsWorking * Ships.shipsPerWorker;
-			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.shipCost);
+			woodForNextTurn = (woodWorking * Wood.woodPerWorker) - (shipsWorking * Ships.woodCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -299,10 +332,10 @@ public class ResourcesManager : MonoBehaviour {
 
 #region Troops
 	public void AddTroops(float value){
-		if (value > 0 && ((int)ships * Ships.troopsPerShip) >= (troops + value))
+		if (value > 0 && ((int)(ships + 0.05f) * Ships.troopsPerShip) >= (troops + value))
 			troops += value;
-		else if (((int)ships * Ships.troopsPerShip) < (troops + value))
-			troops = ((int)ships * Ships.troopsPerShip);
+		else if (((int)(ships + 0.05f) * Ships.troopsPerShip) < (troops + value))
+			troops = ((int)(ships + 0.05f) * Ships.troopsPerShip);
 
 		DisplayResources();
 	}
@@ -322,7 +355,7 @@ public class ResourcesManager : MonoBehaviour {
 			ReduceCitizens(1);
 			troopsWorking++;
 			troopsForNextTurn = troopsWorking * Troops.troopsPerWorker;
-			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -333,7 +366,7 @@ public class ResourcesManager : MonoBehaviour {
 			AddCitizens(1);
 			troopsWorking--; 
 			troopsForNextTurn = troopsWorking * Troops.troopsPerWorker;
-			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost);
+			goldForNextTurn = (goldWorking * Gold.goldPerWorker) - (troopsWorking * Troops.goldCost) - (foodWorking * Food.goldCost) - (woodWorking * Wood.goldCost) - (shipsWorking * Ships.goldCost);
 		}
 
 		DisplayResources();
@@ -349,8 +382,10 @@ public class ResourcesManager : MonoBehaviour {
 #endregion
 
 	public void TurnPassed(){
-		if (foodForNextTurn > 0)
-			AddFood(foodForNextTurn);
+		if (foodForNextTurn > 0){
+			if (gold > 0)
+				AddFood(foodForNextTurn);
+		}
 		else
 			ReduceFood(Mathf.Abs(foodForNextTurn));
 		
@@ -359,21 +394,25 @@ public class ResourcesManager : MonoBehaviour {
 		else
 			ReduceGold(Mathf.Abs(goldForNextTurn));
 		
-		if (woodForNextTurn > 0)
-			AddWood(woodForNextTurn);
+		if (woodForNextTurn > 0){
+			if (gold > 0)
+				AddWood(woodForNextTurn);
+		}
 		else
 			ReduceWood(Mathf.Abs(woodForNextTurn));
 		
 		if (shipsForNextTurn > 0){
-			if (wood > 0)
+			if (wood > 0 && gold > 0)
 				AddShips(shipsForNextTurn);
 		}
 		else
 			ReduceShips(Mathf.Abs(shipsForNextTurn));
 		
 		if (troopsForNextTurn > 0){
-			if (gold > 0)
+			if (gold > 0 && food > 0.09f)
 				AddTroops(troopsForNextTurn);
+			else if (food < 0.09f)
+				ReduceTroops(troops / Troops.lossesFromLackFood);
 		}
 		else
 			ReduceTroops(Mathf.Abs(troopsForNextTurn));
@@ -398,9 +437,10 @@ public class ResourcesManager : MonoBehaviour {
 		UIManager.instance.ShipsDisplay(ships);
 		UIManager.instance.ShipsWorkingDisplay(shipsWorking);
 		UIManager.instance.ShipsPerNextTurnDisplay(shipsForNextTurn);
-		UIManager.instance.TroopsDisplay(troops, (int)((int)ships * Ships.troopsPerShip));
+		UIManager.instance.TroopsDisplay(troops, ((int)(ships + 0.05f) * Ships.troopsPerShip));
 		UIManager.instance.TroopsWorkingDisplay(troopsWorking);
 		UIManager.instance.TroopsPerNextTurnDisplay(troopsForNextTurn);
+		WarningManager.instance.CheckWarnings();
 	}
 
 }
