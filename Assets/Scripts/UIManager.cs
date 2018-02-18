@@ -5,9 +5,19 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 	static public UIManager instance;
+	public GameObject helpDisplay;
 
 	void Awake () {
 		instance = this;
+		helpDisplay.SetActive(false);
+	}
+
+	public void OpenHelpPanel(){
+		helpDisplay.SetActive(true);
+	}
+
+	public void CloseHelpPanel(){
+		helpDisplay.SetActive(false);
 	}
 
 #region Display
@@ -173,5 +183,4 @@ public class UIManager : MonoBehaviour {
 			ResourcesManager.instance.ReduceToWorkTroops();
 	}
 #endregion
-
 }
