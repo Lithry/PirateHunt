@@ -14,16 +14,18 @@ public class EndGame : Event {
     public EndGame(){}
 
 	override public Event CheckEvent(){
-		/*if (ResourcesManager.instance.GetHonorLevel() == 1.0f || ResourcesManager.instance.GetFearLevel() == 1.0f){
+		if ((ResourcesManager.instance.GetHonorLevel() == 1.0f || ResourcesManager.instance.GetFearLevel() == 1.0f) || TimeManager.instance.GetCurrentTime() >= 100){
 			return this;
 		}
-		else{*/
+		else{
 			return null;
-		//}
+		}
 	}
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
-		/*b1.onClick.AddListener(delegate{Button1(b1, b2);});
+		TimeManager.instance.EventLaunched();
+		
+		b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Jugar nuevamente";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Salir";
@@ -38,17 +40,20 @@ public class EndGame : Event {
 			d.text = "Un inspector te ha estado investigando y reunio las pruevas necesarias para encarcelarte\n\n" +
 					 "Titulo: El " + honorName + " " + fearName;
 		}
-		else{
+		else if (honorLevel == 1.0f){
 			t.text = "¡Conseguiste tu aumento!";
 			d.text = "Has logrado conseguir el aumento a Almirante que tanto anhelabas!\n\n" +
 					 "Titulo: El " + honorName + " " + fearName;
 		}
+		else{
+			t.text = "¡Fin de tu camino!";
+			d.text = "Há pasado un tiempo y aunque no hayas logrado conseguir el aumento a Almirante que tanto anhelabas, la\n" +
+					 "población ya conoce tu carácter... ¡y hasta te dieron un apodo!\n" +
+					 "Apodo: El " + honorName + " " + fearName;
+		}
 
 		b1d.text = 	"";
-		
 		b2d.text = 	"";
-
-		TimeManager.instance.EventLaunched();*/
     }
 
 	override protected void Button1(Button b1, Button b2){
@@ -63,7 +68,7 @@ public class EndGame : Event {
 		if (honorLevel < 0.2f)
 			honorName = "Don Nadie";
 		else if (honorLevel >= 0.2f && honorLevel < 0.4f)
-			honorName = "Buen";
+			honorName = "Amable";
 		else if (honorLevel >= 0.4f && honorLevel < 0.6f)
 			honorName = "Carismatico";
 		else if (honorLevel >= 0.6f && honorLevel < 0.8f)

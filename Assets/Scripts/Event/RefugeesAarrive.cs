@@ -11,22 +11,25 @@ public class RefugeesAarrive : Event{
     public RefugeesAarrive(){}
 
     public override Event CheckEvent(){
-       /*random = Random.Range(1, 101);
+       random = Random.Range(1, 101);
 
 		if (random <= 15 && TimeManager.instance.GetCurrentTime() - lastTime >= 9 && ResourcesManager.instance.GetGold() >= 10)
 			return this;
-		else*/
+		else
 			return null;
     }
 
     public override void PlayEvent(Text t, Text d, Text b1d, Button b1, Text b1text, Text b2d, Button b2, Text b2text){
-        /*b1.onClick.AddListener(delegate{Button1(b1, b2);});
+		TimeManager.instance.EventLaunched();
+		lastTime = TimeManager.instance.GetCurrentTime();
+        
+		b1.onClick.AddListener(delegate{Button1(b1, b2);});
 		b1text.text = "Brindar apoyo";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Ignorar";
 
-		refugees = Random.Range(15, 36);
-		goldCost = (int)(refugees / 3);
+		refugees = Random.Range(1, 8);
+		goldCost = (int)(refugees / 2);
 		
 		while (goldCost >= ResourcesManager.instance.GetGold())
 		{
@@ -42,28 +45,26 @@ public class RefugeesAarrive : Event{
 		
 		b2d.text = 	"\n\n\nAldeanos: + " + ((int)(refugees / 2)).ToString();
 		
-		lastTime = TimeManager.instance.GetCurrentTime();
-		TimeManager.instance.EventLaunched();*/
     }
 
     protected override void Button1(Button b1, Button b2){
-        /*ResourcesManager.instance.AddCitizens(refugees);
+        ResourcesManager.instance.AddCitizens(refugees);
 		ResourcesManager.instance.ReduceGold(goldCost);
 		ResourcesManager.instance.AddHonor(1);
 
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();*/
+		b2.onClick.RemoveAllListeners();
     }
 
     protected override void Button2(Button b1, Button b2){
-        /*ResourcesManager.instance.AddCitizens(((int)refugees / 2));
+        ResourcesManager.instance.AddCitizens(((int)refugees / 2));
 		ResourcesManager.instance.AddFear(1);
 
 		EventManager.instance.EndEvent();
 		
 		b1.onClick.RemoveAllListeners();
-		b2.onClick.RemoveAllListeners();*/
+		b2.onClick.RemoveAllListeners();
     }
 }

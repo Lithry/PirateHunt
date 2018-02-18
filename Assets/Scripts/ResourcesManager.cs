@@ -74,6 +74,10 @@ public class ResourcesManager : MonoBehaviour {
 	public float GetHonor(){
 		return honor;
 	}
+
+	public float GetHonorLevel(){
+		return honorBar.fillAmount;
+	}
 #endregion
 
 #region Fear
@@ -96,6 +100,10 @@ public class ResourcesManager : MonoBehaviour {
 
 	public float GetFear(){
 		return fear;
+	}
+
+	public float GetFearLevel(){
+		return fearBar.fillAmount;
 	}
 #endregion
 

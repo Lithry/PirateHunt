@@ -24,7 +24,7 @@ public class TimeManager : MonoBehaviour {
 		time++;
 		display.text = time.ToString();
 		ResourcesManager.instance.TurnPassed();
-		//EventManager.instance.CheckEvents();
+		EventManager.instance.CheckEvents();
 	}
 
 	public int GetTimeOfLastEvent(){
