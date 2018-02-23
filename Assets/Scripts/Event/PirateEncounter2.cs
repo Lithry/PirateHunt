@@ -13,6 +13,7 @@ public class PirateEncounter2 : Event {
 	private int pluss1;
 	private int pluss2;
 	private int troopLost;
+	private int shipsLost;
 
     public PirateEncounter2(Event requiredEvent) : base(){
 		this.requiredEvent = requiredEvent;
@@ -24,7 +25,7 @@ public class PirateEncounter2 : Event {
 		random = Random.Range(1, 101);
 
 
-		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetShips() >= 4 && ResourcesManager.instance.GetTroops() >= 25){
+		if (random <= probability && count <= 3 && requiredEvent.Count() >= 1 && ResourcesManager.instance.GetShips() >= 2 && ResourcesManager.instance.GetTroops() >= 20){
 			return this;
 		}
 		else{
@@ -47,6 +48,7 @@ public class PirateEncounter2 : Event {
 		woodReward = Random.Range(5, 16);
 		goldReward = Random.Range(7, 14);
 		troopLost = Random.Range(3, 9);
+		shipsLost = Random.Range(0, 2);
 		pluss1 = Random.Range(1, 11);
 		pluss2 = Random.Range(1, 11);
 		
@@ -60,10 +62,12 @@ public class PirateEncounter2 : Event {
 
 		b1d.text = 	"\nMadera: + " + woodReward.ToString() +
 				 	"\nOro: + " + goldReward.ToString() +
-				 	"\nTropas: - " + (troopLost + pluss1).ToString();
+				 	"\nTropas: - " + (troopLost + pluss1).ToString() +
+					"\nShips: - " + shipsLost.ToString();
 		
-		b2d.text = 	"\n\nOro: + " + (goldReward + pluss2).ToString() +
-				 	"\nTropas: - " + troopLost.ToString();
+		b2d.text = 	"\nOro: + " + (goldReward + pluss2).ToString() +
+				 	"\nTropas: - " + troopLost.ToString() +
+					"\nShips: - " + (shipsLost + 1).ToString();
 		
     }
 
@@ -71,6 +75,7 @@ public class PirateEncounter2 : Event {
 		ResourcesManager.instance.ReduceTroops(troopLost + pluss1);
 		ResourcesManager.instance.AddWood(woodReward);
 		ResourcesManager.instance.AddGold(goldReward);
+		ResourcesManager.instance.ReduceShips(shipsLost);
 		
 		ResourcesManager.instance.AddHonor(1);
 		
@@ -83,6 +88,7 @@ public class PirateEncounter2 : Event {
 	override protected void Button2(Button b1, Button b2){
 		ResourcesManager.instance.ReduceTroops(troopLost);
 		ResourcesManager.instance.AddGold(goldReward + pluss2);
+		ResourcesManager.instance.ReduceShips(shipsLost + 1);
 		
 		ResourcesManager.instance.AddFear(1);
 		

@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 	static public UIManager instance;
+	public GameObject objetivePanel;
 	public GameObject helpDisplay;
 
 	void Awake () {
 		instance = this;
 		helpDisplay.SetActive(false);
+	}
+
+	public void CloseObjetivePanel(){
+		objetivePanel.SetActive(false);
 	}
 
 	public void OpenHelpPanel(){

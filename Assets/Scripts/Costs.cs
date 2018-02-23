@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class HonorFear{
-	public const float pluss = 0.35f; // barFillAmount = amount * 0.01f / pluss
+	public const float pluss = 0.1f; // barFillAmount = amount * 0.01f / pluss
 }
 
 public static class Food{

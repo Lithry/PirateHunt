@@ -41,10 +41,10 @@ public class ResourcesManager : MonoBehaviour {
 		AddFood(40);
 		gold = 0;
 		goldWorking = 0;
-		AddGold(100);
+		AddGold(30);
 		wood = 0;
 		woodWorking = 0;
-		AddWood(100);
+		AddWood(20);
 		ships = 0;
 		shipsWorking = 0;
 		AddShips(0);
