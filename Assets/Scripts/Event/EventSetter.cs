@@ -23,4 +23,28 @@ public class EventSetter {
 
 		return events;
 	}
+
+	public List<Event> SetSpecialEvents(){
+		List<Event> events = new List<Event>();
+
+		Event tSecurity = new TownSecurity();
+		events.Add(tSecurity);
+
+		Event diseaseFall = new DiseaseFall();
+		events.Add(diseaseFall);
+
+		Event traitor = new Traitor();
+		events.Add(traitor);
+
+		Event mercenaries = new Mercenaries();
+		events.Add(mercenaries);
+
+		Event spy = new Spy();
+		events.Add(spy);
+
+		Event boss = new BossEncounter();
+		events.Add(boss);
+		
+		return events;
+	}
 }

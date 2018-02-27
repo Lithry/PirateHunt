@@ -451,4 +451,22 @@ public class ResourcesManager : MonoBehaviour {
 		WarningManager.instance.CheckWarnings();
 	}
 
+	public void ReducePopulation(int percent){
+		if(percent > 100)
+			percent = 100;
+
+		float total = (citizens + foodWorking + goldWorking + woodWorking + shipsWorking + troopsWorking);
+		int reduce = (int)((total / 100.0f) * percent);
+
+		while (citizens < reduce){
+			ReduceToWorkGold();
+			ReduceToWorkFood();
+			ReduceToWorkWood();
+			ReduceToWorkShips();
+			ReduceToWorkTroops();
+		}
+
+		ReduceCitizens(reduce);
+	}
+
 }

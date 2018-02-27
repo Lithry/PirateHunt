@@ -14,7 +14,7 @@ public class EndGame : Event {
     public EndGame(){}
 
 	override public Event CheckEvent(){
-		if ((ResourcesManager.instance.GetHonorLevel() == 1.0f || ResourcesManager.instance.GetFearLevel() == 1.0f) || TimeManager.instance.GetCurrentTime() >= 100){
+		if (TimeManager.instance.GetCurrentTime() >= 100){
 			return this;
 		}
 		else{
@@ -77,7 +77,7 @@ public class EndGame : Event {
 			honorName = "Almirante";
 
 		if (fearLevel < 0.2f)
-			fearName = "Santo";
+			fearName = "Implacable";
 		else if (fearLevel >= 0.2f && fearLevel < 0.4f)
 			fearName = "Travieso";
 		else if (fearLevel >= 0.4f && fearLevel < 0.6f)

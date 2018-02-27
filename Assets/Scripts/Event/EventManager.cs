@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class EventManager : MonoBehaviour {
 	static public EventManager instance;
-	private List<Event> eventList = new List<Event>();
+	private List<Event> nEvent = new List<Event>();
+	private List<Event> sEvent = new List<Event>();
 	private EventSetter setter = new EventSetter();
 	private Event eventActive;
 	public GameObject eventPanel;
@@ -27,19 +28,37 @@ public class EventManager : MonoBehaviour {
 	}
 	
 	public void SetEvents(){
-		eventList = setter.SetEvents();
+		nEvent = setter.SetEvents();
+		sEvent = setter.SetSpecialEvents();
 	}
 
 	public void CheckEvents(){
-		for (int i = 0; i < eventList.Count; i++){
-			eventActive = eventList[i].CheckEvent();
+		bool special = false;
+		for (int i = 0; i < sEvent.Count; i++){
+			eventActive = sEvent[i].CheckEvent();
 			if (eventActive != null){
 				forwardButton.interactable = false;
 				eventActive.PlayEvent(eventTitle, eventDescription, eventB1Text, button1, button1Text, eventB2Text ,button2, button2Text);
-				eventPanel.SetActive(true);		
+				eventPanel.SetActive(true);
 				eventActive = null;
+				special = true;
 				break;
 			}
+		}
+
+		for (int i = 0; i < nEvent.Count; i++){
+			if (special == false){
+				eventActive = nEvent[i].CheckEvent();
+				if (eventActive != null){
+					forwardButton.interactable = false;
+					eventActive.PlayEvent(eventTitle, eventDescription, eventB1Text, button1, button1Text, eventB2Text ,button2, button2Text);
+					eventPanel.SetActive(true);		
+					eventActive = null;
+					break;
+				}
+			}
+			else
+				break;
 		}
 	}
 
