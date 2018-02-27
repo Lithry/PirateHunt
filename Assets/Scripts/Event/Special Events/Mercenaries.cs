@@ -31,8 +31,8 @@ public class Mercenaries : Event{
 				 "Por suerte no causaron ningun problema mayor y nadie salio herido";
 				 
 
-		b1d.text = 	"Los liberas bajo\n" +
-					"advertencia\n\n";
+		b1d.text = 	"\nLos liberas bajo\n" +
+					"advertencia\n";
 		
 		b2d.text = 	"Lo mantienes encarcelado\n" +
 					"y lo haces publico para mantener\n" +

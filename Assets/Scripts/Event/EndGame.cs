@@ -74,6 +74,8 @@ public class EndGame : Event {
 		else if (honorLevel >= 0.6f && honorLevel < 0.8f)
 			honorName = "Santo";
 		else if (honorLevel >= 0.8f)
+			honorName = "General";
+		else if (honorLevel >= 1.0f)
 			honorName = "Almirante";
 
 		if (fearLevel < 0.2f)
@@ -85,6 +87,6 @@ public class EndGame : Event {
 		else if (fearLevel >= 0.6f && fearLevel < 0.8f)
 			fearName = "Corrupto";
 		else if (fearLevel >= 0.8f)
-			fearName = "Demonio";
+			fearName = "Demoniaco";
 	}
 }
