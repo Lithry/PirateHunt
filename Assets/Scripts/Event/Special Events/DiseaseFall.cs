@@ -30,8 +30,8 @@ public class DiseaseFall : Event{
 				 "la ciudad!\nUn desconocido se acerca a la\n" +
 				 "guardia y dice conocer como tratar la enfermedad";
 
-		b1d.text = 	"Le crees al desconocido\n" +
-					"y tratas la enfermedad\n";
+		b1d.text = 	"\nLe crees al desconocido\n" +
+					"y tratas la enfermedad";
 		
 		b2d.text = 	"Poner en cuarentena\n" +
 					"la ciudad y separar\n" +

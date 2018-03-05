@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour {
 	public Button button2;
 	private Text button2Text;
 	public Button forwardButton;
+	public Button helpButton;
 	
 	void Awake () {
 		instance = this;
@@ -38,6 +39,7 @@ public class EventManager : MonoBehaviour {
 			eventActive = sEvent[i].CheckEvent();
 			if (eventActive != null){
 				forwardButton.interactable = false;
+				helpButton.interactable = false;
 				eventActive.PlayEvent(eventTitle, eventDescription, eventB1Text, button1, button1Text, eventB2Text ,button2, button2Text);
 				eventPanel.SetActive(true);
 				eventActive = null;
@@ -51,6 +53,7 @@ public class EventManager : MonoBehaviour {
 				eventActive = nEvent[i].CheckEvent();
 				if (eventActive != null){
 					forwardButton.interactable = false;
+					helpButton.interactable = false;
 					eventActive.PlayEvent(eventTitle, eventDescription, eventB1Text, button1, button1Text, eventB2Text ,button2, button2Text);
 					eventPanel.SetActive(true);		
 					eventActive = null;
@@ -65,5 +68,6 @@ public class EventManager : MonoBehaviour {
 	public void EndEvent(){
 		eventPanel.SetActive(false);
 		forwardButton.interactable = true;
+		helpButton.interactable = true;
 	}
 }
