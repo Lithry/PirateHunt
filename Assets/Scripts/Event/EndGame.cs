@@ -26,9 +26,9 @@ public class EndGame : Event {
 		TimeManager.instance.EventLaunched();
 		
 		b1.onClick.AddListener(delegate{Button1(b1, b2);});
-		b1text.text = "Jugar nuevamente";
+		b1text.text = "Nuevo Juego";
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
-		b2text.text = "Salir";
+		b2text.text = "Menu Principal";
 
 		honorLevel = ResourcesManager.instance.GetHonorLevel();
 		fearLevel = ResourcesManager.instance.GetFearLevel();
@@ -61,7 +61,7 @@ public class EndGame : Event {
 	}
 
 	override protected void Button2(Button b1, Button b2){
-		Application.Quit();
+		SceneManager.LoadScene("Menu");
 	}
 
 	private void CheckNames(){

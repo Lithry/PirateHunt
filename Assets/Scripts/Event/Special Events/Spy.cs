@@ -30,9 +30,8 @@ public class Spy : Event{
 				 "Has logrado extraerle informacion sobre la guarida de los piratas\n" + 
 				 "y solo te queda decidir como tratar con él";
 
-		b1d.text = 	"Lo encierras en el\n" +
-					"calabozo hasta que\n" +
-					"muera";
+		b1d.text = 	"\nLo encierras en el calabozo\n" +
+					"hasta que muera\n";
 		
 		b2d.text = 	"Lo ejecutas publicamente\n" +
 					"para mandarle un mensaje\n" +

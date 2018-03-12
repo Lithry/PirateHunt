@@ -31,11 +31,13 @@ public class DiseaseFall : Event{
 				 "guardia y dice conocer como tratar la enfermedad";
 
 		b1d.text = 	"\nLe crees al desconocido\n" +
-					"y tratas la enfermedad";
+					"y tratas la enfermedad\n" +
+					"Poblacion: -15%";
 		
 		b2d.text = 	"Poner en cuarentena\n" +
 					"la ciudad y separar\n" +
-					"los enfermos";
+					"los enfermos\n" +
+					"Poblacion: -8%";
     }
 
     protected override void Button1(Button b1, Button b2){

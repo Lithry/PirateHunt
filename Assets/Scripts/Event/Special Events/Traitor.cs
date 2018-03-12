@@ -30,9 +30,8 @@ public class Traitor : Event{
 				 "Por suerte, el traidor no tenia ninguna informacion valiosa\n" + 
 				 "que pudiera comprometer a tu ejercito";
 
-		b1d.text = 	"Lo encierras en el\n" +
-					"calabozo hasta que\n" +
-					"reciba su sentencia";
+		b1d.text = 	"\nLo encierras en el calabozo\n" +
+					"hasta que reciba su sentencia\n";
 		
 		b2d.text = 	"Lo ejecutas publicamente\n" +
 					"para mandarle un mensaje\n" +

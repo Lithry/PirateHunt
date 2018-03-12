@@ -355,6 +355,8 @@ public class ResourcesManager : MonoBehaviour {
 		if (troops < 0)
 			troops = 0;
 		
+		foodForNextTurn = (foodWorking * Food.foodPerWorker) - (troops * Troops.foodCost);
+
 		DisplayResources();
 	}
 

@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject objetivePanel;
 	public GameObject helpDisplay;
 
+
 	void Awake () {
 		instance = this;
 		helpDisplay.SetActive(false);
