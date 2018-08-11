@@ -38,15 +38,11 @@ public class BossEncounter : Event {
 		
 		t.text = "¡Escondite Pirata Encontrado!";
 		d.text = "¡Has encontrado el escondite de los piratas!\n" +
-				 "Segun te informan cuentan con " + shipsNumber.ToString() + " barcos y\n" + 
-				 pirateNumber.ToString() + " piratas";
+				 "Segun te informan cuentan con " + shipsNumber.ToString() + " barcos y " + pirateNumber.ToString() + " piratas";
 
-		b1d.text = 	"\nAtacar generara una\n" +
-					"perdida de " + troopLost.ToString() + " tropas\n\n";
+		b1d.text = 	"\nTropas: -" + troopLost.ToString() + "\n\n";
 		
-		b2d.text = 	"Lo ignoras y le pasas la\n" +
-					"informacion a otra ciudad costera,\n" +
-					"esperando que se encarge por tí";
+		b2d.text = 	"Lo ignoras y le pasas la informacion a otra ciudad costera, esperando que se encarge por tí";
 		
 		TimeManager.instance.EventLaunched();
     }

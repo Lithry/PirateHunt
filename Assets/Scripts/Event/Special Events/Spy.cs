@@ -27,15 +27,11 @@ public class Spy : Event{
 
 		t.text = "¡Infiltrado!";
 		d.text = "¡Has encontrado un infiltrado de los piratas en tu ciudad!\n" +
-				 "Has logrado extraerle informacion sobre la guarida de los piratas\n" + 
-				 "y solo te queda decidir como tratar con él";
+				 "Has logrado extraerle informacion sobre la guarida de los piratas y solo te queda decidir como tratar con él";
 
-		b1d.text = 	"\nLo encierras en el calabozo\n" +
-					"hasta que muera\n";
+		b1d.text = 	"\nLo encierras en el calabozo hasta que muera\n";
 		
-		b2d.text = 	"Lo ejecutas publicamente\n" +
-					"para mandarle un mensaje\n" +
-					"a los piratas";
+		b2d.text = 	"Lo ejecutas publicamente para mandarle un mensaje a los piratas";
     }
 
     protected override void Button1(Button b1, Button b2){

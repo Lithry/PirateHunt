@@ -25,16 +25,12 @@ public class TownSecurity : Event{
         b2.onClick.AddListener(delegate{Button2(b1, b2);});
 		b2text.text = "Mano Dura";
 
-		t.text = "¡La seguridad en tu ciudad!";
-		d.text = "\nParece que el anterior jefeno se preocupo mucho por\n" +
-				 "establecer seguridad en la ciudad\n";
+		t.text = "¡La seguridad en tu ciudad!\n";
+		d.text = "Parece que el anterior jefe no se preocupo mucho por establecer seguridad en la ciudad\n";
 
-		b1d.text = 	"Generar un plan de\n" +
-					"seguridad completo\n";
+		b1d.text = 	"Generar un plan de seguridad completo";
 		
-		b2d.text = 	"Soldados patrullen las\n" +
-					"calles y atrapen a cada\n" +
-					"persona sospechosa";
+		b2d.text = 	"Soldados patrullen las calles y atrapen a cada persona sospechosa";
     }
 
     protected override void Button1(Button b1, Button b2){

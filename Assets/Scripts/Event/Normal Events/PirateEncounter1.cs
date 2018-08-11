@@ -39,7 +39,7 @@ public class PirateEncounter1 : Event {
 		b2text.text = "Matar";
 
 		t.text = "¡Barco pirata avistado!";
-		d.text = "\nUno de tus barcos se ha encontrado un barco pirata\n\n";
+		d.text = "\nUna de tus patrullas se ha encontrado un barco pirata\n\n";
 		
 		woodReward = Random.Range(2, 6);
 		goldReward = Random.Range(3, 8);
@@ -59,7 +59,7 @@ public class PirateEncounter1 : Event {
 				 	"\nOro: + " + goldReward.ToString() +
 				 	"\nTropas: - " + (troopLost + pluss1).ToString();
 		
-		b2d.text = 	"\n\nOro: + " + (goldReward + pluss2).ToString() +
+		b2d.text = 	"\nOro: + " + (goldReward + pluss2).ToString() +
 				 	"\nTropas: - " + troopLost.ToString();
 		
     }

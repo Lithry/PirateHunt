@@ -59,6 +59,10 @@ public class ResourcesManager : MonoBehaviour {
 			honor += value;
 
 		honorBar.fillAmount = (honor * 0.01f) / HonorFear.pluss;
+
+		if (honorBar.fillAmount > 0.98f){
+			honorBar.fillAmount = 1;
+		}
 	}
 
 	public void ReduceHonor(float value){
@@ -86,6 +90,10 @@ public class ResourcesManager : MonoBehaviour {
 			fear += value;
 
 		fearBar.fillAmount = (fear * 0.01f) / HonorFear.pluss;
+
+		if (fearBar.fillAmount > 0.98f){
+			fearBar.fillAmount = 1;
+		}
 	}
 
 	public void ReduceFear(float value){

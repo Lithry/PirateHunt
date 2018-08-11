@@ -37,13 +37,13 @@ public class RefugeesAarrive : Event{
 		}
 
 		t.text = "¡Refugiados!";
-		d.text = "Un grupo de " + refugees.ToString() + " refugiados a llegado a la ciudad\n\n";
+		d.text = "\nUn grupo de " + refugees.ToString() + " refugiados a llegado a la ciudad\n\n";
 		
 			
-		b1d.text = 	"\n\nOro: - " + goldCost.ToString() + 
+		b1d.text = 	"\nOro: - " + goldCost.ToString() + 
 					"\nAldeanos: + " + refugees.ToString();;
 		
-		b2d.text = 	"\n\n\nAldeanos: + " + ((int)(refugees / 2)).ToString();
+		b2d.text = 	"\nAldeanos: + " + ((int)(refugees / 2)).ToString();
 		
     }
 

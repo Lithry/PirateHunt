@@ -63,11 +63,11 @@ public class PirateEncounter2 : Event {
 		b1d.text = 	"\nMadera: + " + woodReward.ToString() +
 				 	"\nOro: + " + goldReward.ToString() +
 				 	"\nTropas: - " + (troopLost + pluss1).ToString() +
-					"\nShips: - " + shipsLost.ToString();
+					"\nBarcos: - " + shipsLost.ToString();
 		
 		b2d.text = 	"\nOro: + " + (goldReward + pluss2).ToString() +
 				 	"\nTropas: - " + troopLost.ToString() +
-					"\nShips: - " + (shipsLost + 1).ToString();
+					"\nBarcos: - " + (shipsLost + 1).ToString();
 		
     }
 

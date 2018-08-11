@@ -26,17 +26,12 @@ public class DiseaseFall : Event{
 		b2text.text = "Destruir Enfermedad";
 
 		t.text = "¡Nueva Enfermedad!";
-		d.text = "¡Una enfermedaddesconocidaesta atacando\n" +
-				 "la ciudad!\nUn desconocido se acerca a la\n" +
-				 "guardia y dice conocer como tratar la enfermedad";
+		d.text = "¡Una enfermedad desconocida esta atacando la ciudad!\nUn desconocido se acerca a la guardia y dice conocer la cura";
 
-		b1d.text = 	"\nLe crees al desconocido\n" +
-					"y tratas la enfermedad\n" +
+		b1d.text = 	"Le crees al desconocido y tratas la enfermedad\n" +
 					"Poblacion: -15%";
 		
-		b2d.text = 	"Poner en cuarentena\n" +
-					"la ciudad y separar\n" +
-					"los enfermos\n" +
+		b2d.text = 	"Poner en cuarentena la ciudad y separar los enfermos\n" +
 					"Poblacion: -8%";
     }
 

@@ -27,15 +27,11 @@ public class Traitor : Event{
 
 		t.text = "¡Traidor!";
 		d.text = "¡Has encontrado un traidor entre tus lineas!\n" +
-				 "Por suerte, el traidor no tenia ninguna informacion valiosa\n" + 
-				 "que pudiera comprometer a tu ejercito";
+				 "Por suerte, no tenia ninguna informacion valiosa que pudiera comprometer a tu ejercito";
 
-		b1d.text = 	"\nLo encierras en el calabozo\n" +
-					"hasta que reciba su sentencia\n";
+		b1d.text = 	"\nLo encierras en el calabozo hasta que reciba su sentencia\n";
 		
-		b2d.text = 	"Lo ejecutas publicamente\n" +
-					"para mandarle un mensaje\n" +
-					"a los piratas";
+		b2d.text = 	"Lo ejecutas publicamente para mandarle un mensaje a los piratas";
     }
 
     protected override void Button1(Button b1, Button b2){

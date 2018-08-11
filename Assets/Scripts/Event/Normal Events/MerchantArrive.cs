@@ -42,7 +42,7 @@ public class MerchantArrive : Event{
 		b1d.text = 	"\n\nMadera: + " + wood.ToString() +
 				 	"\nOro: - " + gold.ToString();
 		
-		b2d.text = 	"\n\n\nMadera: + " + ((int)(wood / 2)).ToString();
+		b2d.text = 	"\n\nMadera: + " + ((int)(wood / 2)).ToString();
 
     }
 

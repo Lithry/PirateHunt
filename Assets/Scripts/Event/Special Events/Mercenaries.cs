@@ -26,17 +26,13 @@ public class Mercenaries : Event{
 		b2text.text = "Mantener";
 
 		t.text = "¡Mercenarios Borrachos!";
-		d.text = "Un grupo de mercenarios borrachos causo problemas en las calles\n" +
-				 "y fueron encarcelados.\n" +
+		d.text = "Un grupo de mercenarios borrachos causo problemas en las calles y fueron encarcelados.\n" +
 				 "Por suerte no causaron ningun problema mayor y nadie salio herido";
 				 
 
-		b1d.text = 	"\nLos liberas bajo\n" +
-					"advertencia\n";
+		b1d.text = 	"\nLos liberas bajo advertencia\n";
 		
-		b2d.text = 	"Lo mantienes encarcelado\n" +
-					"y lo haces publico para mantener\n" +
-					"a otros mercenarios bajo control";
+		b2d.text = 	"Lo mantienes encarceladoy lo haces publico para mantener a otros mercenarios bajo control";
     }
 
     protected override void Button1(Button b1, Button b2){
